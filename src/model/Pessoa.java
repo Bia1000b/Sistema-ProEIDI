@@ -1,10 +1,8 @@
-package src.utils;
+package src.model;
 
-import src.enums.Genero;
 import java.io.Serializable;
-import java.time.LocalDate;
 
-public abstract class Pessoa implements Serializable {
+public abstract class Pessoa{
 //    private String nome;
 //    private String cpf;
 //    private Genero genero;

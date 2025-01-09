@@ -1,4 +1,4 @@
-package src.utils;
+package src.model;
 
 public class Turma {
 }

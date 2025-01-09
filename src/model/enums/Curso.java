@@ -1,4 +1,4 @@
-package src.enums;
+package src.model.enums;
 
 public enum Curso {
     SMARTPHONE_BASICO,

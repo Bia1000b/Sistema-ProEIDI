@@ -1,6 +1,6 @@
-package src.principal;
+package src.app;
 
-class Main{
+public class SistemaProEIDIApp {
     public static void main(String[] args) {
         //add
 

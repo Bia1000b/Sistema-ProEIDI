@@ -1,4 +1,4 @@
-package src.enums;
+package src.model.enums;
 
 public enum Horario {
     OITO_E_TRINTA,
