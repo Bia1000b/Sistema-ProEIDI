@@ -1,0 +1,128 @@
+package br.ufrn.imd.sistemaproeidi.model;
+
+import br.ufrn.imd.sistemaproeidi.model.enums.*;
+
+import java.time.LocalDate;
+import java.util.Vector;
+
+public class Turma {
+    private Vector<Aluno> alunos = new Vector<Aluno>();
+    private Vector<MembroEquipe> equipe = new Vector<MembroEquipe>();
+
+    private String nome;
+    private Curso curso;
+    private Horario horario;
+    private Integer numeroVagas;
+    private Boolean concluido = false;
+    private LocalDate DataInicio;
+    private LocalDate DataTermino;
+
+    public Turma(String nome, Curso curso, Horario horario, Integer numeroVagas, LocalDate dataInicio, LocalDate dataTermino) {
+        this.nome = nome;
+        this.curso = curso;
+        this.horario = horario;
+        this.numeroVagas = numeroVagas;
+        this.concluido = false;
+        DataInicio = dataInicio;
+        DataTermino = dataTermino;
+    }
+
+    public Turma(){}
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public Vector<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(Vector<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    public Vector<MembroEquipe> getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Vector<MembroEquipe> equipe) {
+        this.equipe = equipe;
+    }
+
+    public Integer getNumeroVagas() {
+        return numeroVagas;
+    }
+
+    public void setNumeroVagas(Integer numeroVagas) {
+        this.numeroVagas = numeroVagas;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+
+    public LocalDate getDataInicio() {
+        return DataInicio;
+    }
+
+    public void setDataInicio(LocalDate dataInicio) {
+        DataInicio = dataInicio;
+    }
+
+    public LocalDate getDataTermino() {
+        return DataTermino;
+    }
+
+    public void setDataTermino(LocalDate dataTermino) {
+        DataTermino = dataTermino;
+    }
+
+    public void detalharTurma() {
+        System.out.println("=== Detalhes da Turma ===");
+        System.out.println("Nome: " + nome);
+        System.out.println("Curso: " + curso);
+        System.out.println("Horário: " + horario);
+        System.out.println("Número de Vagas: " + numeroVagas);
+        System.out.println("Concluído: " + (concluido ? "Sim" : "Não"));
+        System.out.println("Data de Início: " + (DataInicio != null ? DataInicio.toString() : "Não definida"));
+        System.out.println("Data de Término: " + (DataTermino != null ? DataTermino.toString() : "Não definida"));
+
+        System.out.println("\n=== Alunos Matriculados ===");
+        if (alunos.isEmpty()) {
+            System.out.println("Nenhum aluno matriculado.");
+        } else {
+            for (Aluno aluno : alunos) {
+                System.out.println("- " + aluno.getNome() + " (" + aluno.getCPF() + ")");
+            }
+        }
+
+        System.out.println("\n=== Membros da Equipe ===");
+        if (equipe.isEmpty()) {
+            System.out.println("Nenhum membro da equipe associado.");
+        } else {
+            for (MembroEquipe membro : equipe) {
+                System.out.println("- " + membro.getNome() + " (" + membro.getCargo() + ")");
+            }
+        }
+    }
+
+
+
+
+    private void concluir(){
+        //se hoje == dataTermino
+        // this.concluido = true;
+    }
+}
