@@ -105,5 +105,32 @@ public class Aluno extends Pessoa {
         this.sistemaOperacional = sistemaOperacional;
     }
 
+    public void detalharAluno() {
+        System.out.println("=== Detalhes do Aluno ===");
+        System.out.println("Nome: " + getNome());
+        System.out.println("CPF: " + getCPF());
+        System.out.println("Gênero: " + getGenero());
+        System.out.println("Número de Celular: " + getNumeroCelular());
+        System.out.println("Data de Nascimento: " + dataNascimento);
+        System.out.println("Idade: " + Period.between(dataNascimento, LocalDate.now()).getYears() + " anos");
+        System.out.println("Escolaridade: " + escolaridade);
+        System.out.println("Observações de Saúde: " + obsSaude);
+        System.out.println("Tem Internet: " + (temInternet ? "Sim" : "Não"));
+        System.out.println("Tem Computador: " + (temComputador ? "Sim" : "Não"));
+        System.out.println("Tem Smartphone: " + (temSmartphone ? "Sim" : "Não"));
+        System.out.println("Sistema Operacional: " + sistemaOperacional);
+        System.out.println("Curso Atual: " + (cursoAtual != null ? cursoAtual : "Nenhum"));
+
+        System.out.println("\n=== Cursos Feitos ===");
+        if (CursosFeitos == null || CursosFeitos.isEmpty()) {
+            System.out.println("Nenhum curso concluído.");
+        } else {
+            for (Curso curso : CursosFeitos) {
+                System.out.println("- " + curso);
+            }
+        }
+    }
+
+
 
 }

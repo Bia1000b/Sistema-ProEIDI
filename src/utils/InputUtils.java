@@ -25,37 +25,19 @@ public class InputUtils {
         }
     }
 
-    public static Genero lerGenero(){
-        while(true) {
-            try{
-                System.out.print("Gênero (MASC/FEM/OUTRO): ");
-                return Genero.valueOf(scanner.nextLine().toUpperCase());
-            }catch (IllegalArgumentException e){
-                System.out.println("Entrada inválida! Por favor, insira um gênero válido (MASC/FEM/OUTRO).");
-            }
-        }
-    }
-
-//    public static String lerTurma(){
-//
-//    }
-
     public static <T extends Enum<T>> T lerEnum(Class<T> enumClass) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                // Exibe as opções disponíveis no enum
                 System.out.print("Opções disponíveis: ");
                 for (T value : enumClass.getEnumConstants()) {
                     System.out.print(value.name() + " ");
                 }
                 System.out.println();
 
-                // Solicita ao usuário uma entrada
                 System.out.print("Escolha uma opção: ");
                 String entrada = scanner.nextLine().toUpperCase();
 
-                // Retorna o enum correspondente
                 return Enum.valueOf(enumClass, entrada);
             } catch (IllegalArgumentException e) {
                 System.out.println("Entrada inválida! Por favor, insira um valor válido.");
@@ -67,9 +49,9 @@ public class InputUtils {
         System.out.println(mensagem);
         while (true) {
             String entrada = scanner.nextLine().trim().toUpperCase();
-            if (entrada.equals("SIM")) {
+            if (("SIM").contains(entrada)) {
                 return true;
-            } else if (entrada.equals("NÃO") || !entrada.equals("NAO")) {
+            } else if (("NÃO").contains(entrada) || ("NAO").contains(entrada) ) {
                 return false;
             }
             System.out.println("Resposta inválida! Por favor, digite 'SIM' ou 'NÃO'.");

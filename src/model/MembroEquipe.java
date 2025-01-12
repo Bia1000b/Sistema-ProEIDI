@@ -10,7 +10,6 @@ import java.util.Vector;
 
 public class MembroEquipe extends Pessoa{
     private String matricula;
-    private Vector<Curso> turmas;
     private String cursoUFRN;
     private String email;
     private Cargo cargo;
@@ -20,16 +19,51 @@ public class MembroEquipe extends Pessoa{
         return banco;
     }
 
-    public MembroEquipe(String nome, String CPF, Genero genero, String numeroCelular, String matricula, Vector<Curso> turmas, String cursoUFRN, String email, Cargo cargo) {
+    public MembroEquipe(String nome, String CPF, Genero genero, String numeroCelular, String matricula, String cursoUFRN, String email, Cargo cargo) {
         super(nome, CPF, genero, numeroCelular);
         this.matricula = matricula;
-        this.turmas = turmas;
         this.cursoUFRN = cursoUFRN;
         this.email = email;
         this.cargo = cargo;
     }
 
-    void matricularAluno(){
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCursoUFRN() {
+        return cursoUFRN;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public void setCursoUFRN(String cursoUFRN) {
+        this.cursoUFRN = cursoUFRN;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCargo(Cargo cargo) {
+        if(this.cargo != Cargo.PROFESSOR){
+            System.out.println("Você não tem permissão para cadatrar um membro da equipe.");
+        }else{
+            this.cargo = cargo;
+        }
+    }
+
+    public void matricularAluno(){
         System.out.println("=== Cadastro de Aluno ===");
         String nome = InputUtils.lerString("Nome: ");
         LocalDate dataNascimento = InputUtils.lerData("Nascimento");
@@ -40,7 +74,7 @@ public class MembroEquipe extends Pessoa{
         }
 
         String cpf = InputUtils.lerString("CPF: ");
-        Genero genero = InputUtils.lerGenero();
+        Genero genero = InputUtils.lerEnum(Genero.class);
         String numeroCelular = InputUtils.lerString("Número de celular");
         Escolaridade escolaridade = InputUtils.lerEnum(Escolaridade.class);
         String obsSaude = InputUtils.lerString("Observação relativa à saúde");
@@ -84,14 +118,40 @@ public class MembroEquipe extends Pessoa{
         }
     }
 
-    void cadastrarTurma(){
+
+    public void cadastrarMembroEquipe() {
+        if(this.cargo != Cargo.PROFESSOR){
+            System.out.println("Você não tem permissão para cadatrar um membro da equipe.");
+        }else{
+            System.out.println("=== Cadastro de Membro da Equipe ===");
+            String nome = InputUtils.lerString("Nome: ");
+            String cpf = InputUtils.lerString("CPF: ");
+            Genero genero = InputUtils.lerEnum(Genero.class);
+            String numeroCelular = InputUtils.lerString("Número de celular: ");
+            String matricula = InputUtils.lerString("Matrícula: ");
+            String cursoUFRN = InputUtils.lerString("Curso na UFRN: ");
+            String email = InputUtils.lerString("E-mail: ");
+            Cargo cargo = InputUtils.lerEnum(Cargo.class);
+
+            MembroEquipe novoMembro = new MembroEquipe(nome,  cpf, genero, numeroCelular, matricula, cursoUFRN, email, cargo);
+
+            if (banco.getArrayPessoas().add(novoMembro)) {
+                System.out.println("Membro da equipe cadastrado com sucesso!");
+            } else {
+                System.out.println("Erro ao cadastrar o membro da equipe!");
+            }
+        }
+    }
+
+    private void cadastrarTurma(){
+        String nome = InputUtils.lerString("Nome da turma: ");
         Curso curso = InputUtils.lerEnum(Curso.class);
         Horario horario = InputUtils.lerEnum(Horario.class);
         Integer numeroVagas = InputUtils.lerInteger("Número de vagas");
         LocalDate dataInicio = InputUtils.lerData("Data de ínicio");
         LocalDate dataTermino = InputUtils.lerData("Data de término");
 
-        Turma turma = new Turma(curso, horario, numeroVagas, dataInicio, dataTermino);
+        Turma turma = new Turma(nome, curso, horario, numeroVagas, dataInicio, dataTermino);
 
         if(banco.getArrayTurmas().add(turma)){
             System.out.println("Turma cadastrada com sucesso!");
@@ -100,7 +160,7 @@ public class MembroEquipe extends Pessoa{
         }
     }
 
-    void adicionarMembroDaEquipeATurma(Turma turma, MembroEquipe membro){
+    public void adicionarMembroDaEquipeATurma(Turma turma, MembroEquipe membro){
         Vector<MembroEquipe> membros = turma.getEquipe();
         if(membros.add(membro)){
             System.out.println("Membro adicionado com sucesso à turma " + turma.getNome());
@@ -108,27 +168,7 @@ public class MembroEquipe extends Pessoa{
         turma.setEquipe(membros);
     }
 
-    void cadastrarMembroEquipe() {
-        System.out.println("=== Cadastro de Membro da Equipe ===");
-        String nome = InputUtils.lerString("Nome: ");
-        String cpf = InputUtils.lerString("CPF: ");
-        Genero genero = InputUtils.lerGenero();
-        String numeroCelular = InputUtils.lerString("Número de celular: ");
-        String matricula = InputUtils.lerString("Matrícula: ");
-        String cursoUFRN = InputUtils.lerString("Curso na UFRN: ");
-        String email = InputUtils.lerString("E-mail: ");
-        Cargo cargo = InputUtils.lerEnum(Cargo.class);
-
-        MembroEquipe novoMembro = new MembroEquipe(nome,  cpf, genero, numeroCelular, matricula, turmas, cursoUFRN, email, cargo);
-
-        if (banco.getArrayPessoas().add(novoMembro)) {
-            System.out.println("Membro da equipe cadastrado com sucesso!");
-        } else {
-            System.out.println("Erro ao cadastrar o membro da equipe!");
-        }
-    }
-
-    void chamadaAlunos(Turma turma){
+    public void chamadaAlunos(Turma turma){
         Boolean presente = true;
         LocalDate dataAtual = LocalDate.now();
         for(Aluno aluno : turma.getAlunos()){
@@ -141,39 +181,60 @@ public class MembroEquipe extends Pessoa{
         }
     }
 
-    void chamadaMembrosEquipe(Turma turma){
-        Boolean presente = true;
-        LocalDate dataAtual = LocalDate.now();
-        for(MembroEquipe membroEquipe : turma.getEquipe()){
-            presente = InputUtils.lerBool("Presente? ");
-            if(!presente){
-                Vector<LocalDate> faltas = membroEquipe.getFaltas();
-                faltas.add(dataAtual);
-                membroEquipe.setFaltas(faltas);
+    private void chamadaMembrosEquipe(Turma turma){
+        if(this.cargo != Cargo.PROFESSOR){
+            System.out.println("Você não tem permissão para cadatrar um membro da equipe.");
+        }else {
+            boolean presente = true;
+            LocalDate dataAtual = LocalDate.now();
+            for (MembroEquipe membroEquipe : turma.getEquipe()) {
+                presente = InputUtils.lerBool("Presente? ");
+                if (!presente) {
+                    Vector<LocalDate> faltas = membroEquipe.getFaltas();
+                    faltas.add(dataAtual);
+                    membroEquipe.setFaltas(faltas);
+                }
             }
         }
     }
 
-
-    void editarAluno() {
-        System.out.println("=== Editar Aluno ===");
-
-        // Solicita o CPF do aluno a ser editado
-        String cpf = InputUtils.lerString("CPF do aluno que deseja editar: ");
-
-        // Procura o aluno pelo CPF no banco de dados
-        Aluno aluno = null;
+    public Pessoa buscarPessoa(String CPF) {
         for (Pessoa pessoa : banco.getArrayPessoas()) {
-            if (pessoa instanceof Aluno && pessoa.getCPF().equals(cpf)) {
-                aluno = (Aluno) pessoa;
-                break;
+            if (pessoa.getCPF().equals(CPF)) {
+                if (pessoa instanceof Aluno) {
+                    Aluno aluno = (Aluno) pessoa;
+                    aluno.detalharAluno();
+                } else if (pessoa instanceof MembroEquipe) {
+                    MembroEquipe membro = (MembroEquipe) pessoa;
+                    membro.detalharMembroEquipe();
+                }
+                return pessoa;
             }
         }
 
-        if (aluno == null) {
-            System.out.println("Aluno não encontrado!");
-            return;
+        System.out.println("Nenhuma pessoa com esse CPF foi encontrada...");
+        return null;
+    }
+
+    public void buscarTurma(String nome){
+        for (Turma turma : banco.getArrayTurmas()) {
+            if (turma.getNome().equals(nome)) {
+                turma.detalharTurma();
+                return;
+            }
         }
+
+        System.out.println("Nenhuma turma corresponde a esse nome...");
+    }
+
+    public void listarTurmas(){
+        for (Turma turma : banco.getArrayTurmas()) {
+            turma.detalharTurma();
+        }
+    }
+
+    public void editarAluno(Aluno aluno) {
+        System.out.println("=== Editar Aluno ===");
 
         System.out.println("Informações atuais do aluno:");
         System.out.println("Nome: " + aluno.getNome());
@@ -191,55 +252,53 @@ public class MembroEquipe extends Pessoa{
 
         System.out.println("\n== Atualizações ==");
 
-        if (InputUtils.lerBool("Deseja atualizar o nome? (true/false): ")) {
+        if (InputUtils.lerBool("Deseja atualizar o nome?")) {
             String novoNome = InputUtils.lerString("Novo nome: ");
             aluno.setNome(novoNome);
         }
 
         // Atualizar Número de Celular
-        if (InputUtils.lerBool("Deseja atualizar o número de celular? (true/false): ")) {
+        if (InputUtils.lerBool("Deseja atualizar o número de celular?")) {
             String novoNumeroCelular = InputUtils.lerString("Novo número de celular: ");
             aluno.setNumeroCelular(novoNumeroCelular);
         }
 
         // Atualizar Escolaridade
-        if (InputUtils.lerBool("Deseja atualizar a escolaridade? (true/false): ")) {
+        if (InputUtils.lerBool("Deseja atualizar a escolaridade?")) {
             Escolaridade novaEscolaridade = InputUtils.lerEnum(Escolaridade.class);
             aluno.setEscolaridade(novaEscolaridade);
         }
 
         // Atualizar Observação de Saúde
-        if (InputUtils.lerBool("Deseja atualizar a observação de saúde? (true/false): ")) {
+        if (InputUtils.lerBool("Deseja atualizar a observação de saúde?")) {
             String novaObsSaude = InputUtils.lerString("Nova observação de saúde: ");
             aluno.setObsSaude(novaObsSaude);
         }
 
         // Atualizar Tem Internet
-        if (InputUtils.lerBool("Deseja atualizar se tem internet? (true/false): ")) {
+        if (InputUtils.lerBool("Deseja atualizar se tem internet?")) {
             boolean novoTemInternet = InputUtils.lerBool("Tem internet? (true/false): ");
             aluno.setTemInternet(novoTemInternet);
         }
 
         // Atualizar Tem Computador
-        if (InputUtils.lerBool("Deseja atualizar se tem computador? (true/false): ")) {
+        if (InputUtils.lerBool("Deseja atualizar se tem computador?")) {
             boolean novoTemComputador = InputUtils.lerBool("Tem computador? (true/false): ");
             aluno.setTemComputador(novoTemComputador);
         }
 
         // Atualizar Tem Smartphone
-        if (InputUtils.lerBool("Deseja atualizar se tem smartphone? (true/false): ")) {
+        if (InputUtils.lerBool("Deseja atualizar se tem smartphone?")) {
             boolean novoTemSmartphone = InputUtils.lerBool("Tem smartphone? (true/false): ");
             aluno.setTemSmartphone(novoTemSmartphone);
         }
 
-        // Atualizar Sistema Operacional
-        if (InputUtils.lerBool("Deseja atualizar o sistema operacional? (true/false): ")) {
+        if (InputUtils.lerBool("Deseja atualizar o sistema operacional?")) {
             SistemaOperacional novoSistemaOperacional = InputUtils.lerEnum(SistemaOperacional.class);
             aluno.setSistemaOperacional(novoSistemaOperacional);
         }
 
-        // Atualizar Curso Atual
-        if (InputUtils.lerBool("Deseja atualizar o curso atual? (true/false): ")) {
+        if (InputUtils.lerBool("Deseja atualizar o curso atual?")) {
             Curso novoCursoAtual = InputUtils.lerEnum(Curso.class);
             aluno.setCursoAtual(novoCursoAtual);
         }
@@ -247,25 +306,8 @@ public class MembroEquipe extends Pessoa{
         System.out.println("As informações do aluno foram atualizadas com sucesso!");
     }
 
-    void editarMembroEquipe() {
+    public void editarMembroEquipe(MembroEquipe membro) {
         System.out.println("=== Editar Membro da Equipe ===");
-
-        // Solicita o CPF do membro a ser editado
-        String cpf = InputUtils.lerString("CPF do membro que deseja editar: ");
-
-        // Procura o membro pelo CPF no banco de dados
-        MembroEquipe membro = null;
-        for (Pessoa pessoa : banco.getArrayPessoas()) {
-            if (pessoa instanceof MembroEquipe && pessoa.getCPF().equals(cpf)) {
-                membro = (MembroEquipe) pessoa;
-                break;
-            }
-        }
-
-        if (membro == null) {
-            System.out.println("Membro da equipe não encontrado!");
-            return;
-        }
 
         // Exibe as informações atuais do membro
         System.out.println("Informações atuais do membro:");
@@ -277,75 +319,142 @@ public class MembroEquipe extends Pessoa{
         System.out.println("Curso na UFRN: " + membro.getCursoUFRN());
         System.out.println("E-mail: " + membro.getEmail());
         System.out.println("Cargo: " + membro.getCargo());
-        System.out.println("Turmas: " + membro.getTurmas());
 
-        // Atualiza as informações do membro com base na entrada do usuário
         System.out.println("\n== Atualizações ==");
 
-        // Atualizar Nome
         if (InputUtils.lerBool("Deseja atualizar o nome?")) {
             String novoNome = InputUtils.lerString("Novo nome: ");
             membro.setNome(novoNome);
         }
 
-        // Atualizar Número de Celular
         if (InputUtils.lerBool("Deseja atualizar o número de celular?")) {
             String novoNumeroCelular = InputUtils.lerString("Novo número de celular: ");
             membro.setNumeroCelular(novoNumeroCelular);
         }
 
-        // Atualizar Matrícula
         if (InputUtils.lerBool("Deseja atualizar a matrícula?")) {
             String novaMatricula = InputUtils.lerString("Nova matrícula: ");
             membro.setMatricula(novaMatricula);
         }
 
-        // Atualizar Curso na UFRN
         if (InputUtils.lerBool("Deseja atualizar o curso na UFRN?")) {
             String novoCursoUFRN = InputUtils.lerString("Novo curso na UFRN: ");
             membro.setCursoUFRN(novoCursoUFRN);
         }
 
-        // Atualizar E-mail
         if (InputUtils.lerBool("Deseja atualizar o e-mail?")) {
             String novoEmail = InputUtils.lerString("Novo e-mail: ");
             membro.setEmail(novoEmail);
         }
 
-        // Atualizar Cargo
         if (InputUtils.lerBool("Deseja atualizar o cargo?")) {
             Cargo novoCargo = InputUtils.lerEnum(Cargo.class);
             membro.setCargo(novoCargo);
         }
 
-//        // Atualizar Turmas
-//        if (InputUtils.lerBool("Deseja atualizar as turmas?")) {
-//            Vector<Curso> novasTurmas = new Vector<>();
-//            System.out.println("Insira as turmas (digite 'fim' para parar): ");
-//            while (true) {
-//                String nomeTurma = InputUtils.lerString("Nome da turma: ");
-//                if (nomeTurma.equalsIgnoreCase("fim")) {
-//                    break;
-//                }
-//                Curso curso = null;
-//                for (Curso c : Curso.values()) {
-//                    if (c.name().equalsIgnoreCase(nomeTurma)) {
-//                        curso = c;
-//                        break;
-//                    }
-//                }
-//                if (curso != null) {
-//                    novasTurmas.add(curso);
-//                } else {
-//                    System.out.println("Turma inválida, tente novamente.");
-//                }
-//            }
-//            membro.setTurmas(novasTurmas);
-//        }
+        if (InputUtils.lerBool("Deseja remover este membro de alguma turma?")) {
+            String nomeTurma = InputUtils.lerString("Nome da turma: ");
+
+            for(Turma turma : banco.getArrayTurmas()){
+                if(nomeTurma.equals(turma.getNome())){
+                    for(MembroEquipe membroDaTurma : turma.getEquipe()){
+                        if(membroDaTurma.getCPF().equals(membro.getCPF())){
+                            turma.getEquipe().remove(membro);
+                        }
+
+                    }
+                }
+            }
+        }
 
         System.out.println("As informações do membro foram atualizadas com sucesso!");
     }
 
+    private void detalharMembroEquipe() {
+        System.out.println("=== Detalhes do Membro da Equipe ===");
+        System.out.println("Nome: " + getNome());
+        System.out.println("CPF: " + getCPF());
+        System.out.println("Gênero: " + getGenero());
+        System.out.println("Número de Celular: " + getNumeroCelular());
+        System.out.println("Matrícula: " + matricula);
+        System.out.println("Curso na UFRN: " + cursoUFRN);
+        System.out.println("E-mail: " + email);
+        System.out.println("Cargo: " + cargo);
+    }
 
+    public void editarTurma(Turma turma) {
+        if(this.cargo != Cargo.PROFESSOR){
+            System.out.println("Você não tem permissão para remover alguém da turma.");
+        }else {
+            if (turma == null) {
+                System.out.println("Turma inválida!");
+                return;
+            }
 
+            System.out.println("=== Editar Turma: " + turma.getNome() + " ===");
+
+            if (InputUtils.lerBool("Deseja alterar o nome da turma?")) {
+                String novoNome = InputUtils.lerString("Novo nome: ");
+                turma.setNome(novoNome);
+            }
+
+            if (InputUtils.lerBool("Deseja alterar o curso associado?")) {
+                Curso novoCurso = InputUtils.lerEnum(Curso.class);
+                turma.setCurso(novoCurso);
+            }
+
+            // Editar o horário da turma
+            if (InputUtils.lerBool("Deseja alterar o horário?")) {
+                Horario novoHorario = InputUtils.lerEnum(Horario.class);
+                turma.setHorario(novoHorario);
+            }
+
+            if (InputUtils.lerBool("Deseja alterar o número de vagas?")) {
+                Integer novasVagas = InputUtils.lerInteger("Novo número de vagas: ");
+                if (novasVagas < turma.getAlunos().size()) {
+                    System.out.println("O número de vagas não pode ser menor que o número de alunos já matriculados (" + turma.getAlunos().size() + ").");
+                } else {
+                    turma.setNumeroVagas(novasVagas);
+                }
+            }
+
+            if (InputUtils.lerBool("Deseja alterar a data de início?")) {
+                LocalDate novaDataInicio = InputUtils.lerData("Nova data de início: ");
+                if (turma.getDataTermino() != null && novaDataInicio.isAfter(turma.getDataTermino())) {
+                    System.out.println("A data de início não pode ser posterior à data de término.");
+                } else {
+                    turma.setDataInicio(novaDataInicio);
+                }
+            }
+
+            if (InputUtils.lerBool("Deseja alterar a data de término?")) {
+                LocalDate novaDataTermino = InputUtils.lerData("Nova data de término: ");
+                if (turma.getDataInicio() != null && novaDataTermino.isBefore(turma.getDataInicio())) {
+                    System.out.println("A data de término não pode ser anterior à data de início.");
+                } else {
+                    turma.setDataTermino(novaDataTermino);
+                }
+            }
+
+            System.out.println("Edição da turma concluída!");
+        }
+    }
+
+    public void removerPessoaDaTurma(Pessoa pessoa, Turma turma){
+        if(this.cargo != Cargo.PROFESSOR){
+            System.out.println("Você não tem permissão para remover alguém da turma.");
+        }else{
+            if(pessoa instanceof Aluno){
+                Aluno aluno = (Aluno) pessoa;
+                turma.getAlunos().remove(aluno);
+                System.out.println("Aluno removido com sucesso");
+            }
+            if(pessoa instanceof MembroEquipe){
+                MembroEquipe membroEquipe = (MembroEquipe) pessoa;
+                turma.getAlunos().remove(membroEquipe);
+                System.out.println("Membro da equipe removido com sucesso");
+            }
+        }
+
+    }
 }
