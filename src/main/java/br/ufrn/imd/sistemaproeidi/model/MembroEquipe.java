@@ -3,17 +3,18 @@ package br.ufrn.imd.sistemaproeidi.model;
 import br.ufrn.imd.sistemaproeidi.model.enums.*;
 import br.ufrn.imd.sistemaproeidi.utils.InputUtils;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Vector;
 
-public class MembroEquipe extends Pessoa{
+public class MembroEquipe extends Pessoa implements Serializable {
     private String matricula;
     private String cursoUFRN;
     private String email;
     private Cargo cargo;
-    private BancoDAO banco = BancoDAO.getInstance();
+    private static BancoDAO banco = BancoDAO.getInstance();
 
     public BancoDAO getBanco() {
         return banco;
@@ -198,35 +199,6 @@ public class MembroEquipe extends Pessoa{
         }
     }
 
-    public Pessoa buscarPessoa(String CPF) {
-        for (Pessoa pessoa : banco.getArrayPessoas()) {
-            if (pessoa.getCPF().equals(CPF)) {
-                if (pessoa instanceof Aluno) {
-                    Aluno aluno = (Aluno) pessoa;
-                    aluno.detalharAluno();
-                } else if (pessoa instanceof MembroEquipe) {
-                    MembroEquipe membro = (MembroEquipe) pessoa;
-                    membro.detalharMembroEquipe();
-                }
-                return pessoa;
-            }
-        }
-
-        System.out.println("Nenhuma pessoa com esse CPF foi encontrada...");
-        return null;
-    }
-
-    public void buscarTurma(String nome){
-        for (Turma turma : banco.getArrayTurmas()) {
-            if (turma.getNome().equals(nome)) {
-                turma.detalharTurma();
-                return;
-            }
-        }
-
-        System.out.println("Nenhuma turma corresponde a esse nome...");
-    }
-
     public void listarTurmas(){
         for (Turma turma : banco.getArrayTurmas()) {
             turma.detalharTurma();
@@ -370,7 +342,7 @@ public class MembroEquipe extends Pessoa{
         System.out.println("As informações do membro foram atualizadas com sucesso!");
     }
 
-    private void detalharMembroEquipe() {
+    public void detalharMembroEquipe() {
         System.out.println("=== Detalhes do Membro da Equipe ===");
         System.out.println("Nome: " + getNome());
         System.out.println("CPF: " + getCPF());
