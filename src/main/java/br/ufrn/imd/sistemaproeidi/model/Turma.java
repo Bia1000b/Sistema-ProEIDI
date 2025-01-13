@@ -2,10 +2,11 @@ package br.ufrn.imd.sistemaproeidi.model;
 
 import br.ufrn.imd.sistemaproeidi.model.enums.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Vector;
 
-public class Turma {
+public class Turma implements Serializable {
     private Vector<Aluno> alunos = new Vector<Aluno>();
     private Vector<MembroEquipe> equipe = new Vector<MembroEquipe>();
 

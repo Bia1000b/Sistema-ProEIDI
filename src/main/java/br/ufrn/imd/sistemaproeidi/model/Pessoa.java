@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Vector;
 
-public abstract class Pessoa{
+public abstract class Pessoa implements Serializable{
     private String nome;
     private String CPF;
     private Genero genero;
