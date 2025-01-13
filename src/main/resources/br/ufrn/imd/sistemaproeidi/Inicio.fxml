@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.sistemaproeidi.controller.InicioController">
+   <children>
+      <Label alignment="CENTER" layoutX="246.0" layoutY="31.0" text="Bem Vindo(a) ao" />
+      <Label alignment="CENTER" layoutX="161.0" layoutY="59.0" text="Sistema ProEIDI">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="193.0" layoutY="154.0" text="Digite seu CPF no campo abaixo:" />
+      <Separator layoutX="201.0" layoutY="115.0" prefWidth="200.0" />
+      <TextField fx:id="CPFusuario" layoutX="157.0" layoutY="206.0" onAction="#processarCPF" text="Toque e escreva aqui">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
