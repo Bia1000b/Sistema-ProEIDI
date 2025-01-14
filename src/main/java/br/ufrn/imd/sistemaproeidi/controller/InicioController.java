@@ -22,16 +22,13 @@ public class InicioController {
 
     @FXML
     public void initialize() {
-        // Este método é chamado automaticamente ao carregar o FXML
         System.out.println("Tela inicial carregada!");
-        CPFusuario.setText(""); // Limpa o texto padrão do campo de texto
+        CPFusuario.setText("");
     }
 
-    // Método para manipular o CPF (por exemplo, ao pressionar Enter ou um botão)
     public void processarCPF() {
-        //Gerenciador.criarMembroPadrao();
         String cpf = CPFusuario.getText();
-        Gerenciador gerenciador;
+
         if (cpf.isEmpty()) {
             System.out.println("O campo CPF está vazio!");
         } else {
@@ -50,10 +47,8 @@ public class InicioController {
         try {
             FXMLLoader loader = new FXMLLoader(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/PrincipalAluno.fxml"));
 
-            // Carrega a cena
             Scene scene = new Scene(loader.load());
 
-            // Cria um novo Stage
             Stage stage = new Stage();
             stage.setTitle("Aluno");
             stage.setScene(scene);
