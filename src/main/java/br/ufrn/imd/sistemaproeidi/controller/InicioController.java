@@ -36,18 +36,23 @@ public class InicioController {
             if(Gerenciador.buscarPessoa(cpf) == null){
                 exibirAlerta("Login Inválido", "Usuário ou senha incorretos.");
             }else if ((Gerenciador.buscarPessoa(cpf)) instanceof Aluno){
-                abrirTelaPrincipalAluno();
+                Aluno aluno = (Aluno) Gerenciador.buscarPessoa(cpf);
+                abrirTelaPrincipalAluno(aluno);
             }else{
                 abrirTelaPrincipalEquipe();
             }
         }
     }
 
-    private void abrirTelaPrincipalAluno() {
+    private void abrirTelaPrincipalAluno(Aluno aluno) {
         try {
             FXMLLoader loader = new FXMLLoader(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/PrincipalAluno.fxml"));
 
             Scene scene = new Scene(loader.load());
+
+            // Obtendo o controlador da tela principal do aluno
+            PrincipalAlunoController controller = loader.getController();
+            controller.setAluno(aluno); // Passando o objeto Aluno para o controlador
 
             Stage stage = new Stage();
             stage.setTitle("Aluno");

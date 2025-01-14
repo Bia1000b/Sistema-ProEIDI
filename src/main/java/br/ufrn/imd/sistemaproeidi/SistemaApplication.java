@@ -16,7 +16,7 @@ public class SistemaApplication extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(SistemaApplication.class.getResource("Inicio.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("BemVindo!");
+        stage.setTitle("Boas-Vindas!");
         stage.setScene(scene);
         stage.show();
     }
