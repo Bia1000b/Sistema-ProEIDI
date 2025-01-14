@@ -77,13 +77,13 @@ public class Gerenciador {
 
     public static void criarAlunoPadrao() {
         // Valores padrão para inicialização
-        String nomePadrao = "Bianca Medeiros";
-        String cpfPadrao = "12345678901";
+        String nomePadrao = "Victor Aguiar Mendes Gomes Costa Baiano Cauã Leite Silva";
+        String cpfPadrao = "2";
         Genero generoPadrao = Genero.FEM; // Exemplo: Enum para gênero
-        String numeroCelularPadrao = "(84) 99999-9999";
-        LocalDate dataNascimento = LocalDate.of(2000, 1, 1); // Data de nascimento padrão
-        Escolaridade escolaridade = Escolaridade.ALFABETIZADO; // Exemplo: Enum para escolaridade
-        String obsSaude = "Nenhuma observação de saúde.";
+        String numeroCelularPadrao = "(84) 91234-1234";
+        LocalDate dataNascimento = LocalDate.of(1920, 1, 1); // Data de nascimento padrão
+        Escolaridade escolaridade = Escolaridade.SUPERIOR_COMPLETO; // Exemplo: Enum para escolaridade
+        String obsSaude = "Viciado em TikTok.";
         boolean temInternet = true;
         boolean temComputador = true;
         boolean temSmartphone = true;
@@ -103,6 +103,14 @@ public class Gerenciador {
                 temSmartphone,
                 sistemaOperacional
         );
+
+        Vector<Curso> cursos = new Vector<Curso>();
+
+        cursos.add(Curso.PENSAMENTO_COMPUTACIONAL_I);
+        cursos.add(Curso.COMPUTADOR);
+        cursos.add(Curso.SMARTPHONE_BASICO);
+
+        alunoPadrao.setCursosFeitos(cursos);
 
         banco.getArrayPessoas().add(alunoPadrao);
 

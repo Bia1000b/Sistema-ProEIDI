@@ -1,4 +1,5 @@
 package br.ufrn.imd.sistemaproeidi.controller;
+import br.ufrn.imd.sistemaproeidi.utils.*;
 
 import br.ufrn.imd.sistemaproeidi.model.enums.Curso;
 import javafx.collections.FXCollections;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 public class PrincipalAlunoController {
     @FXML private TabPane tabPane;
     @FXML private Label nomeUsuario;
-    @FXML private ListView<String> cursosListView;
+    @FXML private ListView<String> ListViewCursos;
     @FXML private Tab perfilTab, turmaTab;
     @FXML private Button btn_perfil, btn_turma,btn_perfil1, btn_turma1;
     private Aluno aluno;
@@ -38,21 +39,21 @@ public class PrincipalAlunoController {
 
     private void carregarDadosAluno() {
         if (aluno != null) {
-            nomeUsuario.setText(aluno.getNome()); // Atualize o nome no Label
+            nomeUsuario.setText(aluno.getNome());
             System.out.println("Dados do aluno carregados: " + aluno.getNome());
+            carregarCursosFeitos();
         }
     }
 
     private void carregarCursosFeitos(){
         if (aluno.getCursosFeitos() != null) {
-            // Convertendo os cursos para uma lista de strings para exibir na ListView
             ObservableList<String> cursos = FXCollections.observableArrayList();
 
             for (Curso curso : aluno.getCursosFeitos()) {
-                cursos.add(curso.getNome()); // Adicione o nome do curso ou outras informações desejadas
+                cursos.add(InputUtils.formatEnum(curso.toString()));
             }
 
-            cursosListView.setItems(cursos); // Configura os cursos na ListView
+            ListViewCursos.setItems(cursos);
         }
     }
 
