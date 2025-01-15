@@ -75,7 +75,7 @@ public class Gerenciador {
         banco.getArrayPessoas().add(membroPadrao);
     }
 
-    public static void criarAlunoPadrao() {
+    public static void criarAlunoPadrao(Turma turma) {
         // Valores padrão para inicialização
         String nomePadrao = "Victor Aguiar Mendes Gomes Costa Baiano Cauã Leite Silva";
         String cpfPadrao = "2";
@@ -110,13 +110,89 @@ public class Gerenciador {
         cursos.add(Curso.COMPUTADOR);
         cursos.add(Curso.SMARTPHONE_BASICO);
 
+        adicionarFalta(alunoPadrao);
+
         alunoPadrao.setCursosFeitos(cursos);
+
+        alunoPadrao.setCursoAtual(Curso.SMARTPHONE_AVANCADO);
+
+        adicionarAlunoATurma(turma, alunoPadrao);
 
         banco.getArrayPessoas().add(alunoPadrao);
 
         System.out.println("Aluno padrão criado e adicionado ao banco com sucesso!");
     }
 
+    //ESSA FUNÇÃO NÃO É DAQUI!
+    public static void adicionarAlunoATurma(Turma turma, Aluno aluno){
+        if(turma.getNumeroVagas() > 0){
+            aluno.setCursoAtual(turma.getCurso());
+            aluno.setCodigoTurma(turma.getCodigo());
+            Vector<Aluno> alunos = turma.getAlunos();
+            if(alunos.add(aluno)){
+                System.out.println("Membro adicionado com sucesso à turma " + turma.getNome());
+            }
+            turma.setAlunos(alunos);
+            int numeroDeVagas = turma.getNumeroVagas() - 1;
+            turma.setNumeroVagas(numeroDeVagas);
+        }else{
+            System.out.println("Turma cheia");
+        }
+    }
+
+    //ESSA FUNÇÃO NÃO É DAQUI!
+    public static void adicionarFalta(Aluno aluno){
+        LocalDate dataAtual = LocalDate.now();
+        Vector<LocalDate> faltas = aluno.getFaltas();
+        faltas.add(dataAtual);
+        aluno.setFaltas(faltas);
+    }
+
+
+    public static Turma criarTurmaPadrao() {
+        // Valores padrão para inicialização
+        String nomePadrao = "Turma de Pensamento Computacional";
+        Curso cursoPadrao = Curso.PENSAMENTO_COMPUTACIONAL_I; // Exemplo: Enum para cursos
+        Horario horarioPadrao = Horario.DEZ_E_TRINTA; // Classe para horário
+        Integer numeroVagasPadrao = 20;
+        LocalDate dataInicioPadrao = LocalDate.of(2025, 2, 1); // Data de início padrão
+        LocalDate dataTerminoPadrao = LocalDate.of(2025, 6, 30); // Data de término padrão
+
+        // Criando uma turma com os valores padrão
+        Turma turmaPadrao = new Turma(
+                nomePadrao,
+                cursoPadrao,
+                horarioPadrao,
+                numeroVagasPadrao,
+                dataInicioPadrao,
+                dataTerminoPadrao
+        );
+
+        // Adicionando alguns alunos e membros da equipe à turma
+        Aluno aluno1 = new Aluno("João Silva", "12345678901", Genero.MASC, "(84) 91234-5678",
+                LocalDate.of(2000, 1, 1), Escolaridade.MEDIO_COMPLETO, "Nenhuma observação.",
+                true, true, true, SistemaOperacional.ANDROID);
+        Aluno aluno2 = new Aluno("Maria Oliveira", "98765432109", Genero.FEM, "(84) 98765-4321",
+                LocalDate.of(1998, 5, 20), Escolaridade.SUPERIOR_INCOMPLETO, "Alérgica a amendoim.",
+                true, true, false, SistemaOperacional.IOS);
+        turmaPadrao.getAlunos().add(aluno1);
+        turmaPadrao.getAlunos().add(aluno2);
+
+        MembroEquipe professor = new MembroEquipe("Carlos Andrade", "22233344455", Genero.MASC,
+                "(84) 91111-2222", "1", "BTI", "carlos@gmail.com", Cargo.PROFESSOR);
+        turmaPadrao.getEquipe().add(professor);
+
+        MembroEquipe professor2 = new MembroEquipe("Joana Silva", "12345665433", Genero.FEM,
+                "(84) 91111-2222", "22", "BCC", "joana@gmail.com", Cargo.PROFESSOR);
+        turmaPadrao.getEquipe().add(professor2);
+
+        // Adicionando a turma ao banco
+        BancoDAO.getInstance().getArrayTurmas().add(turmaPadrao);
+
+        System.out.println("Turma padrão criada e adicionada ao banco com sucesso!");
+
+        return turmaPadrao;
+    }
 
 
     public static Pessoa buscarPessoa(String CPF) {
@@ -137,14 +213,15 @@ public class Gerenciador {
         return null;
     }
 
-    public void buscarTurma(String nome){
+    public static Turma buscarTurma(String codigo){
         for (Turma turma : banco.getArrayTurmas()) {
-            if (turma.getNome().equals(nome)) {
+            if (turma.getCodigo().equals(codigo)) {
                 turma.detalharTurma();
-                return;
+                return turma;
             }
         }
 
-        System.out.println("Nenhuma turma corresponde a esse nome...");
+        System.out.println("Nenhuma turma com esse código foi encontrada...");
+        return null;
     }
 }

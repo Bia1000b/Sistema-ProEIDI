@@ -1,6 +1,7 @@
 package br.ufrn.imd.sistemaproeidi.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BancoDAO implements Serializable {
@@ -18,6 +19,12 @@ public class BancoDAO implements Serializable {
             instance = new BancoDAO();
         }
         return instance;
+    }
+
+    public String gerarCodigoTurma(String cursoNome, LocalDate dataInicio) {
+        int sequencial = turmas.size() + 1; // Número sequencial baseado no tamanho da lista de turmas
+        String dataFormatada = dataInicio.toString().replace("-", ""); // AAAAMMDD
+        return cursoNome.toUpperCase() + "-" + dataFormatada + "-" + String.format("%03d", sequencial);
     }
 
     public ArrayList<Pessoa> getArrayPessoas() {

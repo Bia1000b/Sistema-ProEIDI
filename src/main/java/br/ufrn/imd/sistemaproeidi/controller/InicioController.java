@@ -26,7 +26,9 @@ public class InicioController {
         CPFusuario.setText("");
     }
 
-    public void processarCPF() {
+    public void processarCPF(){
+        Turma turmaInicial = Gerenciador.criarTurmaPadrao();
+        Gerenciador.criarAlunoPadrao(turmaInicial);
         String cpf = CPFusuario.getText();
 
         if (cpf.isEmpty()) {

@@ -3,6 +3,7 @@ package br.ufrn.imd.sistemaproeidi.utils;
 import br.ufrn.imd.sistemaproeidi.model.enums.Genero;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +13,11 @@ import java.util.stream.Collectors;
 
 public class InputUtils {
     private static Scanner scanner = new Scanner(System.in);
+
+    public static String formatLocalDate(LocalDate input){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+        return formatter.format(input);
+    }
 
     public static String formatEnum(String input) {
         if (input == null || input.isEmpty()) {

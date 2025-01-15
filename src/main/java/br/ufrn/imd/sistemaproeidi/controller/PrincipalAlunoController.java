@@ -10,15 +10,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import br.ufrn.imd.sistemaproeidi.model.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class PrincipalAlunoController {
+    @FXML private Label CursoAtual, Faltas, HorarioTurma, NomeProfessor1, NomeProfessor2, NumeroDeTelefone, SO, nomeTurma, nomeUsuario, totalFaltas;
     @FXML private TabPane tabPane;
-    @FXML private Label nomeUsuario;
-    @FXML private ListView<String> ListViewCursos;
+    @FXML private ListView<String> ListViewCursos, listViewFaltas;
     @FXML private Tab perfilTab, turmaTab;
-    @FXML private Button btn_perfil, btn_turma,btn_perfil1, btn_turma1;
+    @FXML private Button btn_perfil, btn_turma, btn_perfil1, btn_turma1;
+
     private Aluno aluno;
+    private Turma turmaAluno;
 
     private Stage principalSceneAluno;
 
@@ -29,6 +34,12 @@ public class PrincipalAlunoController {
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
         carregarDadosAluno();
+        carregarCursosFeitos();
+        carregarFaltas();
+    }
+
+    public void setTurmaAluno(){
+        this.turmaAluno = Gerenciador.buscarTurma(this.aluno.getCodigoTurma());
     }
 
     @FXML
@@ -39,9 +50,18 @@ public class PrincipalAlunoController {
 
     private void carregarDadosAluno() {
         if (aluno != null) {
+            setTurmaAluno();
             nomeUsuario.setText(aluno.getNome());
+            CursoAtual.setText(InputUtils.formatEnum(aluno.getCursoAtual().toString()));
+            HorarioTurma.setText(InputUtils.formatEnum(turmaAluno.getHorario().toString()));
+            NomeProfessor1.setText(turmaAluno.getEquipe().getFirst().getNome());
+            NomeProfessor2.setText(turmaAluno.getEquipe().get(1).getNome());
+            NumeroDeTelefone.setText(aluno.getNumeroCelular());
+            SO.setText(aluno.getSistemaOperacional().toString());
+            nomeTurma.setText(turmaAluno.getNome());
+            totalFaltas.setText(Integer.toString(aluno.getFaltas().size()));
+
             System.out.println("Dados do aluno carregados: " + aluno.getNome());
-            carregarCursosFeitos();
         }
     }
 
@@ -54,6 +74,34 @@ public class PrincipalAlunoController {
             }
 
             ListViewCursos.setItems(cursos);
+        }
+    }
+
+    private void carregarFaltas(){
+        if (aluno.getFaltas() != null) {
+            ObservableList<String> faltas = FXCollections.observableArrayList();
+
+            for (LocalDate falta : aluno.getFaltas()) {
+                if(faltas.add(InputUtils.formatLocalDate(falta))){
+                    System.out.println("==========" + falta.toString());
+                }
+            }
+
+            listViewFaltas.setItems(faltas);
+        }
+    }
+
+    private void carregarAlunosTurma(){
+        if (turmaAluno.getAlunos() != null) {
+            ObservableList<String> alunos = FXCollections.observableArrayList();
+
+            for (Aluno colegaTurma : turmaAluno.getAlunos()) {
+                if(alunos.add(colegaTurma.getNome())){
+                    System.out.println("==========" + colegaTurma.toString());
+                }
+            }
+
+            listViewFaltas.setItems(alunos);
         }
     }
 

@@ -95,18 +95,8 @@ public class MembroEquipe extends Pessoa implements Serializable {
         for(Turma turma : banco.getArrayTurmas()){
             if(turmaMatricula.equals(turma.getNome())){
                 System.out.println("Turma válida.");
-                if(turma.getNumeroVagas() > 0){
-                    aluno.setCursoAtual(turma.getCurso());
-                    Vector<Aluno> alunosNovo = turma.getAlunos();
-                    alunosNovo.add(aluno);
-                    turma.setAlunos(alunosNovo);
-                    Integer numeroDeVagas = turma.getNumeroVagas();
-                    turma.setNumeroVagas(numeroDeVagas--);
-                    break;
-                }else{
-                    System.out.println("Turma cheia");
-                    break;
-                }
+
+                adicionarAlunoATurma(turma, aluno);
             }else{
                 System.out.println("Turma válida.");
             }
@@ -119,6 +109,29 @@ public class MembroEquipe extends Pessoa implements Serializable {
         }
     }
 
+    public void adicionarAlunoATurma(Turma turma, Aluno aluno){
+        if(turma.getNumeroVagas() > 0){
+            aluno.setCursoAtual(turma.getCurso());
+            aluno.setCodigoTurma(turma.getCodigo());
+            Vector<Aluno> alunos = turma.getAlunos();
+            if(alunos.add(aluno)){
+                System.out.println("Membro adicionado com sucesso à turma " + turma.getNome());
+            }
+            turma.setAlunos(alunos);
+            int numeroDeVagas = turma.getNumeroVagas() - 1;
+            turma.setNumeroVagas(numeroDeVagas);
+        }else{
+            System.out.println("Turma cheia");
+        }
+    }
+
+    public void adicionarMembroDaEquipeATurma(Turma turma, MembroEquipe membro){
+        Vector<MembroEquipe> membros = turma.getEquipe();
+        if(membros.add(membro)){
+            System.out.println("Membro adicionado com sucesso à turma " + turma.getNome());
+        }
+        turma.setEquipe(membros);
+    }
 
     public void cadastrarMembroEquipe() {
         if(this.cargo != Cargo.PROFESSOR){
@@ -161,25 +174,21 @@ public class MembroEquipe extends Pessoa implements Serializable {
         }
     }
 
-    public void adicionarMembroDaEquipeATurma(Turma turma, MembroEquipe membro){
-        Vector<MembroEquipe> membros = turma.getEquipe();
-        if(membros.add(membro)){
-            System.out.println("Membro adicionado com sucesso à turma " + turma.getNome());
-        }
-        turma.setEquipe(membros);
-    }
-
     public void chamadaAlunos(Turma turma){
         Boolean presente = true;
-        LocalDate dataAtual = LocalDate.now();
         for(Aluno aluno : turma.getAlunos()){
             presente = InputUtils.lerBool("Presente? ");
             if(!presente){
-                Vector<LocalDate> faltas = aluno.getFaltas();
-                faltas.add(dataAtual);
-                aluno.setFaltas(faltas);
+                adicionarFalta(aluno);
             }
         }
+    }
+
+    public void adicionarFalta(Aluno aluno){
+        LocalDate dataAtual = LocalDate.now();
+        Vector<LocalDate> faltas = aluno.getFaltas();
+        faltas.add(dataAtual);
+        aluno.setFaltas(faltas);
     }
 
     private void chamadaMembrosEquipe(Turma turma){
