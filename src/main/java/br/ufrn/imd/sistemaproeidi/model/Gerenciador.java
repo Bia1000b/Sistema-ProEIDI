@@ -53,7 +53,7 @@ public class Gerenciador {
     public static void criarMembroPadrao() {
         // Valores padrão para inicialização
         String nomePadrao = "João Silva";
-        String cpfPadrao = "12345678900";
+        String cpfPadrao = "11";
         Genero generoPadrao = Genero.MASC;
         String numeroCelularPadrao = "(84) 99999-9999";
         String matriculaPadrao = "20230001";
