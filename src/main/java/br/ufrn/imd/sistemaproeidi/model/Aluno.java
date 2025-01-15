@@ -16,6 +16,7 @@ public class Aluno extends Pessoa {
     private boolean temSmartphone;
     private SistemaOperacional sistemaOperacional;
     private Curso cursoAtual;
+    private String codigoTurma;
     private Vector<Curso> CursosFeitos;
 
 
@@ -29,6 +30,15 @@ public class Aluno extends Pessoa {
         this.temSmartphone = temSmartphone;
         this.sistemaOperacional = sistemaOperacional;
     }
+
+    public String getCodigoTurma() {
+        return codigoTurma;
+    }
+
+    public void setCodigoTurma(String codigoTurma) {
+        this.codigoTurma = codigoTurma;
+    }
+
 
     public Vector<Curso> getCursosFeitos() {
         return CursosFeitos;

@@ -17,6 +17,7 @@ public class Turma implements Serializable {
     private Boolean concluido = false;
     private LocalDate DataInicio;
     private LocalDate DataTermino;
+    private String codigo;
 
     public Turma(String nome, Curso curso, Horario horario, Integer numeroVagas, LocalDate dataInicio, LocalDate dataTermino) {
         this.nome = nome;
@@ -24,11 +25,17 @@ public class Turma implements Serializable {
         this.horario = horario;
         this.numeroVagas = numeroVagas;
         this.concluido = false;
-        DataInicio = dataInicio;
-        DataTermino = dataTermino;
+        this.DataInicio = dataInicio;
+        this.DataTermino = dataTermino;
+
+        this.codigo = BancoDAO.getInstance().gerarCodigoTurma(curso.toString(), dataInicio);
     }
 
     public Turma(){}
+
+    public String getCodigo() {
+        return codigo;
+    }
 
     public String getNome() {
         return nome;
@@ -72,6 +79,10 @@ public class Turma implements Serializable {
 
     public void setHorario(Horario horario) {
         this.horario = horario;
+    }
+
+    public Horario getHorario() {
+        return horario;
     }
 
     public LocalDate getDataInicio() {
@@ -118,9 +129,6 @@ public class Turma implements Serializable {
             }
         }
     }
-
-
-
 
     private void concluir(){
         //se hoje == dataTermino

@@ -51,4 +51,6 @@ public abstract class Pessoa implements Serializable{
     public String getNome() {
         return nome;
     }
+
+
 }
