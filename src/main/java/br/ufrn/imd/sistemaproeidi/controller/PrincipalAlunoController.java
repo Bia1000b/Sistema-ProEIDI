@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class PrincipalAlunoController {
     @FXML private Label CursoAtual, Faltas, HorarioTurma, NomeProfessor1, NomeProfessor2, NumeroDeTelefone, SO, nomeTurma, nomeUsuario, totalFaltas;
     @FXML private TabPane tabPane;
-    @FXML private ListView<String> ListViewCursos, listViewFaltas;
+    @FXML private ListView<String> ListViewCursos, listViewFaltas, listViewAlunosTurma;
     @FXML private Tab perfilTab, turmaTab;
     @FXML private Button btn_perfil, btn_turma, btn_perfil1, btn_turma1;
 
@@ -36,6 +36,7 @@ public class PrincipalAlunoController {
         carregarDadosAluno();
         carregarCursosFeitos();
         carregarFaltas();
+        carregarAlunosTurma();
     }
 
     public void setTurmaAluno(){
@@ -101,7 +102,7 @@ public class PrincipalAlunoController {
                 }
             }
 
-            listViewFaltas.setItems(alunos);
+            listViewAlunosTurma.setItems(alunos);
         }
     }
 
