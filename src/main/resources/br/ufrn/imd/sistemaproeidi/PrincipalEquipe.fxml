@@ -140,8 +140,8 @@
                               </Pane>
                               <Pane fx:id="pane_11111211111" layoutX="13.0" layoutY="300.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
                                  <children>
-                                    <Label fx:id="faltas" layoutX="11.0" layoutY="7.0" text="Numero de Faltas:" textFill="WHITE" />
-                                    <Label fx:id="matricula1" layoutX="177.0" layoutY="6.0" prefHeight="0.0" prefWidth="71.0" text="faltas" textFill="WHITE" />
+                                    <Label layoutX="11.0" layoutY="7.0" text="Numero de Faltas:" textFill="WHITE" />
+                                    <Label fx:id="faltas" layoutX="177.0" layoutY="6.0" prefHeight="0.0" prefWidth="71.0" text="faltas" textFill="WHITE" />
                                  </children>
                               </Pane>
                            </children>

@@ -31,6 +31,11 @@ public class PrincipalAlunoController {
         this.principalSceneAluno = stage;
     }
 
+    @FXML
+    public void initialize() {
+        System.out.println("Tela Principal Aluno carregada!");
+    }
+
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
         aluno.detalharAluno(); //OPCIONAL
@@ -42,11 +47,6 @@ public class PrincipalAlunoController {
 
     public void setTurmaAluno(){
         this.turmaAluno = Gerenciador.buscarTurma(this.aluno.getCodigoTurma());
-    }
-
-    @FXML
-    public void initialize() {
-        System.out.println("Tela Principal Aluno carregada!");
     }
 
     private void carregarDadosAluno() {

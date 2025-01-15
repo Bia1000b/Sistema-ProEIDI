@@ -29,6 +29,7 @@ public class InicioController {
     public void processarCPF(){
         Turma turmaInicial = Gerenciador.criarTurmaPadrao();
         Gerenciador.criarAlunoPadrao(turmaInicial);
+        Gerenciador.criarMembroPadrao();
         String cpf = CPFusuario.getText();
 
         if (cpf.isEmpty()) {
@@ -40,8 +41,9 @@ public class InicioController {
             }else if ((Gerenciador.buscarPessoa(cpf)) instanceof Aluno){
                 Aluno aluno = (Aluno) Gerenciador.buscarPessoa(cpf);
                 abrirTelaPrincipalAluno(aluno);
-            }else{
-                abrirTelaPrincipalEquipe();
+            }else if ((Gerenciador.buscarPessoa(cpf)) instanceof MembroEquipe){
+                MembroEquipe membroEquipe = (MembroEquipe) Gerenciador.buscarPessoa(cpf);
+                abrirTelaPrincipalEquipe(membroEquipe);
             }
         }
     }
@@ -52,9 +54,8 @@ public class InicioController {
 
             Scene scene = new Scene(loader.load());
 
-            // Obtendo o controlador da tela principal do aluno
             PrincipalAlunoController controller = loader.getController();
-            controller.setAluno(aluno); // Passando o objeto Aluno para o controlador
+            controller.setAluno(aluno);
 
             Stage stage = new Stage();
             stage.setTitle("Aluno");
@@ -66,11 +67,14 @@ public class InicioController {
         }
     }
 
-    private void abrirTelaPrincipalEquipe() {
+    private void abrirTelaPrincipalEquipe(MembroEquipe membro) {
         try {
             FXMLLoader loader = new FXMLLoader(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/PrincipalEquipe.fxml"));
 
             Scene scene = new Scene(loader.load());
+
+            PrincipalEquipeController controller = loader.getController();
+            controller.setMembroEquipe(membro);
 
             Stage stage = new Stage();
             stage.setTitle("Equipe");
@@ -78,7 +82,7 @@ public class InicioController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Erro ao carregar PrincipalAluno.fxml: " + e.getMessage());
+            System.out.println("Erro ao carregar PrincipalEquipe.fxml: " + e.getMessage());
         }
     }
 
