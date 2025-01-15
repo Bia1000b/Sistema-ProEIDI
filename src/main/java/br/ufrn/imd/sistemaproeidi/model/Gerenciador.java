@@ -50,6 +50,8 @@ public class Gerenciador {
         }
     }
 
+
+
     public static void criarMembroPadrao() {
         // Valores padrão para inicialização
         String nomePadrao = "João Silva";
