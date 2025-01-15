@@ -33,6 +33,7 @@ public class PrincipalAlunoController {
 
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
+        aluno.detalharAluno(); //OPCIONAL
         carregarDadosAluno();
         carregarCursosFeitos();
         carregarFaltas();
@@ -46,7 +47,6 @@ public class PrincipalAlunoController {
     @FXML
     public void initialize() {
         System.out.println("Tela Principal Aluno carregada!");
-        //nome.setText();
     }
 
     private void carregarDadosAluno() {
@@ -83,9 +83,7 @@ public class PrincipalAlunoController {
             ObservableList<String> faltas = FXCollections.observableArrayList();
 
             for (LocalDate falta : aluno.getFaltas()) {
-                if(faltas.add(InputUtils.formatLocalDate(falta))){
-                    System.out.println("==========" + falta.toString());
-                }
+                faltas.add(InputUtils.formatLocalDate(falta));
             }
 
             listViewFaltas.setItems(faltas);
@@ -97,9 +95,7 @@ public class PrincipalAlunoController {
             ObservableList<String> alunos = FXCollections.observableArrayList();
 
             for (Aluno colegaTurma : turmaAluno.getAlunos()) {
-                if(alunos.add(colegaTurma.getNome())){
-                    System.out.println("==========" + colegaTurma.toString());
-                }
+                alunos.add(colegaTurma.getNome());
             }
 
             listViewAlunosTurma.setItems(alunos);

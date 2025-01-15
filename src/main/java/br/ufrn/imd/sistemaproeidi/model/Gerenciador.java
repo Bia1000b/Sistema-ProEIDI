@@ -200,7 +200,6 @@ public class Gerenciador {
             if (pessoa.getCPF().equals(CPF)) {
                 if (pessoa instanceof Aluno) {
                     Aluno aluno = (Aluno) pessoa;
-                    aluno.detalharAluno();
                 } else if (pessoa instanceof MembroEquipe) {
                     MembroEquipe membro = (MembroEquipe) pessoa;
                     membro.detalharMembroEquipe();

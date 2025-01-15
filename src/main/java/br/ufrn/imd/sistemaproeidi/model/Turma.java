@@ -102,7 +102,7 @@ public class Turma implements Serializable {
     }
 
     public void detalharTurma() {
-        System.out.println("=== Detalhes da Turma ===");
+        System.out.println("========================= Detalhes da Turma ========================= ");
         System.out.println("Nome: " + nome);
         System.out.println("Curso: " + curso);
         System.out.println("Horário: " + horario);
@@ -111,7 +111,7 @@ public class Turma implements Serializable {
         System.out.println("Data de Início: " + (DataInicio != null ? DataInicio.toString() : "Não definida"));
         System.out.println("Data de Término: " + (DataTermino != null ? DataTermino.toString() : "Não definida"));
 
-        System.out.println("\n=== Alunos Matriculados ===");
+        System.out.println("\n--------- Alunos Matriculados ---------");
         if (alunos.isEmpty()) {
             System.out.println("Nenhum aluno matriculado.");
         } else {
@@ -120,7 +120,7 @@ public class Turma implements Serializable {
             }
         }
 
-        System.out.println("\n=== Membros da Equipe ===");
+        System.out.println("\n--------- Membros da Equipe ---------");
         if (equipe.isEmpty()) {
             System.out.println("Nenhum membro da equipe associado.");
         } else {
@@ -128,6 +128,8 @@ public class Turma implements Serializable {
                 System.out.println("- " + membro.getNome() + " (" + membro.getCargo() + ")");
             }
         }
+
+        System.out.println("==================================================================== ");
     }
 
     private void concluir(){

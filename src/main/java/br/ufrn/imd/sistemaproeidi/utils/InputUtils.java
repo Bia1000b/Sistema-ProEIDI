@@ -26,19 +26,17 @@ public class InputUtils {
 
         input = (input.replace("_", " ")).toLowerCase();
 
-        String[] words = input.toLowerCase().split(" "); // Dividir a string em palavras
+        String[] words = input.toLowerCase().split(" ");
         StringBuilder capitalized = new StringBuilder();
 
         for (String word : words) {
             if (!word.isEmpty()) {
-                // Capitalizar a primeira letra e adicionar o restante da palavra
                 capitalized.append(Character.toUpperCase(word.charAt(0)))
                         .append(word.substring(1))
                         .append(" ");
             }
         }
 
-        // Remover o espaço extra no final
         return capitalized.toString().trim();
     }
 
