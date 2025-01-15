@@ -64,42 +64,18 @@ public class MembroEquipe extends Pessoa implements Serializable {
         }
     }
 
-    public void matricularAluno(){
-        System.out.println("=== Cadastro de Aluno ===");
-        String nome = InputUtils.lerString("Nome: ");
-        LocalDate dataNascimento = InputUtils.lerData("Nascimento");
-
+    public void matricularAluno(String nome, String cpf, Genero genero, LocalDate dataNascimento, String numeroCelular, Escolaridade escolaridade, String obsSaude, boolean temInternet, boolean temComputador, boolean temSmartphone, SistemaOperacional SO, Turma turma){
         if(Period.between(dataNascimento, LocalDate.now()).getYears() < 60){
             System.out.println("É necessário ser idoso para participar do projeto.");
             return;
         }
 
-        String cpf = InputUtils.lerString("CPF: ");
-        Genero genero = InputUtils.lerEnum(Genero.class);
-        String numeroCelular = InputUtils.lerString("Número de celular");
-        Escolaridade escolaridade = InputUtils.lerEnum(Escolaridade.class);
-        String obsSaude = InputUtils.lerString("Observação relativa à saúde");
-        boolean temInternet = InputUtils.lerBool("Tem internet?");
-        boolean temComputador = InputUtils.lerBool("Tem computador?");
-        boolean temSmartphone = InputUtils.lerBool("Tem smartPhone?");
-        SistemaOperacional sistemaOperacional = InputUtils.lerEnum(SistemaOperacional.class);
+        Aluno aluno = new Aluno(nome, cpf, genero, numeroCelular, dataNascimento, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, SO);
 
-        Aluno aluno = new Aluno(nome, cpf, genero, numeroCelular, dataNascimento, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, sistemaOperacional);
-
-        for(Turma turmaDisponivel : banco.getArrayTurmas()){
-            System.out.println(turmaDisponivel.getNome() + "\n");
-        }
-
-        String turmaMatricula = InputUtils.lerString("Turma: ");
-
-        for(Turma turma : banco.getArrayTurmas()){
-            if(turmaMatricula.equals(turma.getNome())){
-                System.out.println("Turma válida.");
-
-                adicionarAlunoATurma(turma, aluno);
-            }else{
-                System.out.println("Turma válida.");
-            }
+        if(adicionarAlunoATurma(turma, aluno)){
+            System.out.println("Aluno" + aluno.getNome() + "adicionado à turma " + turma.getNome() + " com sucesso!");
+        }else{
+            System.out.println("Erro ao adicionar aluno à turma!");
         }
 
         if(banco.getArrayPessoas().add(aluno)){
@@ -109,7 +85,28 @@ public class MembroEquipe extends Pessoa implements Serializable {
         }
     }
 
-    public void adicionarAlunoATurma(Turma turma, Aluno aluno){
+
+
+
+
+    public void cadastrarMembroEquipe(String nome, String cpf, Genero genero, String numeroCelular, String matricula, String cursoUFRN, String email, Cargo cargo) {
+        if(this.cargo != Cargo.PROFESSOR){
+            System.out.println("Você não tem permissão para cadatrar um membro da equipe.");
+        }else{
+
+            genero = null;
+
+            MembroEquipe novoMembro = new MembroEquipe(nome, cpf, genero, numeroCelular, matricula, cursoUFRN, email, cargo);
+
+            if (banco.getArrayPessoas().add(novoMembro)) {
+                System.out.println("Membro da equipe cadastrado com sucesso!");
+            } else {
+                System.out.println("Erro ao cadastrar o membro da equipe!");
+            }
+        }
+    }
+
+    public boolean adicionarAlunoATurma(Turma turma, Aluno aluno){
         if(turma.getNumeroVagas() > 0){
             aluno.setCursoAtual(turma.getCurso());
             aluno.setCodigoTurma(turma.getCodigo());
@@ -120,9 +117,11 @@ public class MembroEquipe extends Pessoa implements Serializable {
             turma.setAlunos(alunos);
             int numeroDeVagas = turma.getNumeroVagas() - 1;
             turma.setNumeroVagas(numeroDeVagas);
-        }else{
-            System.out.println("Turma cheia");
+            return true;
         }
+
+        System.out.println("Turma cheia");
+        return false;
     }
 
     public void adicionarMembroDaEquipeATurma(Turma turma, MembroEquipe membro){
@@ -133,38 +132,8 @@ public class MembroEquipe extends Pessoa implements Serializable {
         turma.setEquipe(membros);
     }
 
-    public void cadastrarMembroEquipe() {
-        if(this.cargo != Cargo.PROFESSOR){
-            System.out.println("Você não tem permissão para cadatrar um membro da equipe.");
-        }else{
-            System.out.println("=== Cadastro de Membro da Equipe ===");
-            String nome = InputUtils.lerString("Nome: ");
-            String cpf = InputUtils.lerString("CPF: ");
-            Genero genero = InputUtils.lerEnum(Genero.class);
-            String numeroCelular = InputUtils.lerString("Número de celular: ");
-            String matricula = InputUtils.lerString("Matrícula: ");
-            String cursoUFRN = InputUtils.lerString("Curso na UFRN: ");
-            String email = InputUtils.lerString("E-mail: ");
-            Cargo cargo = InputUtils.lerEnum(Cargo.class);
 
-            MembroEquipe novoMembro = new MembroEquipe(nome,  cpf, genero, numeroCelular, matricula, cursoUFRN, email, cargo);
-
-            if (banco.getArrayPessoas().add(novoMembro)) {
-                System.out.println("Membro da equipe cadastrado com sucesso!");
-            } else {
-                System.out.println("Erro ao cadastrar o membro da equipe!");
-            }
-        }
-    }
-
-    private void cadastrarTurma(){
-        String nome = InputUtils.lerString("Nome da turma: ");
-        Curso curso = InputUtils.lerEnum(Curso.class);
-        Horario horario = InputUtils.lerEnum(Horario.class);
-        Integer numeroVagas = InputUtils.lerInteger("Número de vagas");
-        LocalDate dataInicio = InputUtils.lerData("Data de ínicio");
-        LocalDate dataTermino = InputUtils.lerData("Data de término");
-
+    private void cadastrarTurma(String nome, Curso curso, Horario horario, Integer numeroVagas, LocalDate dataInicio, LocalDate dataTermino){
         Turma turma = new Turma(nome, curso, horario, numeroVagas, dataInicio, dataTermino);
 
         if(banco.getArrayTurmas().add(turma)){

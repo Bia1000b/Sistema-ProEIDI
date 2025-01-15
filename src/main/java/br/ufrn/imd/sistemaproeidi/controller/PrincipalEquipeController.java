@@ -74,11 +74,7 @@ public class PrincipalEquipeController {
 
 
 
-    @FXML
-    void clicarBtnCadastrar(ActionEvent event) {
-        tabPane.getSelectionModel().select(perfilTab);
-        System.out.println("Botão PERFIL clicado.");
-    }
+
 
 
 
