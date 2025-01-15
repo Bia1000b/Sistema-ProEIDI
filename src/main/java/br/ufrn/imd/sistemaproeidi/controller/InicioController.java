@@ -36,7 +36,7 @@ public class InicioController {
         } else {
             System.out.println("CPF digitado: " + cpf);
             if(Gerenciador.buscarPessoa(cpf) == null){
-                exibirAlerta("Login Inválido", "Usuário ou senha incorretos.");
+                exibirAlerta("Login Inválido", "CPF incorreto ou não cadastrado!.");
             }else if ((Gerenciador.buscarPessoa(cpf)) instanceof Aluno){
                 Aluno aluno = (Aluno) Gerenciador.buscarPessoa(cpf);
                 abrirTelaPrincipalAluno(aluno);
