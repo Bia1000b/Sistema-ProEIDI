@@ -76,9 +76,7 @@ public class PrincipalEquipeController {
         this.membroEquipe = membroEquipe;
         membroEquipe.detalharMembroEquipe(); //OPCIONAL
         carregarDadosMembroEquipe();
-//        carregarCursosFeitos();
 //        carregarFaltas();
-//        carregarAlunosTurma();
     }
 
     //muitos dados repetidos, rever isso
@@ -274,6 +272,15 @@ public class PrincipalEquipeController {
         horarioLabel.setPrefSize(500, 30);
         horarioLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
 
+        // Criação do Button chamada
+        Button btn_chamada = new Button("Chamada");
+        btn_chamada.setLayoutX(250);
+        btn_chamada.setLayoutY(59);
+        btn_chamada.setPrefSize(100, 30);
+        btn_chamada.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
+
+        //FALTA A ACAO DA CHAMADA
+
         // Criação do Button para ver detalhes
         Button btn_verTurma = new Button("Ver");
         btn_verTurma.setLayoutX(370);
@@ -303,7 +310,7 @@ public class PrincipalEquipeController {
         });
 
         // Adicionar todos os componentes ao Pane
-        paneTurma.getChildren().addAll(labelNome, horarioLabel,btn_apagar,btn_verTurma);
+        paneTurma.getChildren().addAll(labelNome, horarioLabel,btn_apagar,btn_verTurma,btn_chamada);
 
         // Adicionar o Pane ao HBox
         blocoTurma.getChildren().add(paneTurma);
