@@ -416,19 +416,21 @@ public class PrincipalEquipeController {
                 System.out.println("Erro ao carregar VerAluno.fxml: " + e.getMessage());
             }
         } else if (pessoa instanceof MembroEquipe) {
-            try {
-                Parent root = FXMLLoader.load(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/VerEquipe.fxml"));
 
-                Scene scene = new Scene(root);
-
-                Stage stage = new Stage();
-                stage.setTitle("Membro da Equipe");
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Erro ao carregar VerEquipe.fxml: " + e.getMessage());
-            }
+            System.out.println("Tela nao configiurada");
+//            try {
+//                Parent root = FXMLLoader.load(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/VerEquipe.fxml"));
+//
+//                Scene scene = new Scene(root);
+//
+//                Stage stage = new Stage();
+//                stage.setTitle("Membro da Equipe");
+//                stage.setScene(scene);
+//                stage.show();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                System.out.println("Erro ao carregar VerEquipe.fxml: " + e.getMessage());
+//            }
 
         }
     }
