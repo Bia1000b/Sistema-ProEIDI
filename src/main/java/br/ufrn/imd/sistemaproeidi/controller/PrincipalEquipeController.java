@@ -281,6 +281,11 @@ public class PrincipalEquipeController {
         btn_verTurma.setPrefSize(100, 30);
         btn_verTurma.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
 
+        // Ação do botão de verPessoa
+        btn_verTurma.setOnAction(event -> {
+            abrirTelaVerTurma(turma);
+        });
+
         // Criação do Button para excluir
         Button btn_apagar = new Button("Apagar");
         btn_apagar.setLayoutX(370);
@@ -339,12 +344,6 @@ public class PrincipalEquipeController {
         labelNome.setLayoutY(14);
         labelNome.setPrefSize(500, 30);
         labelNome.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
-
-//        Label horarioLabel = new Label("HORARIO: " + horario);
-//        horarioLabel.setLayoutX(14);
-//        horarioLabel.setLayoutY(44);
-//        horarioLabel.setPrefSize(500, 30);
-//        horarioLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
 
         // Criação do Button para ver detalhes
         Button btn_verPessoa = new Button("Ver");
@@ -423,24 +422,47 @@ public class PrincipalEquipeController {
                 System.out.println("Erro ao carregar VerAluno.fxml: " + e.getMessage());
             }
         } else if (pessoa instanceof MembroEquipe) {
+            try {
+                FXMLLoader loader = new FXMLLoader(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/VerMembro.fxml"));
+                Parent root = loader.load();
 
-            System.out.println("Tela nao configiurada");
-//            try {
-//                Parent root = FXMLLoader.load(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/VerEquipe.fxml"));
-//
-//                Scene scene = new Scene(root);
-//
-//                Stage stage = new Stage();
-//                stage.setTitle("Membro da Equipe");
-//                stage.setScene(scene);
-//                stage.show();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                System.out.println("Erro ao carregar VerEquipe.fxml: " + e.getMessage());
-//            }
+                VerMembroController controller = loader.getController();
+
+                MembroEquipe membro = (MembroEquipe) pessoa;
+                controller.setMembroEquipe(membro);
+
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setTitle("Membro da Equipe");
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Erro ao carregar VerAluno.fxml: " + e.getMessage());
+            }
 
         }
     }
 
+    private void abrirTelaVerTurma(Turma turma) {
+        try {
+            FXMLLoader loader = new FXMLLoader(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/VerTurma.fxml"));
+            Parent root = loader.load();
+
+            VerTurmaController controller = loader.getController();
+
+            controller.setTurma(turma);
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Turma");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao carregar VerTurma.fxml: " + e.getMessage());
+        }
+
+    }
 
 }

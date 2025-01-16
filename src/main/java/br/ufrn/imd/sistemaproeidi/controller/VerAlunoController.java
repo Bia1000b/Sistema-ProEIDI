@@ -24,7 +24,7 @@ public class VerAlunoController {
     private ListView<String> ListViewCursos, listViewFaltas;
 
     public void initialize() {
-        System.out.println("Tela Principal Aluno carregada!");
+        System.out.println("Tela Ver carregada!");
     }
 
     public void setAluno(Aluno aluno) {
