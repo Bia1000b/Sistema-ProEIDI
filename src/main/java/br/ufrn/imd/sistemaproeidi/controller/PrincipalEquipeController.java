@@ -403,10 +403,14 @@ public class PrincipalEquipeController {
     private void abrirTelaVerPessoa(Pessoa pessoa) {
         if (pessoa instanceof Aluno) {
             try {
-                Parent root = FXMLLoader.load(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/VerAluno.fxml"));
+                FXMLLoader loader = new FXMLLoader(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/VerAluno.fxml"));
+                Parent root = loader.load();
 
+                // Obtém o controlador
+                VerAlunoController controller = loader.getController();
+
+                // Configura a janela
                 Scene scene = new Scene(root);
-
                 Stage stage = new Stage();
                 stage.setTitle("Aluno");
                 stage.setScene(scene);
