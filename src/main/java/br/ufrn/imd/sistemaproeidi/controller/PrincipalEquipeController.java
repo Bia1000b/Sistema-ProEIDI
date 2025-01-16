@@ -227,4 +227,139 @@ public class PrincipalEquipeController {
         tabPane.getSelectionModel().select(cadastrarTurmaTab);
         System.out.println("Botão BUSCAR clicado.");
     }
+
+    @FXML
+    private void carregarTurmas() {
+        try {
+            // Adicionar cada tarefa ao VBox
+            for (Turma turma : turmas) {
+                String nome = turma.getNome();
+                boolean concluida = turma.getConcluido();
+                Horario horario = turma.getHorario();
+
+                // Adiciona a tarefa ao VBox
+                adicionarBlocoTurma(nome,horario,concluida);
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao carregar turmas " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void adicionarBlocoTurma(String nomeTurma, Horario horario, boolean concluido) {
+        // Criação do HBox
+        HBox blocoTurma = new HBox();
+        blocoTurma.setPrefSize(637, 129); // Dimensão fixa
+        blocoTurma.setStyle("-fx-background-color: #2F4A5F; -fx-border-radius: 10; -fx-padding: 10;");
+
+        // Criação do Pane dentro do HBox para layout manual
+        Pane paneTurma = new Pane();
+        paneTurma.setPrefSize(630, 130); // Mesma altura que o HBox
+
+        // Criação das Labels
+        Label labelNome = new Label("NOME: " + nomeTurma);
+        labelNome.setLayoutX(14);
+        labelNome.setLayoutY(14);
+        labelNome.setPrefSize(500, 30);
+        labelNome.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
+
+        Label horarioLabel = new Label("HORARIO: " + horario);
+        horarioLabel.setLayoutX(14);
+        horarioLabel.setLayoutY(44);
+        horarioLabel.setPrefSize(500, 30);
+        horarioLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
+
+
+        // Criação do Button para excluir atividade
+        Button btn_apagar = new Button("Apagar");
+        btn_apagar.setLayoutX(370);
+        btn_apagar.setLayoutY(59);
+        btn_apagar.setPrefSize(100, 30);
+        btn_apagar.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
+
+        // Ação do botão de excluir
+        btn_apagar.setOnAction(event -> {
+            // Remover do VBox
+            VBoxListaDeTurmas.getChildren().remove(blocoTurma);
+
+        });
+        // Adicionar todos os componentes ao Pane
+        paneTurma.getChildren().addAll(labelNome, horarioLabel,btn_apagar);
+
+        // Adicionar o Pane ao HBox
+        blocoTurma.getChildren().add(paneTurma);
+
+        // Adicionar o HBox ao VBox existente (activitiesVBox)
+        VBoxListaDeTurmas.getChildren().add(blocoTurma);
+    }
+
+    @FXML
+    private void carregarPessoas() {
+        try {
+            // Adicionar cada pss ao VBox
+            for (Pessoa pessoa : pessoas) {
+                String nome = pessoa.getNome();
+
+                // Adiciona a tarefa ao VBox
+                adicionarBlocoPessoa(nome);
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao carregar pessoas " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void adicionarBlocoPessoa(String nomePessoa) {
+        // Criação do HBox
+        HBox blocoPessoa = new HBox();
+        blocoPessoa.setPrefSize(637, 129); // Dimensão fixa
+        blocoPessoa.setStyle("-fx-background-color: #2F4A5F; -fx-border-radius: 10; -fx-padding: 10;");
+
+        // Criação do Pane dentro do HBox para layout manual
+        Pane panePessoa = new Pane();
+        panePessoa.setPrefSize(630, 130); // Mesma altura que o HBox
+
+        // Criação das Labels
+        Label labelNome = new Label("NOME: " + nomePessoa);
+        labelNome.setLayoutX(14);
+        labelNome.setLayoutY(14);
+        labelNome.setPrefSize(500, 30);
+        labelNome.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
+
+//        Label horarioLabel = new Label("HORARIO: " + horario);
+//        horarioLabel.setLayoutX(14);
+//        horarioLabel.setLayoutY(44);
+//        horarioLabel.setPrefSize(500, 30);
+//        horarioLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
+
+
+        // Criação do Button para excluir atividade
+        Button btn_apagar = new Button("Apagar");
+        btn_apagar.setLayoutX(370);
+        btn_apagar.setLayoutY(59);
+        btn_apagar.setPrefSize(100, 30);
+        btn_apagar.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
+
+        // Ação do botão de excluir
+        btn_apagar.setOnAction(event -> {
+            // Remover do VBox
+            VBoxListaDePessoas.getChildren().remove(blocoPessoa);
+
+        });
+        // Adicionar todos os componentes ao Pane
+        panePessoa.getChildren().addAll(labelNome,btn_apagar);
+
+        // Adicionar o Pane ao HBox
+        blocoPessoa.getChildren().add(panePessoa);
+
+        // Adicionar o HBox ao VBox existente (activitiesVBox)
+        VBoxListaDePessoas.getChildren().add(blocoPessoa);
+    }
+
+    private void exibirAlertaCadastroConcluido() {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Cadastro Concluido");
+        alerta.setContentText("Parabens! Cadastro Concluido com sucesso!");
+        alerta.showAndWait();
+    }
 }
