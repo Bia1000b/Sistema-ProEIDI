@@ -101,6 +101,14 @@ public class Turma implements Serializable {
         DataTermino = dataTermino;
     }
 
+    public Boolean getConcluido() {
+        return concluido;
+    }
+
+    public void setConcluido(Boolean concluido) {
+        this.concluido = concluido;
+    }
+
     public void detalharTurma() {
         System.out.println("========================= Detalhes da Turma ========================= ");
         System.out.println("Nome: " + nome);
