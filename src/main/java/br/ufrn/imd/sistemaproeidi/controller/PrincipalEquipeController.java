@@ -1,14 +1,8 @@
 package br.ufrn.imd.sistemaproeidi.controller;
 
 import br.ufrn.imd.sistemaproeidi.SistemaApplication;
-import br.ufrn.imd.sistemaproeidi.model.Aluno;
-import br.ufrn.imd.sistemaproeidi.model.BancoDAO;
-import br.ufrn.imd.sistemaproeidi.model.MembroEquipe;
-import br.ufrn.imd.sistemaproeidi.model.Turma;
-import br.ufrn.imd.sistemaproeidi.model.enums.Cargo;
-import br.ufrn.imd.sistemaproeidi.model.enums.Escolaridade;
-import br.ufrn.imd.sistemaproeidi.model.enums.Genero;
-import br.ufrn.imd.sistemaproeidi.model.enums.SistemaOperacional;
+import br.ufrn.imd.sistemaproeidi.model.*;
+import br.ufrn.imd.sistemaproeidi.model.enums.*;
 import br.ufrn.imd.sistemaproeidi.utils.InputUtils;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -16,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -24,27 +19,31 @@ import java.util.Vector;
 
 public class PrincipalEquipeController {
 
-    @FXML private Tab perfilTab, turmasTab, buscarTab,cadastrarAlunoTab,cadastrarEquipeTab,chamadaTab;
+    @FXML private Tab perfilTab, turmasTab, buscarTab,cadastrarAlunoTab,cadastrarEquipeTab,cadastrarTurmaTab, pessoasTab;
     @FXML private TabPane tabPane;
-    @FXML private Button btn_perfil, btn_perfil1, btn_perfil11, btn_perfil111, btn_perfil1111, btn_perfil11111;
-    @FXML private Button btn_turma, btn_turma1, btn_turma11, btn_turma111, btn_turma1111, btn_turma11111;
-    @FXML private Button btn_cadastrarAluno, btn_cadastrarAluno1, btn_cadastrarAluno11, btn_cadastrarAluno111, btn_cadastrarAluno1111, btn_cadastrarAluno11111;
-    @FXML private Button btn_cadastrarEquipe, btn_cadastrarEquipe1, btn_cadastrarEquipe11, btn_cadastrarEquipe111, btn_cadastrarEquipe1111, btn_cadastrarEquipe11111;
-    @FXML private Button btn_chamada, btn_chamada1, btn_chamada11, btn_chamada111, btn_chamada1111, btn_chamada11111;
-    @FXML private Button btn_buscar, btn_buscar1, btn_buscar11, btn_buscar111, btn_buscar1111, btn_buscar11111;
+    @FXML private VBox VBoxListaDeTurmas, VBoxListaDePessoas;
+    @FXML private Button btn_menu_perfil, btn_menu_perfil1, btn_menu_perfil11, btn_menu_perfil111, btn_menu_perfil1111, btn_menu_perfil11111;
+    @FXML private Button btn_menu_turma, btn_menu_turma1, btn_menu_turma11, btn_menu_turma111, btn_menu_turma1111, btn_menu_turma11111;
+    @FXML private Button btn_Tab_cadastrarAluno, btn_Tab_cadastrarEquipe;
+    @FXML private Button btn_menu_pessoas, btn_menu_pessoas1, btn_menu_pessoas11, btn_menu_pessoas111, btn_menu_pessoas1111, btn_menu_pessoas11111;
+    @FXML private Button btn_menu_chamada, btn_menu_chamada1, btn_menu_chamada11, btn_menu_chamada111, btn_menu_chamada1111, btn_menu_chamada11111;
+    @FXML private Button btn_menu_buscar, btn_menu_buscar1, btn_menu_buscar11, btn_menu_buscar111, btn_menu_buscar1111, btn_menu_buscar11111;
     @FXML private TextField cadastroAlunoCPF, cadastroAlunoNome, cadastroAlunoObsSaude, cadastroAlunoTelefone, cadastroEquipeCPF, cadastroEquipeCursoUFRN, cadastroEquipeEmail, cadastroEquipeMatricula, cadastroEquipeNome, cadastroEquipeTelefone;
-    @FXML private DatePicker cadastroAlunoDataNascimento;
+    @FXML private TextField cadastroTurmaNome, cadastroTurmaVagas;
+    @FXML private DatePicker cadastroAlunoDataNascimento, cadastroTurmaDataInicio, cadastroTurmaDataTermino;
+    @FXML private ChoiceBox<Curso> cadastroTurmaCurso;
     @FXML private ChoiceBox<Genero> cadastroAlunoGenero;
     @FXML private ChoiceBox<SistemaOperacional> cadastroAlunoSO;
     @FXML private ChoiceBox<Escolaridade> cadastroAlunoEscolaridade;
     @FXML private ChoiceBox<Cargo>  cadastroEquipeCargo;
     @FXML private ChoiceBox<Turma>  cadastroAlunoTurmaDisponiveis;
+    @FXML private ChoiceBox<Horario> cadastroTurmaHorario;
     @FXML private CheckBox checkAlunoComputador, checkAlunoInternet, checkAlunoSmartphone;
-    @FXML private Label nomeUsuario, nomeUsuario1, cursoUFRN, cursoUFRN1, email, email1, faltas, faltas1, matricula, matricula1, matricula11, numeroDeTelefone, numeroDeTelefone1;
-    @FXML private Pane inner_pane2, inner_pane21, inner_pane211, inner_pane2111, inner_pane21111, inner_pane211111, pane_111112, pane_1111121, pane_11111211, pane_111112111, pane_1111121111, pane_11111211111, pane_111112111111;
-    @FXML private HBox root2, root21, root211, root2111, root21111, root211111;
+    @FXML private Label nomeUsuario, cursoUFRN, email, faltas, matricula, numeroDeTelefone;
+
 
     private MembroEquipe membroEquipe;
+    private ArrayList<Pessoa> pessoas = BancoDAO.getInstance().getArrayPessoas();
     private ArrayList<Turma> turmas = BancoDAO.getInstance().getArrayTurmas();
 
     private Stage principalSceneEquipe;
