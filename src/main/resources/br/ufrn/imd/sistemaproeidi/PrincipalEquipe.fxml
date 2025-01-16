@@ -5,8 +5,11 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -22,73 +25,55 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@style.css">
                <children>
-                  <HBox fx:id="root2" layoutY="-1.0" prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
+                  <HBox layoutY="-1.0" prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
                      <children>
                         <VBox prefHeight="371.0" prefWidth="154.0" stylesheets="@style.css">
                            <children>
-                              <AnchorPane fx:id="sideAnchorpane2" blendMode="SRC_ATOP" prefHeight="472.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
+                              <AnchorPane blendMode="SRC_ATOP" prefHeight="541.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
                                  <children>
-                                    <Pane fx:id="inner_pane2" layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
+                                    <Pane layoutX="8.0" layoutY="28.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
                                        <children>
                                           <ImageView fitHeight="54.0" fitWidth="79.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/ProEIDILogoOculos.png" />
+                                                <Image url="@imagens/ProEIDILogoOculos.png" />
                                              </image>
                                           </ImageView>
                                           <Label layoutX="90.0" layoutY="14.0" prefHeight="21.0" prefWidth="77.0" text="Sistema" textAlignment="CENTER" />
                                           <Label layoutX="90.0" layoutY="29.0" prefHeight="21.0" prefWidth="77.0" text="ProEIDI" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
-                                    <Button fx:id="btn_perfil" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
+                                    <Button fx:id="btn_menu_perfil" layoutX="8.0" layoutY="107.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/perfil-de-usuario.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_turma" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
+                                    <Button fx:id="btn_menu_turma" layoutX="8.0" layoutY="157.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/abra-o-livro.png" />
+                                                <Image url="@imagens/abra-o-livro.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_cadastrarAluno" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarAlunoFinal" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Aluno" textFill="WHITE">
+                                    <Button fx:id="btn_menu_pessoas" layoutX="8.0" layoutY="205.0" mnemonicParsing="false" onAction="#clicarBtnPessoas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Pessoas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/cadastro.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_cadastrarEquipe" layoutX="7.0" layoutY="257.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarEquipe" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Equipe" textFill="WHITE">
+                                    <Button fx:id="btn_menu_chamada" layoutX="7.0" layoutY="307.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_chamada" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" onAction="#clicarBtnChamada" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_buscar" layoutX="7.0" layoutY="356.0" mnemonicParsing="false" onAction="#clicarBtnBuscar" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Buscar" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/checkbox.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -99,7 +84,7 @@
                         </VBox>
                         <Pane prefHeight="471.0" prefWidth="522.0">
                            <children>
-                              <Pane layoutX="13.0" prefHeight="86.0" prefWidth="502.0" styleClass="pane_1">
+                              <Pane layoutX="11.0" layoutY="14.0" prefHeight="86.0" prefWidth="502.0" styleClass="pane_1">
                                  <children>
                                     <Label layoutX="14.0" layoutY="14.0" text="Bem Vindo(a)," textFill="WHITE" />
                                     <Label fx:id="nomeUsuario" layoutX="14.0" layoutY="39.0" text="Nome do Usuario" textFill="WHITE">
@@ -109,36 +94,36 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane fx:id="pane_111112" layoutX="14.0" layoutY="104.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
+                              <Pane layoutX="14.0" layoutY="104.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
                                  <children>
                                     <Label layoutX="14.0" layoutY="5.0" text="Informacoes Pessoais:" textFill="WHITE" />
                                  </children>
                               </Pane>
-                              <Pane fx:id="pane_1111121" layoutX="14.0" layoutY="142.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
+                              <Pane layoutX="14.0" layoutY="142.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
                                  <children>
                                     <Label layoutX="14.0" layoutY="8.0" text="Telefone:" textFill="WHITE" />
                                     <Label fx:id="numeroDeTelefone" layoutX="173.0" layoutY="8.0" prefHeight="16.0" prefWidth="309.0" text="numeroDeTelefone" textFill="WHITE" />
                                  </children>
                               </Pane>
-                              <Pane fx:id="pane_11111211" layoutX="12.0" layoutY="181.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
+                              <Pane layoutX="12.0" layoutY="181.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
                                  <children>
                                     <Label layoutX="14.0" layoutY="8.0" text="Email:" textFill="WHITE" />
                                     <Label fx:id="email" layoutX="178.0" layoutY="7.0" prefHeight="16.0" prefWidth="301.0" text="email" textFill="WHITE" />
                                  </children>
                               </Pane>
-                              <Pane fx:id="pane_111112111" layoutX="13.0" layoutY="221.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
+                              <Pane layoutX="13.0" layoutY="221.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
                                  <children>
                                     <Label layoutX="11.0" layoutY="7.0" text="Curso:" textFill="WHITE" />
                                     <Label fx:id="cursoUFRN" layoutX="177.0" layoutY="6.0" prefHeight="16.0" prefWidth="307.0" text="cursoUFRN" textFill="WHITE" />
                                  </children>
                               </Pane>
-                              <Pane fx:id="pane_1111121111" layoutX="12.0" layoutY="261.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
+                              <Pane layoutX="12.0" layoutY="261.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
                                  <children>
                                     <Label layoutX="11.0" layoutY="7.0" text="Matricula:" textFill="WHITE" />
                                     <Label fx:id="matricula" layoutX="177.0" layoutY="6.0" prefHeight="16.0" prefWidth="299.0" text="matricula" textFill="WHITE" />
                                  </children>
                               </Pane>
-                              <Pane fx:id="pane_11111211111" layoutX="13.0" layoutY="300.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
+                              <Pane layoutX="13.0" layoutY="300.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
                                  <children>
                                     <Label layoutX="11.0" layoutY="7.0" text="Numero de Faltas:" textFill="WHITE" />
                                     <Label fx:id="faltas" layoutX="177.0" layoutY="6.0" prefHeight="16.0" prefWidth="304.0" text="faltas" textFill="WHITE" />
@@ -156,73 +141,55 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@style.css">
                <children>
-                  <HBox fx:id="root21" prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
+                  <HBox prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
                      <children>
                         <VBox prefHeight="371.0" prefWidth="154.0" stylesheets="@style.css">
                            <children>
-                              <AnchorPane fx:id="sideAnchorpane21" blendMode="SRC_ATOP" prefHeight="472.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
+                              <AnchorPane blendMode="SRC_ATOP" prefHeight="472.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
                                  <children>
-                                    <Pane fx:id="inner_pane21" layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
+                                    <Pane layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
                                        <children>
                                           <ImageView fitHeight="54.0" fitWidth="79.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/ProEIDILogoOculos.png" />
+                                                <Image url="@imagens/ProEIDILogoOculos.png" />
                                              </image>
                                           </ImageView>
                                           <Label layoutX="90.0" layoutY="14.0" prefHeight="21.0" prefWidth="77.0" text="Sistema" textAlignment="CENTER" />
                                           <Label layoutX="90.0" layoutY="29.0" prefHeight="21.0" prefWidth="77.0" text="ProEIDI" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
-                                    <Button fx:id="btn_perfil1" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
+                                    <Button fx:id="btn_menu_perfil1" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/perfil-de-usuario.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_turma1" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
+                                    <Button fx:id="btn_menu_turma1" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/abra-o-livro.png" />
+                                                <Image url="@imagens/abra-o-livro.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_cadastrarAluno1" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarAluno" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Aluno" textFill="WHITE">
+                                    <Button fx:id="btn_menu_pessoas1" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnPessoas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Pessoas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/cadastro.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_cadastrarEquipe1" layoutX="7.0" layoutY="257.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarEquipe" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Equipe" textFill="WHITE">
+                                    <Button fx:id="btn_menu_chamada1" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_chamada1" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" onAction="#clicarBtnChamada" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_buscar1" layoutX="7.0" layoutY="356.0" mnemonicParsing="false" onAction="#clicarBtnBuscar" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Buscar" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/checkbox.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -233,49 +200,33 @@
                         </VBox>
                         <Pane prefHeight="471.0" prefWidth="522.0">
                            <children>
-                              <Pane layoutX="16.0" layoutY="12.0" prefHeight="86.0" prefWidth="502.0" styleClass="pane_1">
+                              <ScrollPane layoutY="92.0" prefHeight="376.0" prefWidth="522.0">
+                                 <content>
+                                    <VBox fx:id="VBoxListaDeTurmas" spacing="10.0" />
+                                 </content>
+                              </ScrollPane>
+                              <Label layoutX="14.0" layoutY="34.0" text="Turmas" textFill="#1b6b8a">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btn_Tab_cadastrarTurma" layoutX="351.0" layoutY="34.0" mnemonicParsing="false" onAction="#clicarBtnTabCadastrarTurma" prefHeight="31.0" prefWidth="157.0" styleClass="btn_perfil" text="Cadastrar Turma" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@imagens/mais.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Pane layoutX="140.0" layoutY="27.0" prefHeight="46.0" prefWidth="197.0" styleClass="btn_perfil">
                                  <children>
-                                    <Label layoutX="14.0" layoutY="14.0" text="Bem Vindo(a)," textFill="WHITE" />
-                                    <Label fx:id="nomeUsuario1" layoutX="14.0" layoutY="39.0" text="TESTE TURMAS" textFill="WHITE">
-                                       <font>
-                                          <Font size="26.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="pane_1111121" layoutX="14.0" layoutY="104.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="5.0" text="Informacoes Pessoais:" textFill="WHITE" />
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="pane_11111211" layoutX="14.0" layoutY="142.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="8.0" text="Telefone:" textFill="WHITE" />
-                                    <Label fx:id="numeroDeTelefone1" layoutX="173.0" layoutY="8.0" text="numeroDeTelefone" textFill="WHITE" />
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="pane_111112111" layoutX="12.0" layoutY="181.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="8.0" text="Email:" textFill="WHITE" />
-                                    <Label fx:id="email1" layoutX="178.0" layoutY="7.0" text="email" textFill="WHITE" />
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="pane_1111121111" layoutX="13.0" layoutY="221.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
-                                 <children>
-                                    <Label layoutX="11.0" layoutY="7.0" text="Curso:" textFill="WHITE" />
-                                    <Label fx:id="cursoUFRN1" layoutX="177.0" layoutY="6.0" prefHeight="16.0" prefWidth="110.0" text="cursoUFRN" textFill="WHITE" />
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="pane_11111211111" layoutX="12.0" layoutY="261.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
-                                 <children>
-                                    <Label layoutX="11.0" layoutY="7.0" text="Matricula:" textFill="WHITE" />
-                                    <Label fx:id="matricula1" layoutX="177.0" layoutY="6.0" prefHeight="0.0" prefWidth="71.0" text="matricula" textFill="WHITE" />
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="pane_111112111111" layoutX="13.0" layoutY="300.0" prefHeight="30.0" prefWidth="496.0" styleClass="pane_1111">
-                                 <children>
-                                    <Label fx:id="faltas1" layoutX="11.0" layoutY="7.0" text="Numero de Faltas:" textFill="WHITE" />
-                                    <Label fx:id="matricula11" layoutX="177.0" layoutY="6.0" prefHeight="0.0" prefWidth="71.0" text="faltas" textFill="WHITE" />
+                                    <TextField fx:id="buscarTurma" layoutX="47.0" layoutY="9.0" prefHeight="28.0" prefWidth="136.0" styleClass="pane_11" text="Buscar" />
+                                    <ImageView fitHeight="21.0" fitWidth="22.0" layoutX="20.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@imagens/procurar.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </Pane>
                            </children>
@@ -285,77 +236,167 @@
                </children></AnchorPane>
             </content>
         </Tab>
-      <Tab fx:id="cadastrarAlunoTab" text="CadastrarAluno">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      <Tab fx:id="pessoasTab" text="Pessoas">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <HBox fx:id="root211" prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
+                  <HBox prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
                      <children>
                         <VBox prefHeight="371.0" prefWidth="154.0" stylesheets="@style.css">
                            <children>
-                              <AnchorPane fx:id="sideAnchorpane211" blendMode="SRC_ATOP" prefHeight="474.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
+                              <AnchorPane blendMode="SRC_ATOP" prefHeight="489.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
                                  <children>
-                                    <Pane fx:id="inner_pane211" layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
+                                    <Pane layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
                                        <children>
                                           <ImageView fitHeight="54.0" fitWidth="79.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/ProEIDILogoOculos.png" />
+                                                <Image url="@imagens/ProEIDILogoOculos.png" />
                                              </image>
                                           </ImageView>
                                           <Label layoutX="90.0" layoutY="14.0" prefHeight="21.0" prefWidth="77.0" text="Sistema" textAlignment="CENTER" />
                                           <Label layoutX="90.0" layoutY="29.0" prefHeight="21.0" prefWidth="77.0" text="ProEIDI" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
-                                    <Button fx:id="btn_perfil11" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
+                                    <Button fx:id="btn_menu_perfil11111" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/perfil-de-usuario.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_turma11" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
+                                    <Button fx:id="btn_menu_turma11111" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/abra-o-livro.png" />
+                                                <Image url="@imagens/abra-o-livro.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_cadastrarAluno11" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarAluno" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Aluno" textFill="WHITE">
+                                    <Button fx:id="btn_menu_pessoas11111" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnPessoas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Pessoas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/cadastro.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_cadastrarEquipe11" layoutX="7.0" layoutY="257.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarEquipe" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Equipe" textFill="WHITE">
+                                    <Button fx:id="btn_menu_chamada11111" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/checkbox.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_chamada11" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" onAction="#clicarBtnChamada" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <Pane prefHeight="471.0" prefWidth="522.0">
+                           <children>
+                              <ScrollPane layoutY="92.0" prefHeight="376.0" prefWidth="522.0">
+                                 <content>
+                                    <VBox fx:id="VBoxListaDePessoas" spacing="10.0" />
+                                 </content>
+                              </ScrollPane>
+                              <Label layoutX="14.0" layoutY="34.0" text="Pessoas" textFill="#1b6b8a">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btn_Tab_cadastrarAluno" layoutX="351.0" layoutY="14.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarAluno" prefHeight="31.0" prefWidth="157.0" styleClass="btn_perfil" text="Cadastrar Aluno" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@imagens/mais.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Pane layoutX="140.0" layoutY="27.0" prefHeight="46.0" prefWidth="197.0" styleClass="btn_perfil">
+                                 <children>
+                                    <TextField fx:id="buscarPessoas" layoutX="47.0" layoutY="9.0" prefHeight="28.0" prefWidth="136.0" styleClass="pane_11" text="Buscar" />
+                                    <ImageView fitHeight="21.0" fitWidth="22.0" layoutX="20.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@imagens/procurar.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <Button fx:id="btn_Tab_cadastrarEquipe" layoutX="351.0" layoutY="52.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarEquipe" prefHeight="31.0" prefWidth="157.0" styleClass="btn_perfil" text="Cadastrar Equipe" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@imagens/mais.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="cadastrarAlunoTab" text="CadastrarAluno">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <HBox prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
+                     <children>
+                        <VBox prefHeight="371.0" prefWidth="154.0" stylesheets="@style.css">
+                           <children>
+                              <AnchorPane blendMode="SRC_ATOP" prefHeight="474.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
+                                 <children>
+                                    <Pane fx:id="inner_pane211" layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
+                                       <children>
+                                          <ImageView fitHeight="54.0" fitWidth="79.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@imagens/ProEIDILogoOculos.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label layoutX="90.0" layoutY="14.0" prefHeight="21.0" prefWidth="77.0" text="Sistema" textAlignment="CENTER" />
+                                          <Label layoutX="90.0" layoutY="29.0" prefHeight="21.0" prefWidth="77.0" text="ProEIDI" textAlignment="CENTER" />
+                                       </children>
+                                    </Pane>
+                                    <Button fx:id="btn_menu_perfil11" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/perfil-de-usuario.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_buscar11" layoutX="7.0" layoutY="356.0" mnemonicParsing="false" onAction="#clicarBtnBuscar" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Buscar" textFill="WHITE">
+                                    <Button fx:id="btn_menu_turma11" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/abra-o-livro.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="btn_menu_pessoas11" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnPessoas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Pessoas" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@imagens/cadastro.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="btn_menu_chamada11" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@imagens/checkbox.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -376,7 +417,7 @@
                               <Label layoutX="18.0" layoutY="93.0" text="Nome Completo:" textFill="#288fc0" />
                               <TextField fx:id="cadastroAlunoCPF" layoutX="238.0" layoutY="111.0" prefHeight="24.0" prefWidth="202.0" />
                               <Label layoutX="238.0" layoutY="92.0" text="CPF:" textFill="#288fc0" />
-                              <Button fx:id="btn_cadastrarAluno" layoutX="171.0" layoutY="429.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar" textFill="WHITE" />
+                              <Button fx:id="btn_cadastrarAlunoFinal" layoutX="171.0" layoutY="429.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarAlunoFinal" prefHeight="23.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar" textFill="WHITE" />
                               <TextField fx:id="cadastroAlunoTelefone" layoutX="18.0" layoutY="165.0" prefHeight="24.0" prefWidth="202.0" />
                               <Label layoutX="18.0" layoutY="146.0" text="Telefone:" textFill="#288fc0" />
                               <ChoiceBox fx:id="cadastroAlunoGenero" layoutX="238.0" layoutY="165.0" prefHeight="24.0" prefWidth="201.0" />
@@ -405,73 +446,55 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <HBox fx:id="root2111" prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
+                  <HBox prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
                      <children>
                         <VBox prefHeight="371.0" prefWidth="154.0" stylesheets="@style.css">
                            <children>
-                              <AnchorPane fx:id="sideAnchorpane2111" blendMode="SRC_ATOP" prefHeight="474.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
+                              <AnchorPane blendMode="SRC_ATOP" prefHeight="474.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
                                  <children>
-                                    <Pane fx:id="inner_pane2111" layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
+                                    <Pane layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
                                        <children>
                                           <ImageView fitHeight="54.0" fitWidth="79.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/ProEIDILogoOculos.png" />
+                                                <Image url="@imagens/ProEIDILogoOculos.png" />
                                              </image>
                                           </ImageView>
                                           <Label layoutX="90.0" layoutY="14.0" prefHeight="21.0" prefWidth="77.0" text="Sistema" textAlignment="CENTER" />
                                           <Label layoutX="90.0" layoutY="29.0" prefHeight="21.0" prefWidth="77.0" text="ProEIDI" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
-                                    <Button fx:id="btn_perfil111" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
+                                    <Button fx:id="btn_menu_perfil111" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/perfil-de-usuario.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_turma111" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
+                                    <Button fx:id="btn_menu_turma111" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/abra-o-livro.png" />
+                                                <Image url="@imagens/abra-o-livro.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_cadastrarAluno111" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarAluno" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Aluno" textFill="WHITE">
+                                    <Button fx:id="btn_menu_pessoas111" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnPessoas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Pessoas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/cadastro.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_cadastrarEquipe111" layoutX="7.0" layoutY="257.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarEquipe" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Equipe" textFill="WHITE">
+                                    <Button fx:id="btn_menu_chamada111" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_chamada111" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" onAction="#clicarBtnChamada" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_buscar111" layoutX="7.0" layoutY="356.0" mnemonicParsing="false" onAction="#clicarBtnBuscar" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Buscar" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/checkbox.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -492,7 +515,7 @@
                               <Label layoutX="18.0" layoutY="93.0" text="Nome Completo:" textFill="#288fc0" />
                               <TextField fx:id="cadastroEquipeCPF" layoutX="238.0" layoutY="111.0" prefHeight="24.0" prefWidth="202.0" />
                               <Label layoutX="238.0" layoutY="92.0" text="CPF:" textFill="#288fc0" />
-                              <Button fx:id="btn_cadastrarEquipe" layoutX="171.0" layoutY="429.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar" textFill="WHITE" />
+                              <Button fx:id="btn_cadastrarEquipeFinal" layoutX="171.0" layoutY="429.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarEquipeFinal" prefHeight="23.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar" textFill="WHITE" />
                               <TextField fx:id="cadastroEquipeTelefone" layoutX="18.0" layoutY="165.0" prefHeight="24.0" prefWidth="202.0" />
                               <Label layoutX="18.0" layoutY="146.0" text="Telefone:" textFill="#288fc0" />
                               <Label layoutX="238.0" layoutY="145.0" text="Matricula:" textFill="#288fc0" />
@@ -510,77 +533,59 @@
                </children></AnchorPane>
          </content>
       </Tab>
-      <Tab fx:id="chamadaTab" text="Chamada">
+      <Tab fx:id="cadastrarTurmaTab" text="CadastrarTurma">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <HBox fx:id="root21111" prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
+                  <HBox prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
                      <children>
                         <VBox prefHeight="371.0" prefWidth="154.0" stylesheets="@style.css">
                            <children>
-                              <AnchorPane fx:id="sideAnchorpane21111" blendMode="SRC_ATOP" prefHeight="474.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
+                              <AnchorPane blendMode="SRC_ATOP" prefHeight="474.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
                                  <children>
-                                    <Pane fx:id="inner_pane21111" layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
+                                    <Pane layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
                                        <children>
                                           <ImageView fitHeight="54.0" fitWidth="79.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/ProEIDILogoOculos.png" />
+                                                <Image url="@imagens/ProEIDILogoOculos.png" />
                                              </image>
                                           </ImageView>
                                           <Label layoutX="90.0" layoutY="14.0" prefHeight="21.0" prefWidth="77.0" text="Sistema" textAlignment="CENTER" />
                                           <Label layoutX="90.0" layoutY="29.0" prefHeight="21.0" prefWidth="77.0" text="ProEIDI" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
-                                    <Button fx:id="btn_perfil1111" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
+                                    <Button fx:id="btn_menu_perfil1111" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/perfil-de-usuario.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_turma1111" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
+                                    <Button fx:id="btn_menu_turma1111" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/abra-o-livro.png" />
+                                                <Image url="@imagens/abra-o-livro.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_cadastrarAluno1111" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarAluno" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Aluno" textFill="WHITE">
+                                    <Button fx:id="btn_menu_pessoas1111" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnPessoas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Pessoas" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/cadastro.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btn_cadastrarEquipe1111" layoutX="7.0" layoutY="257.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarEquipe" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Equipe" textFill="WHITE">
+                                    <Button fx:id="btn_menu_chamada1111" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_chamada1111" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" onAction="#clicarBtnChamada" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_buscar1111" layoutX="7.0" layoutY="356.0" mnemonicParsing="false" onAction="#clicarBtnBuscar" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Buscar" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
+                                                <Image url="@imagens/checkbox.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -589,96 +594,61 @@
                               </AnchorPane>
                            </children>
                         </VBox>
-                        <Pane prefHeight="471.0" prefWidth="541.0" />
+                        <Pane prefHeight="471.0" prefWidth="522.0">
+                           <children>
+                              <Label layoutX="13.0" layoutY="31.0" text="Cadastro Turma" textFill="#1b6b8a">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="18.0" layoutY="66.0" text="Nova turma" textFill="#288fc0" />
+                              <TextField fx:id="cadastroTurmaNome" layoutX="18.0" layoutY="111.0" prefHeight="24.0" prefWidth="421.0" />
+                              <Button fx:id="btn_cadastrarTurmaFinal" layoutX="171.0" layoutY="429.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarTurmaFinal" prefHeight="23.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar" textFill="WHITE" />
+                              <Label layoutX="18.0" layoutY="145.0" text="Curso:" textFill="#288fc0" />
+                              <Label layoutX="238.0" layoutY="145.0" text="Horario:" textFill="#288fc0" />
+                              <Label layoutX="18.0" layoutY="201.0" text="Numero de Vagas:" textFill="#288fc0" />
+                              <Label layoutX="238.0" layoutY="201.0" textFill="#288fc0" />
+                              <Label layoutX="18.0" layoutY="252.0" text="Data de Inicio:" textFill="#288fc0" />
+                              <TextField fx:id="cadastroTurmaVagas" layoutX="18.0" layoutY="218.0" prefHeight="24.0" prefWidth="202.0" />
+                              <Label layoutX="18.0" layoutY="95.0" text="Nome da turma (Curso numero ano.semestre:):" textFill="#288fc0" />
+                              <Label layoutX="20.0" layoutY="320.0" text="Data de Termino:" textFill="#288fc0" />
+                              <ChoiceBox fx:id="cadastroTurmaCurso" layoutX="20.0" layoutY="162.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="cadastroTurmaHorario" layoutX="238.0" layoutY="162.0" prefWidth="150.0" />
+                              <DatePicker fx:id="cadastroTurmaDataInicio" layoutX="19.0" layoutY="282.0" />
+                              <DatePicker fx:id="cadastroTurmaDataTermino" layoutX="20.0" layoutY="343.0" />
+                           </children>
+                        </Pane>
                      </children>
                   </HBox>
                </children></AnchorPane>
          </content>
       </Tab>
-      <Tab fx:id="buscarTab" text="Buscar">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      <Tab text="teste">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <HBox fx:id="root211111" prefHeight="471.0" prefWidth="700.0" stylesheets="@style.css">
+                  <Pane layoutX="166.0" layoutY="-1.0" prefHeight="471.0" prefWidth="527.0">
                      <children>
-                        <VBox prefHeight="371.0" prefWidth="154.0" stylesheets="@style.css">
+                        <TableView fx:id="tabelaChamadaAlunos" layoutX="4.0" layoutY="103.0" prefHeight="216.0" prefWidth="514.0">
+                           <columns>
+                              <TableColumn fx:id="colunaNome" prefWidth="394.0" text="Nome" />
+                              <TableColumn fx:id="colunaNome1" prefWidth="119.0" text="Presença" />
+                           </columns>
+                        </TableView>
+                        <Pane prefHeight="86.0" prefWidth="522.0" styleClass="pane_1">
                            <children>
-                              <AnchorPane fx:id="sideAnchorpane211111" blendMode="SRC_ATOP" prefHeight="474.0" prefWidth="177.0" styleClass="sideAnchorpane" stylesheets="@style.css">
-                                 <children>
-                                    <Pane fx:id="inner_pane211111" layoutX="8.0" layoutY="27.0" prefHeight="64.0" prefWidth="165.0" styleClass="inner_pane" stylesheets="@style.css">
-                                       <children>
-                                          <ImageView fitHeight="54.0" fitWidth="79.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/ProEIDILogoOculos.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Label layoutX="90.0" layoutY="14.0" prefHeight="21.0" prefWidth="77.0" text="Sistema" textAlignment="CENTER" />
-                                          <Label layoutX="90.0" layoutY="29.0" prefHeight="21.0" prefWidth="77.0" text="ProEIDI" textAlignment="CENTER" />
-                                       </children>
-                                    </Pane>
-                                    <Button fx:id="btn_perfil11111" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#clicarBtnPerfil" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Perfil" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_turma11111" layoutX="8.0" layoutY="156.0" mnemonicParsing="false" onAction="#clicarBtnTurmas" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Turmas" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/abra-o-livro.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_cadastrarAluno11111" layoutX="8.0" layoutY="204.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarAluno" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Aluno" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_cadastrarEquipe11111" layoutX="7.0" layoutY="257.0" mnemonicParsing="false" onAction="#clicarBtnCadastrarEquipe" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Cadastrar Equipe" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_chamada11111" layoutX="7.0" layoutY="306.0" mnemonicParsing="false" onAction="#clicarBtnChamada" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Chamada" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btn_buscar11111" layoutX="7.0" layoutY="356.0" mnemonicParsing="false" onAction="#clicarBtnBuscar" prefHeight="41.0" prefWidth="163.0" styleClass="btn_perfil" stylesheets="@style.css" text="Buscar" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../../../../../../../../Pictures/perfil-de-usuario.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </AnchorPane>
+                              <Label layoutX="14.0" layoutY="14.0" text="Chamada" textFill="WHITE" />
+                              <Label layoutX="14.0" layoutY="39.0" text="DIA DE HOJE" textFill="WHITE">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
                            </children>
-                        </VBox>
-                        <Pane prefHeight="471.0" prefWidth="541.0" />
+                        </Pane>
                      </children>
-                  </HBox>
+                  </Pane>
                </children></AnchorPane>
-         </content>
+        </content>
       </Tab>
     </tabs>
 </TabPane>
