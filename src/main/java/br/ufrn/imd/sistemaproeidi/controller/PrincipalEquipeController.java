@@ -117,10 +117,73 @@ public class PrincipalEquipeController {
         System.out.println("Botão CADASTRAR EQUIPE clicado.");
         String nome = cadastroEquipeNome.getText();
         String cpf = cadastroEquipeCPF.getText();
-        String numeroCelular = cadastroAlunoTelefone.getText();
+        String numeroCelular = cadastroEquipeTelefone.getText();
         Cargo cargo = (Cargo) cadastroEquipeCargo.getValue();
+        String matricula = cadastroEquipeMatricula.getText();
+        String cursoUFRN = cadastroEquipeCursoUFRN.getText();
+        String email = cadastroEquipeEmail.getText();
 
-        //membroEquipe.cadastrarMembroEquipe(nome, cpf, null, numeroCelular, matricula, cursoUFRN, email, cargo);
+        membroEquipe.cadastrarMembroEquipe(nome, cpf, null, numeroCelular, matricula, cursoUFRN, email, cargo);
+        LimparCamposEquipe();
+        exibirAlertaCadastroConcluido();
+        carregarPessoas();
+    }
+
+    @FXML
+    public void clicarBtnCadastrarTurmaFinal(ActionEvent event) {
+        System.out.println("Botão CADASTRAR TURMA clicado.");
+        String nome = cadastroTurmaNome.getText();
+        Horario horario = (Horario) cadastroTurmaHorario.getValue();
+        Curso curso = (Curso) cadastroTurmaCurso.getValue();
+        Integer vagas = Integer.parseInt(cadastroTurmaVagas.getText());
+        LocalDate dataInicio = cadastroTurmaDataInicio.getValue();
+        LocalDate dataTermino = cadastroTurmaDataTermino.getValue();
+
+
+        membroEquipe.cadastrarTurma(nome, curso, horario, vagas, dataInicio, dataTermino);
+        LimparCamposTurma();
+        exibirAlertaCadastroConcluido();
+        carregarTurmas();
+    }
+    @FXML
+    public void LimparCamposTurma() {
+        // Limpa os campos da interface
+        cadastroTurmaNome.clear();
+        cadastroTurmaHorario.setValue(null);
+        cadastroTurmaCurso.setValue(null);
+        cadastroTurmaVagas.clear();
+        cadastroTurmaDataInicio.setValue(null);
+        cadastroTurmaDataTermino.setValue(null);
+    }
+
+    @FXML
+    public void LimparCamposEquipe() {
+        // Limpa os campos da interface
+        cadastroEquipeNome.clear();
+        cadastroEquipeCPF.clear();
+        cadastroEquipeTelefone.clear();
+        cadastroEquipeCargo.setValue(null);
+        cadastroEquipeMatricula.clear();
+        cadastroEquipeCursoUFRN.clear();
+        cadastroEquipeEmail.clear();
+    }
+
+    @FXML
+    public void LimparCamposAluno() {
+        // Limpa os campos da interface
+        cadastroAlunoNome.clear();
+        cadastroAlunoDataNascimento.setValue(null);
+        cadastroAlunoCPF.clear();
+        cadastroAlunoGenero.setValue(null);
+        cadastroAlunoTelefone.clear();
+        cadastroAlunoEscolaridade.setValue(null);
+        cadastroAlunoTurmaDisponiveis.setValue(null);
+        cadastroAlunoObsSaude.clear();
+        checkAlunoInternet.setSelected(false);
+        checkAlunoComputador.setSelected(false);
+        checkAlunoSmartphone.setSelected(false);
+        cadastroAlunoSO.setValue(null);
+
     }
 
     @FXML
