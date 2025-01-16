@@ -210,15 +210,21 @@ public class PrincipalEquipeController {
         System.out.println("Botão CADASTRAR EQUIPE clicado.");
     }
 
+//    @FXML
+//    void clicarBtnChamada(ActionEvent event) {
+//        tabPane.getSelectionModel().select(chamadaTab);
+//        System.out.println("Botão CHAMADA clicado.");
+//    }
+
     @FXML
-    void clicarBtnChamada(ActionEvent event) {
-        tabPane.getSelectionModel().select(chamadaTab);
-        System.out.println("Botão CHAMADA clicado.");
+    void clicarBtnPessoas(ActionEvent event) {
+        tabPane.getSelectionModel().select(pessoasTab);
+        System.out.println("Botão PESSOAS clicado.");
     }
 
     @FXML
-    void clicarBtnBuscar(ActionEvent event) {
-        tabPane.getSelectionModel().select(buscarTab);
+    void clicarBtnTabCadastrarTurma(ActionEvent event) {
+        tabPane.getSelectionModel().select(cadastrarTurmaTab);
         System.out.println("Botão BUSCAR clicado.");
     }
 }
