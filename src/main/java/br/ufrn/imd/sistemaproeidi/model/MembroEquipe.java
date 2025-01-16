@@ -87,8 +87,6 @@ public class MembroEquipe extends Pessoa implements Serializable {
 
 
 
-
-
     public void cadastrarMembroEquipe(String nome, String cpf, Genero genero, String numeroCelular, String matricula, String cursoUFRN, String email, Cargo cargo) {
         if(this.cargo != Cargo.PROFESSOR){
             System.out.println("Você não tem permissão para cadatrar um membro da equipe.");
@@ -133,14 +131,21 @@ public class MembroEquipe extends Pessoa implements Serializable {
     }
 
 
-    private void cadastrarTurma(String nome, Curso curso, Horario horario, Integer numeroVagas, LocalDate dataInicio, LocalDate dataTermino){
-        Turma turma = new Turma(nome, curso, horario, numeroVagas, dataInicio, dataTermino);
-
-        if(banco.getArrayTurmas().add(turma)){
-            System.out.println("Turma cadastrada com sucesso!");
+    public void cadastrarTurma(String nome, Curso curso, Horario horario, Integer numeroVagas, LocalDate dataInicio, LocalDate dataTermino){
+        if(this.cargo != Cargo.PROFESSOR){
+            System.out.println("Você não tem permissão para cadastrar uma turma.");
         }else{
-            System.out.println("Erro ao cadastrar turma!");
+
+            Turma turma = new Turma(nome, curso, horario, numeroVagas, dataInicio, dataTermino);
+
+            if(banco.getArrayTurmas().add(turma)){
+                System.out.println("Turma cadastrada com sucesso!");
+            }else{
+                System.out.println("Erro ao cadastrar turma!");
+            }
+
         }
+
     }
 
     public void chamadaAlunos(Turma turma){
