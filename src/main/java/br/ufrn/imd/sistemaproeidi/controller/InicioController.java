@@ -28,7 +28,6 @@ public class InicioController {
 
     public void processarCPF(){
         String cpf = CPFusuario.getText();
-
         if (cpf.isEmpty()) {
             System.out.println("O campo CPF está vazio!");
         } else {
