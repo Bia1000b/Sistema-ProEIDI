@@ -60,6 +60,10 @@ public class PrincipalEquipeController {
         cadastroAlunoEscolaridade.setItems(FXCollections.observableArrayList(Escolaridade.values()));
         cadastroAlunoTurmaDisponiveis.setItems(FXCollections.observableArrayList(turmas));
         cadastroEquipeCargo.setItems(FXCollections.observableArrayList(Cargo.values()));
+        cadastroTurmaCurso.setItems(FXCollections.observableArrayList(Curso.values()));
+        cadastroTurmaHorario.setItems(FXCollections.observableArrayList(Horario.values()));
+        carregarTurmas();
+        carregarPessoas();
 
     }
 
@@ -76,17 +80,11 @@ public class PrincipalEquipeController {
     public void carregarDadosMembroEquipe(){
         if(membroEquipe != null){
             nomeUsuario.setText(membroEquipe.getNome());
-            nomeUsuario1.setText(membroEquipe.getNome()); //REVER
             cursoUFRN.setText(membroEquipe.getCursoUFRN());
-            cursoUFRN1.setText(membroEquipe.getCursoUFRN());
             email.setText(membroEquipe.getEmail());
-            email1.setText(membroEquipe.getEmail());
             faltas.setText(Integer.toString(membroEquipe.getFaltas().size()));
-            faltas1.setText(Integer.toString(membroEquipe.getFaltas().size()));
             matricula.setText(membroEquipe.getMatricula());
-            matricula1.setText(membroEquipe.getMatricula());
             numeroDeTelefone.setText(membroEquipe.getNumeroCelular());
-            numeroDeTelefone1.setText(membroEquipe.getNumeroCelular());
         }
     }
 
@@ -109,6 +107,9 @@ public class PrincipalEquipeController {
         SistemaOperacional sistemaOperacional = (SistemaOperacional) cadastroAlunoSO.getValue();
 
         membroEquipe.matricularAluno(nome, cpf, genero, dataNascimento, numeroCelular, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, sistemaOperacional, turma);
+        LimparCamposAluno();
+        exibirAlertaCadastroConcluido();
+        carregarPessoas();
     }
 
     @FXML
