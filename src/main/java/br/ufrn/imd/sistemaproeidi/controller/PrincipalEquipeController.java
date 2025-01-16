@@ -409,6 +409,9 @@ public class PrincipalEquipeController {
                 // Obtém o controlador
                 VerAlunoController controller = loader.getController();
 
+                Aluno aluno = (Aluno) pessoa;
+                controller.setAluno(aluno);
+
                 // Configura a janela
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
