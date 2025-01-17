@@ -104,9 +104,8 @@ public class PrincipalEquipeController {
         System.out.println("Botão CADASTRAR ALUNO clicado.");
 
         try {
-            // Obtendo valores dos campos
             String nome = cadastroAlunoNome.getText();
-            String dataNascimentoTexto = cadastroAlunoDataNascimento.getEditor().getText(); // Obtemos o texto diretamente
+            String dataNascimentoTexto = cadastroAlunoDataNascimento.getEditor().getText();
             LocalDate dataNascimento = null;
             String cpf = cadastroAlunoCPF.getText();
             Genero genero = (Genero) cadastroAlunoGenero.getValue();
@@ -119,7 +118,6 @@ public class PrincipalEquipeController {
             boolean temSmartphone = checkAlunoSmartphone.isSelected();
             SistemaOperacional sistemaOperacional = (SistemaOperacional) cadastroAlunoSO.getValue();
 
-            // Validação do formato da data
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             try {
                 dataNascimento = LocalDate.parse(dataNascimentoTexto, formatter);
@@ -128,7 +126,6 @@ public class PrincipalEquipeController {
                 return;
             }
 
-            // Validação dos campos obrigatórios
             if (nome == null || nome.isBlank() ||
                     dataNascimento == null ||
                     cpf == null || cpf.isBlank() ||
@@ -140,13 +137,11 @@ public class PrincipalEquipeController {
                 return;
             }
 
-            // Validação adicional da data
             if (dataNascimento.isAfter(LocalDate.now())) {
                 exibirAlerta("Data inválida", "A data de nascimento não pode ser futura.");
                 return;
             }
 
-            // Tentativa de matrícula
             if (membroEquipe.matricularAluno(nome, cpf, genero, dataNascimento, numeroCelular, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, sistemaOperacional, turma)) {
                 LimparCamposAluno();
                 exibirAlertaCadastroConcluido();
