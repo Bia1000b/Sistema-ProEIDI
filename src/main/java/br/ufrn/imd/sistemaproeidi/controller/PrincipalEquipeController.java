@@ -344,7 +344,7 @@ public class PrincipalEquipeController {
 
         // Ação do botão de excluir
         btn_apagar.setOnAction(event -> {
-            if (exibirAlertaConfirmarApagar("Pessoa")){
+            if (exibirAlertaConfirmarApagar(turma.getNome())){
                 // Remover do VBox
                 VBoxListaDeTurmas.getChildren().remove(blocoTurma);
                 turmas.remove(turma);
@@ -416,7 +416,7 @@ public class PrincipalEquipeController {
 
         // Ação do botão de excluir
         btn_apagar.setOnAction(event -> {
-            if (exibirAlertaConfirmarApagar("Pessoa")){
+            if (exibirAlertaConfirmarApagar(pessoa.getNome())){
                 // Remover do VBox
                 VBoxListaDePessoas.getChildren().remove(blocoPessoa);
                 pessoas.remove(pessoa);
@@ -446,7 +446,7 @@ public class PrincipalEquipeController {
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
         alerta.setTitle(objeto + " será apagada(o)");
         alerta.setHeaderText(null);
-        alerta.setContentText(objeto + "será apagada(o). Deseja continuar?");
+        alerta.setContentText(objeto + " será apagada(o). Deseja continuar?");
 
         Optional<ButtonType> resultado = alerta.showAndWait();
         return resultado.isPresent() && resultado.get() == ButtonType.OK;

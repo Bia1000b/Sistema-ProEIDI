@@ -13,6 +13,7 @@ public class MembroEquipe extends Pessoa implements Serializable {
     private String cursoUFRN;
     private String email;
     private Cargo cargo;
+    private Vector<String> codigosTurmas;
     private static BancoDAO banco = BancoDAO.getInstance();
 
     public BancoDAO getBanco() {

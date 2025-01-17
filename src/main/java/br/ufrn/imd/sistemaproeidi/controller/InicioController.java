@@ -23,7 +23,7 @@ public class InicioController {
     @FXML
     public void initialize() {
         System.out.println("Tela inicial carregada!");
-        Gerenciador.criarMembroPadrao();
+        //Gerenciador.criarMembroPadrao();
         CPFusuario.setText("");
     }
 
