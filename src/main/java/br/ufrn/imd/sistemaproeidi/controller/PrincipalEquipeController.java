@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Vector;
@@ -100,27 +102,67 @@ public class PrincipalEquipeController {
     @FXML
     public void clicarBtnCadastrarAlunoFinal(ActionEvent event) {
         System.out.println("Botão CADASTRAR ALUNO clicado.");
-        String nome = cadastroAlunoNome.getText();
-        LocalDate dataNascimento = cadastroAlunoDataNascimento.getValue();
-        String cpf = cadastroAlunoCPF.getText();
-        Genero genero = (Genero) cadastroAlunoGenero.getValue();
-        String numeroCelular = cadastroAlunoTelefone.getText();
-        Escolaridade escolaridade = (Escolaridade) cadastroAlunoEscolaridade.getValue();
-        Turma turma = (Turma) cadastroAlunoTurmaDisponiveis.getValue();
-        String obsSaude = cadastroAlunoObsSaude.getText();
-        boolean temInternet = checkAlunoInternet.isSelected();
-        boolean temComputador = checkAlunoComputador.isSelected();
-        boolean temSmartphone = checkAlunoSmartphone.isSelected();
-        SistemaOperacional sistemaOperacional = (SistemaOperacional) cadastroAlunoSO.getValue();
 
-        if(membroEquipe.matricularAluno(nome, cpf, genero, dataNascimento, numeroCelular, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, sistemaOperacional, turma)){
-            LimparCamposAluno();
-            exibirAlertaCadastroConcluido();
-            carregarPessoas();
-        }else{
-            exibirAlerta("Cadastro impedido.", "Verifique a idade do aluno.");
+        try {
+            // Obtendo valores dos campos
+            String nome = cadastroAlunoNome.getText();
+            String dataNascimentoTexto = cadastroAlunoDataNascimento.getEditor().getText(); // Obtemos o texto diretamente
+            LocalDate dataNascimento = null;
+            String cpf = cadastroAlunoCPF.getText();
+            Genero genero = (Genero) cadastroAlunoGenero.getValue();
+            String numeroCelular = cadastroAlunoTelefone.getText();
+            Escolaridade escolaridade = (Escolaridade) cadastroAlunoEscolaridade.getValue();
+            Turma turma = (Turma) cadastroAlunoTurmaDisponiveis.getValue();
+            String obsSaude = cadastroAlunoObsSaude.getText();
+            boolean temInternet = checkAlunoInternet.isSelected();
+            boolean temComputador = checkAlunoComputador.isSelected();
+            boolean temSmartphone = checkAlunoSmartphone.isSelected();
+            SistemaOperacional sistemaOperacional = (SistemaOperacional) cadastroAlunoSO.getValue();
+
+            // Validação do formato da data
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            try {
+                dataNascimento = LocalDate.parse(dataNascimentoTexto, formatter);
+            } catch (DateTimeParseException e) {
+                exibirAlerta("Erro no formato da data", "Digite a data de nascimento no formato correto: dd/MM/yyyy.");
+                return;
+            }
+
+            // Validação dos campos obrigatórios
+            if (nome == null || nome.isBlank() ||
+                    dataNascimento == null ||
+                    cpf == null || cpf.isBlank() ||
+                    genero == null ||
+                    numeroCelular == null || numeroCelular.isBlank() ||
+                    escolaridade == null ||
+                    turma == null) {
+                exibirAlerta("Cadastro impedido", "Por favor, preencha todos os campos obrigatórios.");
+                return;
+            }
+
+            // Validação adicional da data
+            if (dataNascimento.isAfter(LocalDate.now())) {
+                exibirAlerta("Data inválida", "A data de nascimento não pode ser futura.");
+                return;
+            }
+
+            // Tentativa de matrícula
+            if (membroEquipe.matricularAluno(nome, cpf, genero, dataNascimento, numeroCelular, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, sistemaOperacional, turma)) {
+                LimparCamposAluno();
+                exibirAlertaCadastroConcluido();
+                carregarPessoas();
+            } else {
+                exibirAlerta("Cadastro impedido", "Verifique a idade do aluno.");
+            }
+
+        } catch (Exception e) {
+            // Tratamento genérico para erros inesperados
+            exibirAlerta("Erro inesperado", "Ocorreu um erro ao tentar cadastrar o aluno. Por favor, tente novamente.");
         }
     }
+
+
+
 
     @FXML
     public void clicarBtnCadastrarEquipeFinal(ActionEvent event) {
@@ -237,6 +279,7 @@ public class PrincipalEquipeController {
 
     @FXML
     private void carregarTurmas() {
+        VBoxListaDeTurmas.getChildren().clear();
         try {
             // Adicionar cada tarefa ao VBox
             for (Turma turma : turmas) {
@@ -325,6 +368,7 @@ public class PrincipalEquipeController {
 
     @FXML
     private void carregarPessoas() {
+        VBoxListaDePessoas.getChildren().clear();
         try {
             // Adicionar cada pss ao VBox
             for (Pessoa pessoa : pessoas) {
