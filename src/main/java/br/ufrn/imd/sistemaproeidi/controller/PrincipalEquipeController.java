@@ -72,6 +72,13 @@ public class PrincipalEquipeController {
 
     }
 
+    private void exibirAlerta(String titulo, String mensagem) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle(titulo);
+        alerta.setContentText(mensagem);
+        alerta.showAndWait();
+    }
+
     public void setMembroEquipe(MembroEquipe membroEquipe) {
         this.membroEquipe = membroEquipe;
         membroEquipe.detalharMembroEquipe(); //OPCIONAL
@@ -79,7 +86,6 @@ public class PrincipalEquipeController {
 //        carregarFaltas();
     }
 
-    //muitos dados repetidos, rever isso
     public void carregarDadosMembroEquipe(){
         if(membroEquipe != null){
             nomeUsuario.setText(membroEquipe.getNome());
@@ -90,8 +96,6 @@ public class PrincipalEquipeController {
             numeroDeTelefone.setText(membroEquipe.getNumeroCelular());
         }
     }
-
-
 
     @FXML
     public void clicarBtnCadastrarAlunoFinal(ActionEvent event) {
@@ -109,10 +113,13 @@ public class PrincipalEquipeController {
         boolean temSmartphone = checkAlunoSmartphone.isSelected();
         SistemaOperacional sistemaOperacional = (SistemaOperacional) cadastroAlunoSO.getValue();
 
-        membroEquipe.matricularAluno(nome, cpf, genero, dataNascimento, numeroCelular, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, sistemaOperacional, turma);
-        LimparCamposAluno();
-        exibirAlertaCadastroConcluido();
-        carregarPessoas();
+        if(membroEquipe.matricularAluno(nome, cpf, genero, dataNascimento, numeroCelular, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, sistemaOperacional, turma)){
+            LimparCamposAluno();
+            exibirAlertaCadastroConcluido();
+            carregarPessoas();
+        }else{
+            exibirAlerta("Cadastro impedido.", "Verifique a idade do aluno.");
+        }
     }
 
     @FXML
@@ -150,7 +157,6 @@ public class PrincipalEquipeController {
     }
     @FXML
     public void LimparCamposTurma() {
-        // Limpa os campos da interface
         cadastroTurmaNome.clear();
         cadastroTurmaHorario.setValue(null);
         cadastroTurmaCurso.setValue(null);
@@ -161,7 +167,6 @@ public class PrincipalEquipeController {
 
     @FXML
     public void LimparCamposEquipe() {
-        // Limpa os campos da interface
         cadastroEquipeNome.clear();
         cadastroEquipeCPF.clear();
         cadastroEquipeTelefone.clear();
@@ -173,7 +178,6 @@ public class PrincipalEquipeController {
 
     @FXML
     public void LimparCamposAluno() {
-        // Limpa os campos da interface
         cadastroAlunoNome.clear();
         cadastroAlunoDataNascimento.setValue(null);
         cadastroAlunoCPF.clear();

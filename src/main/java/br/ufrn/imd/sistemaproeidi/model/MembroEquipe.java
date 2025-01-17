@@ -64,10 +64,10 @@ public class MembroEquipe extends Pessoa implements Serializable {
         }
     }
 
-    public void matricularAluno(String nome, String cpf, Genero genero, LocalDate dataNascimento, String numeroCelular, Escolaridade escolaridade, String obsSaude, boolean temInternet, boolean temComputador, boolean temSmartphone, SistemaOperacional SO, Turma turma){
+    public boolean matricularAluno(String nome, String cpf, Genero genero, LocalDate dataNascimento, String numeroCelular, Escolaridade escolaridade, String obsSaude, boolean temInternet, boolean temComputador, boolean temSmartphone, SistemaOperacional SO, Turma turma){
         if(Period.between(dataNascimento, LocalDate.now()).getYears() < 60){
             System.out.println("É necessário ser idoso para participar do projeto.");
-            return;
+            return false;
         }
 
         Aluno aluno = new Aluno(nome, cpf, genero, numeroCelular, dataNascimento, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, SO);
@@ -76,13 +76,17 @@ public class MembroEquipe extends Pessoa implements Serializable {
             System.out.println("Aluno" + aluno.getNome() + "adicionado à turma " + turma.getNome() + " com sucesso!");
         }else{
             System.out.println("Erro ao adicionar aluno à turma!");
+            return false;
         }
 
         if(banco.getArrayPessoas().add(aluno)){
             System.out.println("Aluno matriculado com sucesso!");
         }else{
             System.out.println("Erro ao matricular!");
+            return false;
         }
+
+        return true;
     }
 
 
