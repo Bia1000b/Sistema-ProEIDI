@@ -67,7 +67,7 @@ public class VerTurmaController {
                 membros.add(membroEquipe.getNome());
             }
 
-            listViewAlunosTurma.setItems(membros);
+            listViewMembrosTurma.setItems(membros);
         }
     }
 }

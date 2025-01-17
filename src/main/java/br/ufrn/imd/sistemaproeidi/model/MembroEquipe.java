@@ -6,7 +6,6 @@ import br.ufrn.imd.sistemaproeidi.utils.InputUtils;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
 import java.util.Vector;
 
 public class MembroEquipe extends Pessoa implements Serializable {
@@ -399,21 +398,17 @@ public class MembroEquipe extends Pessoa implements Serializable {
         }
     }
 
-    public void removerPessoaDaTurma(Pessoa pessoa, Turma turma){
-        if(this.cargo != Cargo.PROFESSOR){
-            System.out.println("Você não tem permissão para remover alguém da turma.");
-        }else{
-            if(pessoa instanceof Aluno){
-                Aluno aluno = (Aluno) pessoa;
-                turma.getAlunos().remove(aluno);
-                System.out.println("Aluno removido com sucesso");
-            }
-            if(pessoa instanceof MembroEquipe){
-                MembroEquipe membroEquipe = (MembroEquipe) pessoa;
-                turma.getAlunos().remove(membroEquipe);
-                System.out.println("Membro da equipe removido com sucesso");
-            }
-        }
+    public void removerPessoaDaTurma(Pessoa pessoa){
+//            if(pessoa instanceof Aluno){
+//                Aluno aluno = (Aluno) pessoa;
+//                turma.getAlunos().remove(aluno);
+//                System.out.println("Aluno removido com sucesso");
+//            }
+//            if(pessoa instanceof MembroEquipe){
+//                MembroEquipe membroEquipe = (MembroEquipe) pessoa;
+//                turma.getAlunos().remove(membroEquipe);
+//                System.out.println("Membro da equipe removido com sucesso");
+//            }
 
     }
 }

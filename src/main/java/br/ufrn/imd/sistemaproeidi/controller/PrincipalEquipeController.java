@@ -420,6 +420,9 @@ public class PrincipalEquipeController {
                 // Remover do VBox
                 VBoxListaDePessoas.getChildren().remove(blocoPessoa);
                 pessoas.remove(pessoa);
+                if (pessoa instanceof Aluno){
+                    membroEquipe.removerPessoaDaTurma(pessoa);
+                }
             }
         });
         // Adicionar todos os componentes ao Pane
