@@ -140,7 +140,10 @@ public class Turma implements Serializable {
         System.out.println("==================================================================== ");
     }
 
-
+    @Override
+    public String toString() {
+        return nome;
+    }
 
     private void concluir(){
         //se hoje == dataTermino
