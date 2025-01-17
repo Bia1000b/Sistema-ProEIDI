@@ -78,4 +78,29 @@ public class Gerenciador {
         System.out.println("Nenhuma turma com esse código foi encontrada...");
         return null;
     }
+
+    public static void criarMembroPadrao() {
+        // Valores padrão para inicialização
+        String nomePadrao = "João Silva";
+        String cpfPadrao = "11";
+        Genero generoPadrao = Genero.MASC;
+        String numeroCelularPadrao = "(84) 99999-9999";
+        String matriculaPadrao = "20230001";
+        String cursoPadrao = "Engenharia de Computação";
+        String emailPadrao = "joao.silva@ufrn.br";
+        Cargo cargoPadrao = Cargo.PROFESSOR;
+        // Criando um objeto MembroEquipe com os valores padrão
+        MembroEquipe membroPadrao = new MembroEquipe(
+                nomePadrao,
+                cpfPadrao,
+                generoPadrao,
+                numeroCelularPadrao,
+                matriculaPadrao,
+                cursoPadrao,
+                emailPadrao,
+                cargoPadrao
+        );
+        banco.getArrayPessoas().add(membroPadrao);
+    }
+
 }
