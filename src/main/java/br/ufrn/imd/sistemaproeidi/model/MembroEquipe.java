@@ -128,19 +128,15 @@ public class MembroEquipe extends Pessoa implements Serializable {
         return true;
     }
 
-    public void cadastrarMembroEquipe(String nome, String cpf, Genero genero, String numeroCelular, String matricula, String cursoUFRN, String email, Cargo cargo) {
-        if(this.cargo != Cargo.PROFESSOR){
-            System.out.println("Você não tem permissão para cadatrar um membro da equipe.");
-        }else{
+    public boolean  cadastrarMembroEquipe(String nome, String cpf, Genero genero, String numeroCelular, String matricula, String cursoUFRN, String email, Cargo cargo) {
+        MembroEquipe novoMembro = new MembroEquipe(nome, cpf, genero, numeroCelular, matricula, cursoUFRN, email, cargo);
 
-            MembroEquipe novoMembro = new MembroEquipe(nome, cpf, genero, numeroCelular, matricula, cursoUFRN, email, cargo);
-
-            if (banco.getArrayPessoas().add(novoMembro)) {
-                System.out.println("Membro da equipe cadastrado com sucesso!");
-            } else {
-                System.out.println("Erro ao cadastrar o membro da equipe!");
-            }
+        if (banco.getArrayPessoas().add(novoMembro)) {
+            System.out.println("Membro da equipe cadastrado com sucesso!");
+        } else {
+            System.out.println("Erro ao cadastrar o membro da equipe!");
         }
+
     }
 
     public boolean adicionarAlunoATurma(Turma turma, Aluno aluno){

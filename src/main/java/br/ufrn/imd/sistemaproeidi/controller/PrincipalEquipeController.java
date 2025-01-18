@@ -69,6 +69,7 @@ public class PrincipalEquipeController {
         cadastroEquipeCargo.setItems(FXCollections.observableArrayList(Cargo.values()));
         cadastroTurmaCurso.setItems(FXCollections.observableArrayList(Curso.values()));
         cadastroTurmaHorario.setItems(FXCollections.observableArrayList(Horario.values()));
+        cadastroAlunoDataNascimento.setValue(LocalDate.of(1964,06,20));
         carregarTurmas();
         carregarPessoas();
 
@@ -106,33 +107,25 @@ public class PrincipalEquipeController {
         try {
             String nome = InputUtils.validarNome(cadastroAlunoNome.getText());
             String dataNascimentoTexto = cadastroAlunoDataNascimento.getEditor().getText();
-            LocalDate dataNascimento = null;
+            System.out.println(dataNascimentoTexto);
+            LocalDate dataNascimento = InputUtils.validarData(dataNascimentoTexto);
             String cpf = InputUtils.validarCPF(cadastroAlunoCPF.getText());
-            Genero genero = (Genero) cadastroAlunoGenero.getValue(); //OK
+            Genero genero = (Genero) cadastroAlunoGenero.getValue();
             String numeroCelular = InputUtils.validarTelefone(cadastroAlunoTelefone.getText());
-            Escolaridade escolaridade = (Escolaridade) cadastroAlunoEscolaridade.getValue(); //OK
-            Turma turma = (Turma) cadastroAlunoTurmaDisponiveis.getValue(); //OK
+            Escolaridade escolaridade = (Escolaridade) cadastroAlunoEscolaridade.getValue();
+            Turma turma = (Turma) cadastroAlunoTurmaDisponiveis.getValue();
             String obsSaude = cadastroAlunoObsSaude.getText();
             boolean temInternet = checkAlunoInternet.isSelected();
             boolean temComputador = checkAlunoComputador.isSelected();
             boolean temSmartphone = checkAlunoSmartphone.isSelected();
             SistemaOperacional sistemaOperacional = (SistemaOperacional) cadastroAlunoSO.getValue();
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            try {
-                dataNascimento = LocalDate.parse(dataNascimentoTexto, formatter);
-            } catch (DateTimeParseException e) {
-                exibirAlerta("Erro no formato da data", "Digite a data de nascimento no formato correto: dd/MM/yyyy.");
-                return;
-            }
-
             if (nome == null ||
-                    dataNascimento == null ||
-                    cpf == null || cpf.isBlank() ||
-                    genero == null ||
-                    numeroCelular == null || numeroCelular.isBlank() ||
-                    escolaridade == null ||
-                    turma == null) {
+                cpf == null || cpf.isBlank() ||
+                genero == null ||
+                numeroCelular == null ||
+                escolaridade == null ||
+                turma == null) {
                 exibirAlerta("Cadastro impedido", "Por favor, preencha os campos corretamente.");
                 return;
             }
@@ -161,20 +154,44 @@ public class PrincipalEquipeController {
     @FXML
     public void clicarBtnCadastrarEquipeFinal(ActionEvent event) {
         System.out.println("Botão CADASTRAR EQUIPE clicado.");
-        String nome = cadastroEquipeNome.getText();
-        String cpf = cadastroEquipeCPF.getText();
-        String numeroCelular = cadastroEquipeTelefone.getText();
-        Genero genero = (Genero) cadastroEquipeGenero.getValue();
-        Cargo cargo = (Cargo) cadastroEquipeCargo.getValue();
-        String matricula = cadastroEquipeMatricula.getText();
-        String cursoUFRN = cadastroEquipeCursoUFRN.getText();
-        String email = cadastroEquipeEmail.getText();
 
-        membroEquipe.cadastrarMembroEquipe(nome, cpf, genero, numeroCelular, matricula, cursoUFRN, email, cargo);
-        LimparCamposEquipe();
-        exibirAlertaCadastroConcluido();
-        carregarPessoas();
+        try {
+            // Validações dos campos
+            String nome = InputUtils.validarNome(cadastroEquipeNome.getText());
+            String cpf = InputUtils.validarCPF(cadastroEquipeCPF.getText());
+            String numeroCelular = InputUtils.validarTelefone(cadastroEquipeTelefone.getText());
+            Genero genero = (Genero) cadastroEquipeGenero.getValue();
+            Cargo cargo = (Cargo) cadastroEquipeCargo.getValue();
+            String matricula = cadastroEquipeMatricula.getText();
+            String cursoUFRN = cadastroEquipeCursoUFRN.getText();
+            String email = InputUtils.validarEmail(cadastroEquipeEmail.getText());
+
+            // Verificar se os campos obrigatórios estão preenchidos
+            if (nome == null ||
+                    cpf == null || cpf.isBlank() ||
+                    numeroCelular == null ||
+                    genero == null ||
+                    cargo == null ||
+                    matricula.isBlank() ||
+                    cursoUFRN.isBlank() ||
+                    email == null || email.isBlank()) {
+                exibirAlerta("Cadastro impedido", "Por favor, preencha os campos corretamente.");
+                return;
+            }
+
+            // Realizar o cadastro do membro da equipe
+            if (membroEquipe.cadastrarMembroEquipe(nome, cpf, genero, numeroCelular, matricula, cursoUFRN, email, cargo)) {
+                LimparCamposEquipe();
+                exibirAlertaCadastroConcluido();
+                carregarPessoas();
+            } else {
+                exibirAlerta("Cadastro impedido", "Não foi possível cadastrar o membro da equipe. Verifique os dados e tente novamente.");
+            }
+        } catch (Exception e) {
+            exibirAlerta("Erro inesperado", "Ocorreu um erro ao tentar cadastrar o membro da equipe. Por favor, tente novamente.");
+        }
     }
+
 
     @FXML
     public void clicarBtnCadastrarTurmaFinal(ActionEvent event) {

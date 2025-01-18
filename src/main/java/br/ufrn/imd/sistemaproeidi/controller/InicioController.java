@@ -1,6 +1,7 @@
 package br.ufrn.imd.sistemaproeidi.controller;
 
 import br.ufrn.imd.sistemaproeidi.SistemaApplication;
+import br.ufrn.imd.sistemaproeidi.utils.InputUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,20 +29,17 @@ public class InicioController {
 
     public void processarCPF(){
         //Gerenciador.criarMembroPadrao();
-        String cpf = CPFusuario.getText();
-        if (cpf.isEmpty()) {
-            System.out.println("O campo CPF está vazio!");
-        } else {
-            System.out.println("CPF digitado: " + cpf);
-            if(Gerenciador.buscarPessoa(cpf) == null){
-                exibirAlerta("Login Inválido", "CPF incorreto ou não cadastrado!.");
-            }else if ((Gerenciador.buscarPessoa(cpf)) instanceof Aluno){
-                Aluno aluno = (Aluno) Gerenciador.buscarPessoa(cpf);
-                abrirTelaPrincipalAluno(aluno);
-            }else if ((Gerenciador.buscarPessoa(cpf)) instanceof MembroEquipe){
-                MembroEquipe membroEquipe = (MembroEquipe) Gerenciador.buscarPessoa(cpf);
-                abrirTelaPrincipalEquipe(membroEquipe);
-            }
+        String cpf = InputUtils.validarCPF(CPFusuario.getText());
+        System.out.println("CPF digitado: " + cpf);
+
+        if(Gerenciador.buscarPessoa(cpf) == null){
+            exibirAlerta("Login Inválido", "CPF incorreto ou não cadastrado!.");
+        }else if ((Gerenciador.buscarPessoa(cpf)) instanceof Aluno){
+            Aluno aluno = (Aluno) Gerenciador.buscarPessoa(cpf);
+            abrirTelaPrincipalAluno(aluno);
+        }else if ((Gerenciador.buscarPessoa(cpf)) instanceof MembroEquipe){
+            MembroEquipe membroEquipe = (MembroEquipe) Gerenciador.buscarPessoa(cpf);
+            abrirTelaPrincipalEquipe(membroEquipe);
         }
     }
 

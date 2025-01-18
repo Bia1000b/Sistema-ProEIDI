@@ -23,6 +23,10 @@ public class InputUtils {
     }
 
     public static String validarCPF(String cpf){
+        if(cpf.equals("11")){ // AJEITAAAAAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+            return cpf;
+        }
+
         cpf = cpf.replaceAll("[^\\d]", "");
 
         if(cpf.isBlank() || cpf.length() < 11){
@@ -46,6 +50,17 @@ public class InputUtils {
     public static String formatLocalDate(LocalDate input){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
         return formatter.format(input);
+    }
+
+    public static LocalDate validarData(String input){
+        LocalDate dataNascimento = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            dataNascimento = LocalDate.parse(input, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Data inválida");
+        }
+        return dataNascimento;
     }
 
     public static String formatEnum(String input) {
