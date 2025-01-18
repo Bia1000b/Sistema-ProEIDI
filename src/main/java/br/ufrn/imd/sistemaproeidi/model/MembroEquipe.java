@@ -164,10 +164,20 @@ public class MembroEquipe extends Pessoa implements Serializable {
     public void adicionarMembroDaEquipeATurma(Turma turma, MembroEquipe membro){
         Vector<MembroEquipe> membros = turma.getEquipe();
         if(membros.add(membro)){
+            membro.getCodigosTurmas().add(turma.getCodigo());
             System.out.println("Membro adicionado com sucesso à turma " + turma.getNome());
         }
         turma.setEquipe(membros);
     }
+    public void removerMembroDaEquipeDaTurma(Turma turma, MembroEquipe membro){
+        Vector<MembroEquipe> membros = turma.getEquipe();
+        if(membros.remove(membro)){
+            membro.getCodigosTurmas().remove(turma.getCodigo());
+            System.out.println("Membro removido com sucesso da turma " + turma.getNome());
+        }
+        turma.setEquipe(membros);
+    }
+
 
 
     public void cadastrarTurma(String nome, Curso curso, Horario horario, Integer numeroVagas, LocalDate dataInicio, LocalDate dataTermino){
@@ -227,143 +237,6 @@ public class MembroEquipe extends Pessoa implements Serializable {
         }
     }
 
-    public void editarAluno(Aluno aluno) {
-        System.out.println("=== Editar Aluno ===");
-
-        System.out.println("Informações atuais do aluno:");
-        System.out.println("Nome: " + aluno.getNome());
-        System.out.println("CPF: " + aluno.getCPF());
-        System.out.println("Gênero: " + aluno.getGenero());
-        System.out.println("Número de celular: " + aluno.getNumeroCelular());
-        System.out.println("Data de nascimento: " + aluno.getDataNascimento());
-        System.out.println("Escolaridade: " + aluno.getEscolaridade());
-        System.out.println("Observação de saúde: " + aluno.getObsSaude());
-        System.out.println("Tem internet? " + aluno.isTemInternet());
-        System.out.println("Tem computador? " + aluno.isTemComputador());
-        System.out.println("Tem smartphone? " + aluno.isTemSmartphone());
-        System.out.println("Sistema operacional: " + aluno.getSistemaOperacional());
-        System.out.println("Curso atual: " + aluno.getCursoAtual());
-
-        System.out.println("\n== Atualizações ==");
-
-        if (InputUtils.lerBool("Deseja atualizar o nome?")) {
-            String novoNome = InputUtils.lerString("Novo nome: ");
-            aluno.setNome(novoNome);
-        }
-
-        // Atualizar Número de Celular
-        if (InputUtils.lerBool("Deseja atualizar o número de celular?")) {
-            String novoNumeroCelular = InputUtils.lerString("Novo número de celular: ");
-            aluno.setNumeroCelular(novoNumeroCelular);
-        }
-
-        // Atualizar Escolaridade
-        if (InputUtils.lerBool("Deseja atualizar a escolaridade?")) {
-            Escolaridade novaEscolaridade = InputUtils.lerEnum(Escolaridade.class);
-            aluno.setEscolaridade(novaEscolaridade);
-        }
-
-        // Atualizar Observação de Saúde
-        if (InputUtils.lerBool("Deseja atualizar a observação de saúde?")) {
-            String novaObsSaude = InputUtils.lerString("Nova observação de saúde: ");
-            aluno.setObsSaude(novaObsSaude);
-        }
-
-        // Atualizar Tem Internet
-        if (InputUtils.lerBool("Deseja atualizar se tem internet?")) {
-            boolean novoTemInternet = InputUtils.lerBool("Tem internet? (true/false): ");
-            aluno.setTemInternet(novoTemInternet);
-        }
-
-        // Atualizar Tem Computador
-        if (InputUtils.lerBool("Deseja atualizar se tem computador?")) {
-            boolean novoTemComputador = InputUtils.lerBool("Tem computador? (true/false): ");
-            aluno.setTemComputador(novoTemComputador);
-        }
-
-        // Atualizar Tem Smartphone
-        if (InputUtils.lerBool("Deseja atualizar se tem smartphone?")) {
-            boolean novoTemSmartphone = InputUtils.lerBool("Tem smartphone? (true/false): ");
-            aluno.setTemSmartphone(novoTemSmartphone);
-        }
-
-        if (InputUtils.lerBool("Deseja atualizar o sistema operacional?")) {
-            SistemaOperacional novoSistemaOperacional = InputUtils.lerEnum(SistemaOperacional.class);
-            aluno.setSistemaOperacional(novoSistemaOperacional);
-        }
-
-        if (InputUtils.lerBool("Deseja atualizar o curso atual?")) {
-            Curso novoCursoAtual = InputUtils.lerEnum(Curso.class);
-            aluno.setCursoAtual(novoCursoAtual);
-        }
-
-        System.out.println("As informações do aluno foram atualizadas com sucesso!");
-    }
-
-    public void editarMembroEquipe(MembroEquipe membro) {
-        System.out.println("=== Editar Membro da Equipe ===");
-
-        // Exibe as informações atuais do membro
-        System.out.println("Informações atuais do membro:");
-        System.out.println("Nome: " + membro.getNome());
-        System.out.println("CPF: " + membro.getCPF());
-        System.out.println("Gênero: " + membro.getGenero());
-        System.out.println("Número de celular: " + membro.getNumeroCelular());
-        System.out.println("Matrícula: " + membro.getMatricula());
-        System.out.println("Curso na UFRN: " + membro.getCursoUFRN());
-        System.out.println("E-mail: " + membro.getEmail());
-        System.out.println("Cargo: " + membro.getCargo());
-
-        System.out.println("\n== Atualizações ==");
-
-        if (InputUtils.lerBool("Deseja atualizar o nome?")) {
-            String novoNome = InputUtils.lerString("Novo nome: ");
-            membro.setNome(novoNome);
-        }
-
-        if (InputUtils.lerBool("Deseja atualizar o número de celular?")) {
-            String novoNumeroCelular = InputUtils.lerString("Novo número de celular: ");
-            membro.setNumeroCelular(novoNumeroCelular);
-        }
-
-        if (InputUtils.lerBool("Deseja atualizar a matrícula?")) {
-            String novaMatricula = InputUtils.lerString("Nova matrícula: ");
-            membro.setMatricula(novaMatricula);
-        }
-
-        if (InputUtils.lerBool("Deseja atualizar o curso na UFRN?")) {
-            String novoCursoUFRN = InputUtils.lerString("Novo curso na UFRN: ");
-            membro.setCursoUFRN(novoCursoUFRN);
-        }
-
-        if (InputUtils.lerBool("Deseja atualizar o e-mail?")) {
-            String novoEmail = InputUtils.lerString("Novo e-mail: ");
-            membro.setEmail(novoEmail);
-        }
-
-        if (InputUtils.lerBool("Deseja atualizar o cargo?")) {
-            Cargo novoCargo = InputUtils.lerEnum(Cargo.class);
-            membro.setCargo(novoCargo);
-        }
-
-        if (InputUtils.lerBool("Deseja remover este membro de alguma turma?")) {
-            String nomeTurma = InputUtils.lerString("Nome da turma: ");
-
-            for(Turma turma : banco.getArrayTurmas()){
-                if(nomeTurma.equals(turma.getNome())){
-                    for(MembroEquipe membroDaTurma : turma.getEquipe()){
-                        if(membroDaTurma.getCPF().equals(membro.getCPF())){
-                            turma.getEquipe().remove(membro);
-                        }
-
-                    }
-                }
-            }
-        }
-
-        System.out.println("As informações do membro foram atualizadas com sucesso!");
-    }
-
     public void detalharMembroEquipe() {
         System.out.println("=== Detalhes do Membro da Equipe ===");
         System.out.println("Nome: " + getNome());
@@ -376,75 +249,37 @@ public class MembroEquipe extends Pessoa implements Serializable {
         System.out.println("Cargo: " + cargo);
     }
 
-    public void editarTurma(Turma turma) {
-        if(this.cargo != Cargo.PROFESSOR){
-            System.out.println("Você não tem permissão para remover alguém da turma.");
-        }else {
-            if (turma == null) {
-                System.out.println("Turma inválida!");
-                return;
-            }
-
-            System.out.println("=== Editar Turma: " + turma.getNome() + " ===");
-
-            if (InputUtils.lerBool("Deseja alterar o nome da turma?")) {
-                String novoNome = InputUtils.lerString("Novo nome: ");
-                turma.setNome(novoNome);
-            }
-
-            if (InputUtils.lerBool("Deseja alterar o curso associado?")) {
-                Curso novoCurso = InputUtils.lerEnum(Curso.class);
-                turma.setCurso(novoCurso);
-            }
-
-            // Editar o horário da turma
-            if (InputUtils.lerBool("Deseja alterar o horário?")) {
-                Horario novoHorario = InputUtils.lerEnum(Horario.class);
-                turma.setHorario(novoHorario);
-            }
-
-            if (InputUtils.lerBool("Deseja alterar o número de vagas?")) {
-                Integer novasVagas = InputUtils.lerInteger("Novo número de vagas: ");
-                if (novasVagas < turma.getAlunos().size()) {
-                    System.out.println("O número de vagas não pode ser menor que o número de alunos já matriculados (" + turma.getAlunos().size() + ").");
-                } else {
-                    turma.setNumeroVagas(novasVagas);
+    public void removerPessoaDasTurmas(Pessoa pessoa){
+            if(pessoa instanceof Aluno){
+                Aluno aluno = (Aluno) pessoa;
+                String codigoTurma = aluno.getCodigoTurma();
+                for(Turma turma : banco.getArrayTurmas()){
+                    if(Objects.equals(codigoTurma, turma.getCodigo())){
+                        turma.getAlunos().remove(aluno);
+                    }
                 }
-            }
+                System.out.println("Aluno removido com sucesso");
+            } else if(pessoa instanceof MembroEquipe){
+                MembroEquipe membroEquipe = (MembroEquipe) pessoa;
 
-            if (InputUtils.lerBool("Deseja alterar a data de início?")) {
-                LocalDate novaDataInicio = InputUtils.lerData("Nova data de início: ");
-                if (turma.getDataTermino() != null && novaDataInicio.isAfter(turma.getDataTermino())) {
-                    System.out.println("A data de início não pode ser posterior à data de término.");
-                } else {
-                    turma.setDataInicio(novaDataInicio);
+                for(Turma turma : banco.getArrayTurmas()){
+                    for(String codigo : membroEquipe.getCodigosTurmas()){
+                        if(Objects.equals(codigo, turma.getCodigo())){
+                            turma.getEquipe().remove(membroEquipe);
+                        }
+                    }
                 }
+
+                System.out.println("Membro da equipe removido com sucesso");
             }
 
-            if (InputUtils.lerBool("Deseja alterar a data de término?")) {
-                LocalDate novaDataTermino = InputUtils.lerData("Nova data de término: ");
-                if (turma.getDataInicio() != null && novaDataTermino.isBefore(turma.getDataInicio())) {
-                    System.out.println("A data de término não pode ser anterior à data de início.");
-                } else {
-                    turma.setDataTermino(novaDataTermino);
-                }
-            }
-
-            System.out.println("Edição da turma concluída!");
-        }
     }
 
-    public void removerPessoaDaTurma(Pessoa pessoa){
-//            if(pessoa instanceof Aluno){
-//                Aluno aluno = (Aluno) pessoa;
-//                turma.getAlunos().remove(aluno);
-//                System.out.println("Aluno removido com sucesso");
-//            }
-//            if(pessoa instanceof MembroEquipe){
-//                MembroEquipe membroEquipe = (MembroEquipe) pessoa;
-//                turma.getAlunos().remove(membroEquipe);
-//                System.out.println("Membro da equipe removido com sucesso");
-//            }
-
+    public void concluirTurma(Turma turma) {
+        turma.setConcluido(true);
+        for(Aluno aluno : turma.getAlunos()){
+            aluno.getFaltas().clear();
+            aluno.getCursosFeitos().add(turma.getCurso());
+        }
     }
 }
