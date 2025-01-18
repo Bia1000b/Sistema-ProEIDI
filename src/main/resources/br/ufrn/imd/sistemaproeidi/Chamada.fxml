@@ -28,7 +28,7 @@
                         </Label>
                     </children>
                 </Pane>
-            <Button fx:id="btn_confirmarChamada" layoutX="252.0" layoutY="442.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="197.0" styleClass="btn_perfil" stylesheets="@style.css" text="Confirmar" textFill="WHITE" />
+            <Button fx:id="btn_confirmarChamada" layoutX="252.0" layoutY="442.0" mnemonicParsing="false" onAction="#clicarBtnConfirmarChamada" prefHeight="28.0" prefWidth="197.0" styleClass="btn_perfil" stylesheets="@style.css" text="Confirmar" textFill="WHITE" />
             </children>
         </Pane>
     </children>
