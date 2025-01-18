@@ -179,18 +179,12 @@ public class MembroEquipe extends Pessoa implements Serializable {
 
 
     public void cadastrarTurma(String nome, Curso curso, Horario horario, Integer numeroVagas, LocalDate dataInicio, LocalDate dataTermino){
-        if(this.cargo != Cargo.PROFESSOR){
-            System.out.println("Você não tem permissão para cadastrar uma turma.");
+        Turma turma = new Turma(nome, curso, horario, numeroVagas, dataInicio, dataTermino);
+
+        if(banco.getArrayTurmas().add(turma)){
+            System.out.println("Turma cadastrada com sucesso!");
         }else{
-
-            Turma turma = new Turma(nome, curso, horario, numeroVagas, dataInicio, dataTermino);
-
-            if(banco.getArrayTurmas().add(turma)){
-                System.out.println("Turma cadastrada com sucesso!");
-            }else{
-                System.out.println("Erro ao cadastrar turma!");
-            }
-
+            System.out.println("Erro ao cadastrar turma!");
         }
 
     }
@@ -213,18 +207,14 @@ public class MembroEquipe extends Pessoa implements Serializable {
     }
 
     private void chamadaMembrosEquipe(Turma turma){
-        if(this.cargo != Cargo.PROFESSOR){
-            System.out.println("Você não tem permissão para cadatrar um membro da equipe.");
-        }else {
-            boolean presente = true;
-            LocalDate dataAtual = LocalDate.now();
-            for (MembroEquipe membroEquipe : turma.getEquipe()) {
-                presente = InputUtils.lerBool("Presente? ");
-                if (!presente) {
-                    Vector<LocalDate> faltas = membroEquipe.getFaltas();
-                    faltas.add(dataAtual);
-                    membroEquipe.setFaltas(faltas);
-                }
+        boolean presente = true;
+        LocalDate dataAtual = LocalDate.now();
+        for (MembroEquipe membroEquipe : turma.getEquipe()) {
+            presente = InputUtils.lerBool("Presente? ");
+            if (!presente) {
+                Vector<LocalDate> faltas = membroEquipe.getFaltas();
+                faltas.add(dataAtual);
+                membroEquipe.setFaltas(faltas);
             }
         }
     }

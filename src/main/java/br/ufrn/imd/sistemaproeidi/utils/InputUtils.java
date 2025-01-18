@@ -49,10 +49,6 @@ public class InputUtils {
 
 
     public static String validarCPF(String cpf){
-        if(cpf.equals("11")){ // AJEITAAAAAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-            return cpf;
-        }
-
         cpf = cpf.replaceAll("[^\\d]", "");
 
         if(cpf.isBlank() || cpf.length() < 11){
