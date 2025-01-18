@@ -192,6 +192,7 @@ public class PrincipalEquipeController {
         LimparCamposTurma();
         exibirAlertaCadastroConcluido();
         carregarTurmas();
+        cadastroAlunoTurmaDisponiveis.setItems(FXCollections.observableArrayList(turmas));
     }
     @FXML
     public void LimparCamposTurma() {
@@ -209,6 +210,7 @@ public class PrincipalEquipeController {
         cadastroEquipeCPF.clear();
         cadastroEquipeTelefone.clear();
         cadastroEquipeCargo.setValue(null);
+        cadastroEquipeGenero.setValue(null);
         cadastroEquipeMatricula.clear();
         cadastroEquipeCursoUFRN.clear();
         cadastroEquipeEmail.clear();
@@ -255,12 +257,6 @@ public class PrincipalEquipeController {
         System.out.println("Botão CADASTRAR EQUIPE clicado.");
     }
 
-//    @FXML
-//    void clicarBtnChamada(ActionEvent event) {
-//        tabPane.getSelectionModel().select(chamadaTab);
-//        System.out.println("Botão CHAMADA clicado.");
-//    }
-
     @FXML
     void clicarBtnPessoas(ActionEvent event) {
         tabPane.getSelectionModel().select(pessoasTab);
@@ -270,7 +266,7 @@ public class PrincipalEquipeController {
     @FXML
     void clicarBtnTabCadastrarTurma(ActionEvent event) {
         tabPane.getSelectionModel().select(cadastrarTurmaTab);
-        System.out.println("Botão BUSCAR clicado.");
+        System.out.println("Botão CADASTRAR TURMA TAB clicado.");
     }
 
     @FXML
@@ -331,7 +327,7 @@ public class PrincipalEquipeController {
         btn_verTurma.setPrefSize(100, 30);
         btn_verTurma.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
 
-        // Ação do botão de verPessoa
+        // Ação do botão de ver
         btn_verTurma.setOnAction(event -> {
             abrirTelaVerTurma(turma);
         });
