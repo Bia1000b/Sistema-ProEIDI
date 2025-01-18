@@ -65,39 +65,73 @@ public class MembroEquipe extends Pessoa implements Serializable {
         }
     }
 
-    public boolean matricularAluno(String nome, String cpf, Genero genero, LocalDate dataNascimento, String numeroCelular, Escolaridade escolaridade, String obsSaude, boolean temInternet, boolean temComputador, boolean temSmartphone, SistemaOperacional SO, Turma turma){
-        if(Period.between(dataNascimento, LocalDate.now()).getYears() < 60){
+    public Vector<String> getCodigosTurmas() {
+        if (codigosTurmas == null) {
+            codigosTurmas = new Vector<>();
+        }
+        return codigosTurmas;
+    }
+
+    public boolean matricularAluno(String nome, String cpf, Genero genero, LocalDate dataNascimento, String numeroCelular, Escolaridade escolaridade, String obsSaude, boolean temInternet, boolean temComputador, boolean temSmartphone, SistemaOperacional SO, Turma turma) {
+        // Verifica se o aluno atende ao critério de idade mínima (60 anos)
+        if (Period.between(dataNascimento, LocalDate.now()).getYears() < 60) {
             System.out.println("É necessário ser idoso para participar do projeto.");
             return false;
         }
 
-        Aluno aluno = new Aluno(nome, cpf, genero, numeroCelular, dataNascimento, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, SO);
-
-        if(adicionarAlunoATurma(turma, aluno)){
-            System.out.println("Aluno" + aluno.getNome() + "adicionado à turma " + turma.getNome() + " com sucesso!");
-        }else{
-            System.out.println("Erro ao adicionar aluno à turma!");
-            return false;
+        // Busca o aluno no sistema pelo CPF
+        Aluno alunoExistente = null;
+        for (Pessoa pessoa : banco.getArrayPessoas()) {
+            if (pessoa instanceof Aluno && pessoa.getCPF().equals(cpf)) {
+                alunoExistente = (Aluno) pessoa;
+                break;
+            }
         }
 
-        if(banco.getArrayPessoas().add(aluno)){
-            System.out.println("Aluno matriculado com sucesso!");
+        if (alunoExistente != null) {
+            alunoExistente.setNome(nome);
+            alunoExistente.setGenero(genero);
+            alunoExistente.setNumeroCelular(numeroCelular);
+            alunoExistente.setDataNascimento(dataNascimento);
+            alunoExistente.setEscolaridade(escolaridade);
+            alunoExistente.setObsSaude(obsSaude);
+            alunoExistente.setTemInternet(temInternet);
+            alunoExistente.setTemComputador(temComputador);
+            alunoExistente.setTemSmartphone(temSmartphone);
+            alunoExistente.setSistemaOperacional(SO);
+
+            System.out.println("Informações do aluno " + alunoExistente.getNome() + " atualizadas com sucesso!");
+        } else {
+            Aluno novoAluno = new Aluno(nome, cpf, genero, numeroCelular, dataNascimento, escolaridade, obsSaude, temInternet, temComputador, temSmartphone, SO);
+
+            if (!banco.getArrayPessoas().add(novoAluno)) {
+                System.out.println("Erro ao matricular!");
+                return false;
+            }
+            alunoExistente = novoAluno;
+            System.out.println("Novo aluno matriculado com sucesso!");
+        }
+
+        // Adiciona o aluno à turma
+        if (Objects.equals(alunoExistente.getCodigoTurma(), turma.getCodigo())) {
+            System.out.println("Esse aluno ja está nessa turma!");
+
         }else{
-            System.out.println("Erro ao matricular!");
-            return false;
+            if (adicionarAlunoATurma(turma, alunoExistente)) {
+                System.out.println("Aluno " + alunoExistente.getNome() + " adicionado à turma " + turma.getNome() + " com sucesso!");
+            }else{
+                System.out.println("Erro ao adicionar aluno!");
+            }
+
         }
 
         return true;
     }
 
-
-
     public void cadastrarMembroEquipe(String nome, String cpf, Genero genero, String numeroCelular, String matricula, String cursoUFRN, String email, Cargo cargo) {
         if(this.cargo != Cargo.PROFESSOR){
             System.out.println("Você não tem permissão para cadatrar um membro da equipe.");
         }else{
-
-            genero = null;
 
             MembroEquipe novoMembro = new MembroEquipe(nome, cpf, genero, numeroCelular, matricula, cursoUFRN, email, cargo);
 
