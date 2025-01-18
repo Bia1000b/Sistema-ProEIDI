@@ -318,7 +318,9 @@ public class PrincipalEquipeController {
         btn_chamada.setPrefSize(100, 30);
         btn_chamada.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
 
-        //FALTA A ACAO DA CHAMADA
+        btn_chamada.setOnAction(event -> {
+            abrirTelaChamada(turma);
+        });
 
         // Criação do Button para ver detalhes
         Button btn_verTurma = new Button("Ver");
@@ -511,6 +513,27 @@ public class PrincipalEquipeController {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Erro ao carregar VerTurma.fxml: " + e.getMessage());
+        }
+
+    }
+
+    private void abrirTelaChamada(Turma turma) {
+        try {
+            FXMLLoader loader = new FXMLLoader(SistemaApplication.class.getResource("/br/ufrn/imd/sistemaproeidi/Chamada.fxml"));
+            Parent root = loader.load();
+
+            ChamadaController controller = loader.getController();
+
+            controller.setTurma(turma);
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Chamada");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao carregar Chamada.fxml: " + e.getMessage());
         }
 
     }
