@@ -350,8 +350,26 @@ public class PrincipalEquipeController {
             }
         });
 
-        // Adicionar todos os componentes ao Pane
-        paneTurma.getChildren().addAll(labelNome, horarioLabel,btn_apagar,btn_verTurma,btn_chamada);
+        if(!turma.getConcluido()){
+            // Criação do Button concluir
+            Button btn_concluir = new Button("Concluir");
+            btn_concluir.setLayoutX(250);
+            btn_concluir.setLayoutY(10);
+            btn_concluir.setPrefSize(100, 30);
+            btn_concluir.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
+
+            paneTurma.getChildren().addAll(labelNome, horarioLabel,btn_apagar,btn_verTurma,btn_chamada,btn_concluir);
+
+            btn_concluir.setOnAction(event -> {
+                if(exibirAlertaConfirmarConcluir(turma.getNome())){
+                    membroEquipe.concluirTurma(turma);
+                    paneTurma.getChildren().remove(btn_concluir);
+                }
+            });
+
+        }else{
+            paneTurma.getChildren().addAll(labelNome, horarioLabel,btn_apagar,btn_verTurma,btn_chamada);
+        }
 
         // Adicionar o Pane ao HBox
         blocoTurma.getChildren().add(paneTurma);
@@ -419,9 +437,7 @@ public class PrincipalEquipeController {
                 // Remover do VBox
                 VBoxListaDePessoas.getChildren().remove(blocoPessoa);
                 pessoas.remove(pessoa);
-                if (pessoa instanceof Aluno){
-                    membroEquipe.removerPessoaDaTurma(pessoa);
-                }
+                membroEquipe.removerPessoaDasTurmas(pessoa);
             }
         });
         // Adicionar todos os componentes ao Pane
@@ -446,6 +462,16 @@ public class PrincipalEquipeController {
         alerta.setTitle(objeto + " será apagada(o)");
         alerta.setHeaderText(null);
         alerta.setContentText(objeto + " será apagada(o). Deseja continuar?");
+
+        Optional<ButtonType> resultado = alerta.showAndWait();
+        return resultado.isPresent() && resultado.get() == ButtonType.OK;
+    }
+
+    private boolean exibirAlertaConfirmarConcluir(String objeto) {
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        alerta.setTitle(objeto + " será concluido(a)");
+        alerta.setHeaderText(null);
+        alerta.setContentText(objeto + " será concluido(a). Deseja continuar?");
 
         Optional<ButtonType> resultado = alerta.showAndWait();
         return resultado.isPresent() && resultado.get() == ButtonType.OK;
