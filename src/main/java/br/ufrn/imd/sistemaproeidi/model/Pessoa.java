@@ -36,6 +36,10 @@ public abstract class Pessoa implements Serializable{
         this.nome = nome;
     }
 
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
     public String getNumeroCelular() {
         return numeroCelular;
     }

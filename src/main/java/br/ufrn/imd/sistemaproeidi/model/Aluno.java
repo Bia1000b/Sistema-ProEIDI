@@ -41,6 +41,9 @@ public class Aluno extends Pessoa {
 
 
     public Vector<Curso> getCursosFeitos() {
+        if (CursosFeitos == null) {
+            CursosFeitos = new Vector<>(); // Inicializa o vetor caso seja null
+        }
         return CursosFeitos;
     }
 

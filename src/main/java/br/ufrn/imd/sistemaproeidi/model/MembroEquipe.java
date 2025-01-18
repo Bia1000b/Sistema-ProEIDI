@@ -6,6 +6,7 @@ import br.ufrn.imd.sistemaproeidi.utils.InputUtils;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Objects;
 import java.util.Vector;
 
 public class MembroEquipe extends Pessoa implements Serializable {

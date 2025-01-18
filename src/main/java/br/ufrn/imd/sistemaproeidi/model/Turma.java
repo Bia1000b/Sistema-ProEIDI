@@ -46,6 +46,9 @@ public class Turma implements Serializable {
     }
 
     public Vector<Aluno> getAlunos() {
+        if (alunos == null) {
+            alunos = new Vector<>();
+        }
         return alunos;
     }
 
@@ -54,6 +57,9 @@ public class Turma implements Serializable {
     }
 
     public Vector<MembroEquipe> getEquipe() {
+        if (equipe == null) {
+            equipe = new Vector<>();
+        }
         return equipe;
     }
 
