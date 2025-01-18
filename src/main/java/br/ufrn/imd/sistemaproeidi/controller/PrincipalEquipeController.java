@@ -33,13 +33,12 @@ public class PrincipalEquipeController {
     @FXML private Button btn_menu_turma, btn_menu_turma1, btn_menu_turma11, btn_menu_turma111, btn_menu_turma1111, btn_menu_turma11111;
     @FXML private Button btn_Tab_cadastrarAluno, btn_Tab_cadastrarEquipe;
     @FXML private Button btn_menu_pessoas, btn_menu_pessoas1, btn_menu_pessoas11, btn_menu_pessoas111, btn_menu_pessoas1111, btn_menu_pessoas11111;
-    @FXML private Button btn_menu_chamada, btn_menu_chamada1, btn_menu_chamada11, btn_menu_chamada111, btn_menu_chamada1111, btn_menu_chamada11111;
     @FXML private Button btn_menu_buscar, btn_menu_buscar1, btn_menu_buscar11, btn_menu_buscar111, btn_menu_buscar1111, btn_menu_buscar11111;
     @FXML private TextField cadastroAlunoCPF, cadastroAlunoNome, cadastroAlunoObsSaude, cadastroAlunoTelefone, cadastroEquipeCPF, cadastroEquipeCursoUFRN, cadastroEquipeEmail, cadastroEquipeMatricula, cadastroEquipeNome, cadastroEquipeTelefone;
     @FXML private TextField cadastroTurmaNome, cadastroTurmaVagas;
     @FXML private DatePicker cadastroAlunoDataNascimento, cadastroTurmaDataInicio, cadastroTurmaDataTermino;
     @FXML private ChoiceBox<Curso> cadastroTurmaCurso;
-    @FXML private ChoiceBox<Genero> cadastroAlunoGenero;
+    @FXML private ChoiceBox<Genero> cadastroAlunoGenero, cadastroEquipeGenero;
     @FXML private ChoiceBox<SistemaOperacional> cadastroAlunoSO;
     @FXML private ChoiceBox<Escolaridade> cadastroAlunoEscolaridade;
     @FXML private ChoiceBox<Cargo>  cadastroEquipeCargo;
@@ -63,6 +62,7 @@ public class PrincipalEquipeController {
     public void initialize() {
         System.out.println("Tela Principal Equipe carregada!");
         cadastroAlunoGenero.setItems(FXCollections.observableArrayList(Genero.values()));
+        cadastroEquipeGenero.setItems(FXCollections.observableArrayList(Genero.values()));
         cadastroAlunoSO.setItems(FXCollections.observableArrayList(SistemaOperacional.values()));
         cadastroAlunoEscolaridade.setItems(FXCollections.observableArrayList(Escolaridade.values()));
         cadastroAlunoTurmaDisponiveis.setItems(FXCollections.observableArrayList(turmas));
@@ -165,12 +165,13 @@ public class PrincipalEquipeController {
         String nome = cadastroEquipeNome.getText();
         String cpf = cadastroEquipeCPF.getText();
         String numeroCelular = cadastroEquipeTelefone.getText();
+        Genero genero = (Genero) cadastroEquipeGenero.getValue();
         Cargo cargo = (Cargo) cadastroEquipeCargo.getValue();
         String matricula = cadastroEquipeMatricula.getText();
         String cursoUFRN = cadastroEquipeCursoUFRN.getText();
         String email = cadastroEquipeEmail.getText();
 
-        membroEquipe.cadastrarMembroEquipe(nome, cpf, null, numeroCelular, matricula, cursoUFRN, email, cargo);
+        membroEquipe.cadastrarMembroEquipe(nome, cpf, genero, numeroCelular, matricula, cursoUFRN, email, cargo);
         LimparCamposEquipe();
         exibirAlertaCadastroConcluido();
         carregarPessoas();

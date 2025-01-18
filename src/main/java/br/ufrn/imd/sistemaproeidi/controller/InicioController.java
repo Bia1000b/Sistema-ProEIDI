@@ -23,11 +23,11 @@ public class InicioController {
     @FXML
     public void initialize() {
         System.out.println("Tela inicial carregada!");
-        //Gerenciador.criarMembroPadrao();
         CPFusuario.setText("");
     }
 
     public void processarCPF(){
+        //Gerenciador.criarMembroPadrao();
         String cpf = CPFusuario.getText();
         if (cpf.isEmpty()) {
             System.out.println("O campo CPF está vazio!");
