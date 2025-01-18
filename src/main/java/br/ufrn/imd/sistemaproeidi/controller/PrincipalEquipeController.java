@@ -104,14 +104,14 @@ public class PrincipalEquipeController {
         System.out.println("Botão CADASTRAR ALUNO clicado.");
 
         try {
-            String nome = cadastroAlunoNome.getText();
+            String nome = InputUtils.validarNome(cadastroAlunoNome.getText());
             String dataNascimentoTexto = cadastroAlunoDataNascimento.getEditor().getText();
             LocalDate dataNascimento = null;
-            String cpf = cadastroAlunoCPF.getText();
-            Genero genero = (Genero) cadastroAlunoGenero.getValue();
-            String numeroCelular = cadastroAlunoTelefone.getText();
-            Escolaridade escolaridade = (Escolaridade) cadastroAlunoEscolaridade.getValue();
-            Turma turma = (Turma) cadastroAlunoTurmaDisponiveis.getValue();
+            String cpf = InputUtils.validarCPF(cadastroAlunoCPF.getText());
+            Genero genero = (Genero) cadastroAlunoGenero.getValue(); //OK
+            String numeroCelular = InputUtils.validarTelefone(cadastroAlunoTelefone.getText());
+            Escolaridade escolaridade = (Escolaridade) cadastroAlunoEscolaridade.getValue(); //OK
+            Turma turma = (Turma) cadastroAlunoTurmaDisponiveis.getValue(); //OK
             String obsSaude = cadastroAlunoObsSaude.getText();
             boolean temInternet = checkAlunoInternet.isSelected();
             boolean temComputador = checkAlunoComputador.isSelected();
@@ -126,14 +126,14 @@ public class PrincipalEquipeController {
                 return;
             }
 
-            if (nome == null || nome.isBlank() ||
+            if (nome == null ||
                     dataNascimento == null ||
                     cpf == null || cpf.isBlank() ||
                     genero == null ||
                     numeroCelular == null || numeroCelular.isBlank() ||
                     escolaridade == null ||
                     turma == null) {
-                exibirAlerta("Cadastro impedido", "Por favor, preencha todos os campos obrigatórios.");
+                exibirAlerta("Cadastro impedido", "Por favor, preencha os campos corretamente.");
                 return;
             }
 
@@ -151,7 +151,6 @@ public class PrincipalEquipeController {
             }
 
         } catch (Exception e) {
-            // Tratamento genérico para erros inesperados
             exibirAlerta("Erro inesperado", "Ocorreu um erro ao tentar cadastrar o aluno. Por favor, tente novamente.");
         }
     }

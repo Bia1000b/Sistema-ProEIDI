@@ -14,6 +14,35 @@ import java.util.stream.Collectors;
 public class InputUtils {
     private static Scanner scanner = new Scanner(System.in);
 
+    public static String validarNome(String nome){
+        if(nome.isBlank() || nome.matches(".*\\d.*")){
+            System.out.println("Nome inválido");
+            return null;
+        }
+        return nome;
+    }
+
+    public static String validarCPF(String cpf){
+        cpf = cpf.replaceAll("[^\\d]", "");
+
+        if(cpf.isBlank() || cpf.length() < 11){
+            System.out.println("CPF inválido");
+            return null;
+        }
+
+        return cpf;
+    }
+
+    public static String validarTelefone(String numero){
+        String novoNumero = numero.replaceAll("[^\\d]", "");
+        if(novoNumero.isBlank() || novoNumero.length() < 11){
+            System.out.println("Número de telefone inválido");
+            return null;
+        }
+        return numero;
+
+    }
+
     public static String formatLocalDate(LocalDate input){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
         return formatter.format(input);
