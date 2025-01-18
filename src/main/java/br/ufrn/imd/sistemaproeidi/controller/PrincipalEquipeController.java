@@ -336,7 +336,7 @@ public class PrincipalEquipeController {
         btn_verTurma.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
 
         // Ação do botão de ver
-        btn_verTurma.setOnAction(event -> {
+        getBtnVerTurma(btn_verTurma).setOnAction(event -> {
             abrirTelaVerTurma(turma);
         });
 
@@ -382,6 +382,10 @@ public class PrincipalEquipeController {
 
         // Adicionar o HBox ao VBox existente (activitiesVBox)
         VBoxListaDeTurmas.getChildren().add(blocoTurma);
+    }
+
+    private static Button getBtnVerTurma(Button btn_verTurma) {
+        return btn_verTurma;
     }
 
     @FXML

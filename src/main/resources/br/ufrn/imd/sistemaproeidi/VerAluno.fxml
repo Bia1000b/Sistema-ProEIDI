@@ -47,7 +47,7 @@
                     <Label layoutX="14.0" layoutY="16.0" text="Faltas:" textFill="WHITE" />
                     <ListView fx:id="listViewFaltas" layoutX="13.0" layoutY="35.0" prefHeight="86.0" prefWidth="124.0" styleClass="pane_11" />
                     <Label fx:id="totalFaltas" layoutX="187.0" layoutY="46.0" text="0" textFill="WHITE" />
-                    <Label fx:id="Faltas" layoutX="169.0" layoutY="18.0" text="Total:" textFill="WHITE" />
+                    <Label layoutX="169.0" layoutY="18.0" text="Total:" textFill="WHITE" />
                 </children>
             </Pane>
             <Pane layoutX="16.0" layoutY="342.0" prefHeight="64.0" prefWidth="202.0" styleClass="pane_1">
