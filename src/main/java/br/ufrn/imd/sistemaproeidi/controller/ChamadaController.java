@@ -3,6 +3,7 @@ package br.ufrn.imd.sistemaproeidi.controller;
 import br.ufrn.imd.sistemaproeidi.model.Aluno;
 import br.ufrn.imd.sistemaproeidi.model.Pessoa;
 import br.ufrn.imd.sistemaproeidi.model.Turma;
+import br.ufrn.imd.sistemaproeidi.utils.InputUtils;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
@@ -18,23 +19,13 @@ import java.util.Optional;
 
 public class ChamadaController {
 
-    @FXML
-    private Button btn_confirmarChamada;
-
-    @FXML
-    private TableColumn<Pessoa, String> colunaNome;
-
-    @FXML
-    private TableColumn<Pessoa, Boolean> colunaPresenca;
-
-    @FXML
-    private Label diaDeHoje;
-
-    @FXML
-    private TableView<Pessoa> tabelaChamada;
+    @FXML private Button btn_confirmarChamada;
+    @FXML private TableColumn<Pessoa, String> colunaNome;
+    @FXML private TableColumn<Pessoa, Boolean> colunaPresenca;
+    @FXML private Label diaDeHoje;
+    @FXML private TableView<Pessoa> tabelaChamada;
 
     private ObservableList<Pessoa> listaPessoasDaTurma;
-
     private Turma turma;
 
     @FXML
@@ -46,7 +37,7 @@ public class ChamadaController {
 
     @FXML
     public void initialize() {
-        diaDeHoje.setText("Data: " + LocalDate.now().toString());
+        diaDeHoje.setText("Data: " + InputUtils.formatLocalDate(LocalDate.now()));
     }
 
     private void configurarTabela() {
@@ -62,7 +53,10 @@ public class ChamadaController {
         listaPessoasDaTurma = FXCollections.observableArrayList();
         listaPessoasDaTurma.addAll(turma.getAlunos());
         listaPessoasDaTurma.addAll(turma.getEquipe());
-        tabelaChamada.setItems(listaPessoasDaTurma);
+
+        if(listaPessoasDaTurma != null){
+            tabelaChamada.setItems(listaPessoasDaTurma);
+        }
     }
 
     @FXML
