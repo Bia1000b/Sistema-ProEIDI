@@ -426,6 +426,17 @@ public class PrincipalEquipeController {
         labelNome.setPrefSize(500, 30);
         labelNome.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
 
+        // Determinação do tipo da pessoa
+        String tipoPessoa = (pessoa instanceof Aluno) ? "Aluno" : "Membro da Equipe";
+
+        // Label para o tipo da pessoa
+        Label labelTipo = new Label(tipoPessoa);
+        labelTipo.setLayoutX(14);
+        labelTipo.setLayoutY(50); // Ajuste para posicionar abaixo do nome
+        labelTipo.setPrefSize(500, 30);
+        labelTipo.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
+
+
         // Criação do Button para ver detalhes
         Button btn_verPessoa = new Button("Ver");
         btn_verPessoa.setLayoutX(370);
@@ -455,7 +466,7 @@ public class PrincipalEquipeController {
             }
         });
         // Adicionar todos os componentes ao Pane
-        panePessoa.getChildren().addAll(labelNome,btn_apagar,btn_verPessoa);
+        panePessoa.getChildren().addAll(labelNome,btn_apagar,btn_verPessoa, labelTipo);
 
         // Adicionar o Pane ao HBox
         blocoPessoa.getChildren().add(panePessoa);
