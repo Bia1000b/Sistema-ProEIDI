@@ -178,20 +178,20 @@
                               </ScrollPane>
                               <Pane fx:id="pane_1111" layoutX="16.0" layoutY="125.0" prefHeight="30.0" prefWidth="493.0" styleClass="pane_1111">
                                  <children>
-                                    <Label layoutX="14.0" layoutY="8.0" text="Professor(a):" textFill="WHITE" />
-                                    <Label fx:id="NomeProfessor1" layoutX="104.0" layoutY="8.0" prefHeight="16.0" prefWidth="265.0" text="NomeProfessor1" textFill="WHITE" />
+                                    <Label layoutX="14.0" layoutY="8.0" text="Data de Inicio:" textFill="WHITE" />
+                                    <Label fx:id="DataInicio" layoutX="137.0" layoutY="8.0" prefHeight="16.0" prefWidth="265.0" text="DataInicio" textFill="WHITE" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_11111" layoutX="16.0" layoutY="163.0" prefHeight="30.0" prefWidth="491.0" styleClass="pane_1111">
                                  <children>
-                                    <Label layoutX="14.0" layoutY="8.0" text="Professor(a):" textFill="WHITE" />
-                                    <Label fx:id="NomeProfessor2" layoutX="105.0" layoutY="8.0" prefHeight="16.0" prefWidth="265.0" text="NomeProfessor2" textFill="WHITE" />
+                                    <Label layoutX="14.0" layoutY="8.0" text="Data de Termino:" textFill="WHITE" />
+                                    <Label fx:id="DataTermino" layoutX="137.0" layoutY="8.0" prefHeight="16.0" prefWidth="265.0" text="DataTermino" textFill="WHITE" />
                                  </children>
                               </Pane>
                               <Pane fx:id="pane_111111" layoutX="16.0" layoutY="89.0" prefHeight="30.0" prefWidth="495.0" styleClass="pane_1111">
                                  <children>
                                     <Label layoutX="14.0" layoutY="8.0" text="Horario:" textFill="WHITE" />
-                                    <Label fx:id="HorarioTurma" layoutX="105.0" layoutY="8.0" prefHeight="16.0" prefWidth="262.0" text="HorarioTurma" textFill="WHITE" />
+                                    <Label fx:id="HorarioTurma" layoutX="136.0" layoutY="8.0" prefHeight="16.0" prefWidth="262.0" text="HorarioTurma" textFill="WHITE" />
                                  </children>
                               </Pane>
                            </children>
