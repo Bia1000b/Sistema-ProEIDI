@@ -22,6 +22,32 @@ public class InputUtils {
         return nome;
     }
 
+    public static String validarEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            System.out.println("Email inválido: o campo está vazio.");
+            return null;
+        }
+
+        int atIndex = email.indexOf('@');
+        if (atIndex <= 0 || atIndex == email.length() - 1) {
+            System.out.println("Email inválido: deve conter '@' e ele não pode estar no início ou no final.");
+            return null;
+        }
+
+        if (email.indexOf('@', atIndex + 1) != -1) {
+            System.out.println("Email inválido: deve conter apenas um '@'.");
+            return null;
+        }
+
+        String dominio = email.substring(atIndex + 1);
+        if (!dominio.contains(".") || dominio.startsWith(".") || dominio.endsWith(".")) {
+            System.out.println("Email inválido: o domínio deve conter pelo menos um ponto e não pode iniciar ou terminar com ele.");
+            return null;
+        }
+        return email;
+    }
+
+
     public static String validarCPF(String cpf){
         if(cpf.equals("11")){ // AJEITAAAAAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
             return cpf;

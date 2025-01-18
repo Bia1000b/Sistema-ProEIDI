@@ -135,7 +135,9 @@ public class MembroEquipe extends Pessoa implements Serializable {
             System.out.println("Membro da equipe cadastrado com sucesso!");
         } else {
             System.out.println("Erro ao cadastrar o membro da equipe!");
+            return false;
         }
+        return true;
 
     }
 

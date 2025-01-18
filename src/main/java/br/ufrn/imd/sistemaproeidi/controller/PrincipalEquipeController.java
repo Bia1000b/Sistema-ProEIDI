@@ -121,7 +121,7 @@ public class PrincipalEquipeController {
             SistemaOperacional sistemaOperacional = (SistemaOperacional) cadastroAlunoSO.getValue();
 
             if (nome == null ||
-                cpf == null || cpf.isBlank() ||
+                cpf == null ||
                 genero == null ||
                 numeroCelular == null ||
                 escolaridade == null ||
@@ -156,7 +156,6 @@ public class PrincipalEquipeController {
         System.out.println("Botão CADASTRAR EQUIPE clicado.");
 
         try {
-            // Validações dos campos
             String nome = InputUtils.validarNome(cadastroEquipeNome.getText());
             String cpf = InputUtils.validarCPF(cadastroEquipeCPF.getText());
             String numeroCelular = InputUtils.validarTelefone(cadastroEquipeTelefone.getText());
@@ -166,15 +165,14 @@ public class PrincipalEquipeController {
             String cursoUFRN = cadastroEquipeCursoUFRN.getText();
             String email = InputUtils.validarEmail(cadastroEquipeEmail.getText());
 
-            // Verificar se os campos obrigatórios estão preenchidos
             if (nome == null ||
-                    cpf == null || cpf.isBlank() ||
+                    cpf == null ||
                     numeroCelular == null ||
                     genero == null ||
                     cargo == null ||
                     matricula.isBlank() ||
                     cursoUFRN.isBlank() ||
-                    email == null || email.isBlank()) {
+                    email == null) {
                 exibirAlerta("Cadastro impedido", "Por favor, preencha os campos corretamente.");
                 return;
             }

@@ -28,7 +28,7 @@ public class InicioController {
     }
 
     public void processarCPF(){
-        //Gerenciador.criarMembroPadrao();
+        Gerenciador.criarMembroPadrao();
         String cpf = InputUtils.validarCPF(CPFusuario.getText());
         System.out.println("CPF digitado: " + cpf);
 
