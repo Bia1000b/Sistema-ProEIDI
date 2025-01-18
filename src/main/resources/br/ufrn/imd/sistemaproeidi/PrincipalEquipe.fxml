@@ -472,13 +472,15 @@
                               <TextField fx:id="cadastroEquipeTelefone" layoutX="18.0" layoutY="165.0" prefHeight="24.0" prefWidth="202.0" />
                               <Label layoutX="18.0" layoutY="146.0" text="Telefone:" textFill="#288fc0" />
                               <Label layoutX="238.0" layoutY="145.0" text="Matricula:" textFill="#288fc0" />
-                              <Label layoutX="18.0" layoutY="201.0" text="Curso UFRN:" textFill="#288fc0" />
-                              <ChoiceBox fx:id="cadastroEquipeCargo" layoutX="239.0" layoutY="218.0" prefHeight="24.0" prefWidth="201.0" />
-                              <Label layoutX="238.0" layoutY="201.0" text="Cargo ProEIDI" textFill="#288fc0" />
-                              <Label layoutX="18.0" layoutY="252.0" text="Email:" textFill="#288fc0" />
-                              <TextField fx:id="cadastroEquipeEmail" layoutX="17.0" layoutY="272.0" prefHeight="24.0" prefWidth="421.0" />
+                              <Label layoutX="16.0" layoutY="252.0" text="Curso UFRN:" textFill="#288fc0" />
+                              <ChoiceBox fx:id="cadastroEquipeCargo" layoutX="237.0" layoutY="269.0" prefHeight="24.0" prefWidth="201.0" />
+                              <Label layoutX="236.0" layoutY="252.0" text="Cargo ProEIDI" textFill="#288fc0" />
+                              <Label layoutX="19.0" layoutY="305.0" text="Email:" textFill="#288fc0" />
+                              <TextField fx:id="cadastroEquipeEmail" layoutX="17.0" layoutY="322.0" prefHeight="24.0" prefWidth="421.0" />
                               <TextField fx:id="cadastroEquipeMatricula" layoutX="238.0" layoutY="165.0" prefHeight="24.0" prefWidth="202.0" />
-                              <TextField fx:id="cadastroEquipeCursoUFRN" layoutX="18.0" layoutY="218.0" prefHeight="24.0" prefWidth="202.0" />
+                              <TextField fx:id="cadastroEquipeCursoUFRN" layoutX="16.0" layoutY="269.0" prefHeight="24.0" prefWidth="202.0" />
+                              <Label layoutX="17.0" layoutY="200.0" text="Genero:" textFill="#288fc0" />
+                              <ChoiceBox fx:id="cadastroEquipeGenero" layoutX="17.0" layoutY="219.0" prefHeight="24.0" prefWidth="201.0" />
                            </children>
                         </Pane>
                      </children>
