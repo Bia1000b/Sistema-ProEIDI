@@ -167,6 +167,7 @@ public class MembroEquipe extends Pessoa implements Serializable {
         }
         turma.setEquipe(membros);
     }
+
     public void removerMembroDaEquipeDaTurma(Turma turma, MembroEquipe membro){
         Vector<MembroEquipe> membros = turma.getEquipe();
         if(membros.remove(membro)){
@@ -175,8 +176,6 @@ public class MembroEquipe extends Pessoa implements Serializable {
         }
         turma.setEquipe(membros);
     }
-
-
 
     public void cadastrarTurma(String nome, Curso curso, Horario horario, Integer numeroVagas, LocalDate dataInicio, LocalDate dataTermino){
         Turma turma = new Turma(nome, curso, horario, numeroVagas, dataInicio, dataTermino);
