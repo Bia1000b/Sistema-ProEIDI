@@ -52,6 +52,7 @@ public class VerAlunoController {
             SO.setText(aluno.getSistemaOperacional().toString());
             TurmaAtual.setText(turmaAluno.getNome());
             CursoAtual.setText(InputUtils.formatEnum(aluno.getCursoAtual().toString()));
+            Faltas.setText(String.valueOf(aluno.getFaltas().size()));
 
             Internet.setText(aluno.isTemInternet() ? "Sim" : "Não");
             Computador.setText(aluno.isTemComputador() ? "Sim" : "Não");

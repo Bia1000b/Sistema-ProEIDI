@@ -33,7 +33,7 @@ public class InicioController {
         System.out.println("CPF digitado: " + cpf);
 
         if(Gerenciador.buscarPessoa(cpf) == null){
-            exibirAlerta("Login Inválido", "CPF incorreto ou não cadastrado!.");
+            exibirAlerta();
         }else if ((Gerenciador.buscarPessoa(cpf)) instanceof Aluno){
             Aluno aluno = (Aluno) Gerenciador.buscarPessoa(cpf);
             abrirTelaPrincipalAluno(aluno);
@@ -81,10 +81,10 @@ public class InicioController {
         }
     }
 
-    private void exibirAlerta(String titulo, String mensagem) {
+    private void exibirAlerta() {
         Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle(titulo);
-        alerta.setContentText(mensagem);
+        alerta.setTitle("Login Inválido");
+        alerta.setContentText("CPF incorreto ou não cadastrado!");
         alerta.showAndWait();
     }
 

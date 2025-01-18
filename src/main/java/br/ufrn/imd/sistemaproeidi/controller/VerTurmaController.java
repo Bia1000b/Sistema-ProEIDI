@@ -1,7 +1,6 @@
 package br.ufrn.imd.sistemaproeidi.controller;
 
 import br.ufrn.imd.sistemaproeidi.model.Aluno;
-import br.ufrn.imd.sistemaproeidi.model.Gerenciador;
 import br.ufrn.imd.sistemaproeidi.model.MembroEquipe;
 import br.ufrn.imd.sistemaproeidi.model.Turma;
 import javafx.collections.FXCollections;
@@ -12,7 +11,7 @@ import javafx.scene.control.ListView;
 
 public class VerTurmaController {
     @FXML
-    private Label HorarioTurma, NomeProfessor1, NomeProfessor2, boolConcluida, NomeTurma, Curso, Vagas, DataInicio, DataTermino;
+    private Label HorarioTurma, boolConcluida, NomeTurma, Curso, Vagas, DataInicio, DataTermino;
 
     @FXML
     private ListView<String> listViewAlunosTurma, listViewMembrosTurma;

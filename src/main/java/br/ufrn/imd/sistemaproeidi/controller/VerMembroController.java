@@ -1,13 +1,11 @@
 package br.ufrn.imd.sistemaproeidi.controller;
 
 import br.ufrn.imd.sistemaproeidi.model.*;
-import br.ufrn.imd.sistemaproeidi.model.enums.Curso;
 import br.ufrn.imd.sistemaproeidi.utils.InputUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -19,7 +17,6 @@ public class VerMembroController {
     @FXML private MembroEquipe membroEquipe;
 
     @FXML private ListView<String> listViewFaltas, listViewTurmas;
-    @FXML private Button adicionarMembroTurma, removerMembroTurma;
     @FXML private ChoiceBox<Turma> opcoesTurmas;
     @FXML private Label cursoUFRN, email, faltas, matricula, nomeUsuario, numeroDeTelefone, CPF, Genero;
 
@@ -42,7 +39,7 @@ public class VerMembroController {
             nomeUsuario.setText(membroEquipe.getNome());
             CPF.setText(membroEquipe.getCPF());
             Genero.setText(membroEquipe.getGenero().toString());
-            cursoUFRN.setText(membroEquipe.getCursoUFRN().toString());
+            cursoUFRN.setText(membroEquipe.getCursoUFRN());
             email.setText(membroEquipe.getEmail());
             faltas.setText(Integer.toString(membroEquipe.getFaltas().size()));
             matricula.setText(membroEquipe.getMatricula());

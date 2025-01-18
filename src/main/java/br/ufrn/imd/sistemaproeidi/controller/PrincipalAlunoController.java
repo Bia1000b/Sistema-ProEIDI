@@ -55,8 +55,6 @@ public class PrincipalAlunoController {
             nomeUsuario.setText(aluno.getNome());
             CursoAtual.setText(InputUtils.formatEnum(aluno.getCursoAtual().toString()));
             HorarioTurma.setText(InputUtils.formatEnum(turmaAluno.getHorario().toString()));
-//            NomeProfessor1.setText(turmaAluno.getEquipe().getFirst().getNome());
-//            NomeProfessor2.setText(turmaAluno.getEquipe().get(1).getNome());
             NumeroDeTelefone.setText(aluno.getNumeroCelular());
             SO.setText(aluno.getSistemaOperacional().toString());
             nomeTurma.setText(turmaAluno.getNome());
