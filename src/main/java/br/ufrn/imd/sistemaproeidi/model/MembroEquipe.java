@@ -41,26 +41,6 @@ public class MembroEquipe extends Pessoa implements Serializable {
         return matricula;
     }
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public void setCursoUFRN(String cursoUFRN) {
-        this.cursoUFRN = cursoUFRN;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setCargo(Cargo cargo) {
-        if(this.cargo != Cargo.PROFESSOR){
-            System.out.println("Você não tem permissão para cadatrar um membro da equipe.");
-        }else{
-            this.cargo = cargo;
-        }
-    }
-
     public Vector<String> getCodigosTurmas() {
         if (codigosTurmas == null) {
             codigosTurmas = new Vector<>();
@@ -69,13 +49,11 @@ public class MembroEquipe extends Pessoa implements Serializable {
     }
 
     public boolean matricularAluno(String nome, String cpf, Genero genero, LocalDate dataNascimento, String numeroCelular, Escolaridade escolaridade, String obsSaude, boolean temInternet, boolean temComputador, boolean temSmartphone, SistemaOperacional SO, Turma turma) {
-        // Verifica se o aluno atende ao critério de idade mínima (60 anos)
         if (Period.between(dataNascimento, LocalDate.now()).getYears() < 60) {
             System.out.println("É necessário ser idoso para participar do projeto.");
             return false;
         }
 
-        // Busca o aluno no sistema pelo CPF
         Aluno alunoExistente = null;
         for (Pessoa pessoa : banco.getArrayPessoas()) {
             if (pessoa instanceof Aluno && pessoa.getCPF().equals(cpf)) {
@@ -108,7 +86,6 @@ public class MembroEquipe extends Pessoa implements Serializable {
             System.out.println("Novo aluno matriculado com sucesso!");
         }
 
-        // Adiciona o aluno à turma
         if (Objects.equals(alunoExistente.getCodigoTurma(), turma.getCodigo())) {
             System.out.println("Esse aluno ja está nessa turma!");
 

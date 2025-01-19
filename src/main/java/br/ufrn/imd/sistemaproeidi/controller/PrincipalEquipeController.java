@@ -76,9 +76,8 @@ public class PrincipalEquipeController {
 
     public void setMembroEquipe(MembroEquipe membroEquipe) {
         this.membroEquipe = membroEquipe;
-        membroEquipe.detalharMembroEquipe(); //OPCIONAL
+        membroEquipe.detalharMembroEquipe();
         carregarDadosMembroEquipe();
-//        carregarFaltas();
     }
 
     public void carregarDadosMembroEquipe(){
@@ -168,8 +167,6 @@ public class PrincipalEquipeController {
                 exibirAlerta("Cadastro impedido", "Por favor, preencha os campos corretamente.");
                 return;
             }
-
-            // Realizar o cadastro do membro da equipe
             if (membroEquipe.cadastrarMembroEquipe(nome, cpf, genero, numeroCelular, matricula, cursoUFRN, email, cargo)) {
                 LimparCamposEquipe();
                 exibirAlertaCadastroConcluido();
@@ -182,24 +179,6 @@ public class PrincipalEquipeController {
         }
     }
 
-
-//    @FXML
-//    public void clicarBtnCadastrarTurmaFinal(ActionEvent event) {
-//        System.out.println("Botão CADASTRAR TURMA clicado.");
-//        String nome = cadastroTurmaNome.getText();
-//        Horario horario = (Horario) cadastroTurmaHorario.getValue();
-//        Curso curso = (Curso) cadastroTurmaCurso.getValue();
-//        Integer vagas = Integer.parseInt(cadastroTurmaVagas.getText());
-//        LocalDate dataInicio = cadastroTurmaDataInicio.getValue();
-//        LocalDate dataTermino = cadastroTurmaDataTermino.getValue();
-//
-//
-//        membroEquipe.cadastrarTurma(nome, curso, horario, vagas, dataInicio, dataTermino);
-//        LimparCamposTurma();
-//        exibirAlertaCadastroConcluido();
-//        carregarTurmas();
-//        cadastroAlunoTurmaDisponiveis.setItems(FXCollections.observableArrayList(turmas));
-//    }
 
     @FXML
     public void clicarBtnCadastrarTurmaFinal(ActionEvent event) {
@@ -320,13 +299,8 @@ public class PrincipalEquipeController {
     private void carregarTurmas() {
         VBoxListaDeTurmas.getChildren().clear();
         try {
-            // Adicionar cada tarefa ao VBox
             for (Turma turma : turmas) {
-                String nome = turma.getNome();
-                boolean concluida = turma.getConcluido();
-                Horario horario = turma.getHorario();
 
-                // Adiciona a tarefa ao VBox
                 adicionarBlocoTurma(turma);
             }
         } catch (Exception e) {
@@ -336,29 +310,25 @@ public class PrincipalEquipeController {
 
     @FXML
     void adicionarBlocoTurma(Turma turma) {
-        // Criação do HBox
         HBox blocoTurma = new HBox();
-        blocoTurma.setPrefSize(500, 129); // Dimensão fixa
+        blocoTurma.setPrefSize(500, 129);
         blocoTurma.setStyle("-fx-background-color: #2F4A5F; -fx-border-radius: 10; -fx-padding: 10;");
 
-        // Criação do Pane dentro do HBox para layout manual
         Pane paneTurma = new Pane();
         paneTurma.setPrefSize(500, 130); // Mesma altura que o HBox
 
-        // Criação das Labels
         Label labelNome = new Label("NOME: " + turma.getNome());
         labelNome.setLayoutX(14);
         labelNome.setLayoutY(14);
         labelNome.setPrefSize(500, 30);
         labelNome.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
 
-        Label horarioLabel = new Label("HORARIO: " + turma.getHorario());
+        Label horarioLabel = new Label("HORARIO: " + InputUtils.validarHorario(turma.getHorario()));
         horarioLabel.setLayoutX(14);
         horarioLabel.setLayoutY(44);
         horarioLabel.setPrefSize(500, 30);
         horarioLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
 
-        // Criação do Button chamada
         Button btn_chamada = new Button("Chamada");
         btn_chamada.setLayoutX(250);
         btn_chamada.setLayoutY(59);
@@ -369,36 +339,30 @@ public class PrincipalEquipeController {
             abrirTelaChamada(turma);
         });
 
-        // Criação do Button para ver detalhes
         Button btn_verTurma = new Button("Ver");
         btn_verTurma.setLayoutX(370);
         btn_verTurma.setLayoutY(10);
         btn_verTurma.setPrefSize(100, 30);
         btn_verTurma.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
 
-        // Ação do botão de ver
         getBtnVerTurma(btn_verTurma).setOnAction(event -> {
             abrirTelaVerTurma(turma);
         });
 
-        // Criação do Button para excluir
         Button btn_apagar = new Button("Apagar");
         btn_apagar.setLayoutX(370);
         btn_apagar.setLayoutY(59);
         btn_apagar.setPrefSize(100, 30);
         btn_apagar.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
 
-        // Ação do botão de excluir
         btn_apagar.setOnAction(event -> {
             if (exibirAlertaConfirmarApagar(turma.getNome())){
-                // Remover do VBox
                 VBoxListaDeTurmas.getChildren().remove(blocoTurma);
                 membroEquipe.removerTurma(turma);
             }
         });
 
         if(!turma.getConcluido()){
-            // Criação do Button concluir
             Button btn_concluir = new Button("Concluir");
             btn_concluir.setLayoutX(250);
             btn_concluir.setLayoutY(10);
@@ -418,10 +382,8 @@ public class PrincipalEquipeController {
             paneTurma.getChildren().addAll(labelNome, horarioLabel,btn_apagar,btn_verTurma,btn_chamada);
         }
 
-        // Adicionar o Pane ao HBox
         blocoTurma.getChildren().add(paneTurma);
 
-        // Adicionar o HBox ao VBox existente (activitiesVBox)
         VBoxListaDeTurmas.getChildren().add(blocoTurma);
     }
 
@@ -433,11 +395,9 @@ public class PrincipalEquipeController {
     private void carregarPessoas() {
         VBoxListaDePessoas.getChildren().clear();
         try {
-            // Adicionar cada pss ao VBox
             for (Pessoa pessoa : pessoas) {
                 String nome = pessoa.getNome();
 
-                // Adiciona a tarefa ao VBox
                 adicionarBlocoPessoa(pessoa);
             }
         } catch (Exception e) {
@@ -447,53 +407,44 @@ public class PrincipalEquipeController {
 
     @FXML
     void adicionarBlocoPessoa(Pessoa pessoa) {
-        // Criação do HBox
         HBox blocoPessoa = new HBox();
-        blocoPessoa.setPrefSize(500, 129); // Dimensão fixa
+        blocoPessoa.setPrefSize(500, 129);
         blocoPessoa.setStyle("-fx-background-color: #2F4A5F; -fx-border-radius: 10; -fx-padding: 10;");
 
-        // Criação do Pane dentro do HBox para layout manual
         Pane panePessoa = new Pane();
-        panePessoa.setPrefSize(500, 130); // Mesma altura que o HBox
+        panePessoa.setPrefSize(500, 130);
 
-        // Criação das Labels
         Label labelNome = new Label("NOME: " + pessoa.getNome());
         labelNome.setLayoutX(14);
         labelNome.setLayoutY(14);
         labelNome.setPrefSize(500, 30);
         labelNome.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
 
-        // Determinação do tipo da pessoa
         String tipoPessoa = (pessoa instanceof Aluno) ? "Aluno" : "Membro da Equipe";
 
-        // Label para o tipo da pessoa
         Label labelTipo = new Label(tipoPessoa);
         labelTipo.setLayoutX(14);
-        labelTipo.setLayoutY(50); // Ajuste para posicionar abaixo do nome
+        labelTipo.setLayoutY(50);
         labelTipo.setPrefSize(500, 30);
         labelTipo.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
 
 
-        // Criação do Button para ver detalhes
         Button btn_verPessoa = new Button("Ver");
         btn_verPessoa.setLayoutX(370);
         btn_verPessoa.setLayoutY(10);
         btn_verPessoa.setPrefSize(100, 30);
         btn_verPessoa.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
 
-        // Criação do Button para excluir atividade
         Button btn_apagar = new Button("Apagar");
         btn_apagar.setLayoutX(370);
         btn_apagar.setLayoutY(59);
         btn_apagar.setPrefSize(100, 30);
         btn_apagar.setStyle("-fx-text-fill: black; -fx-font-size: 14;");
 
-        // Ação do botão de verPessoa
         btn_verPessoa.setOnAction(event -> {
             abrirTelaVerPessoa(pessoa);
         });
 
-        // Ação do botão de excluir
         btn_apagar.setOnAction(event -> {
             System.out.println("Apagar " + pessoa.getNome());
             if (exibirAlertaConfirmarApagar(pessoa.getNome())){
@@ -503,13 +454,10 @@ public class PrincipalEquipeController {
                 membroEquipe.removerPessoaDasTurmas(pessoa);
             }
         });
-        // Adicionar todos os componentes ao Pane
         panePessoa.getChildren().addAll(labelNome,btn_apagar,btn_verPessoa, labelTipo);
 
-        // Adicionar o Pane ao HBox
         blocoPessoa.getChildren().add(panePessoa);
 
-        // Adicionar o HBox ao VBox existente (activitiesVBox)
         VBoxListaDePessoas.getChildren().add(blocoPessoa);
     }
 

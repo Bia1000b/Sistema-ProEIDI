@@ -24,10 +24,6 @@ public abstract class Pessoa implements Serializable{
         return faltas;
     }
 
-    public void setFaltas(Vector<LocalDate> faltas) {
-        this.faltas = faltas;
-    }
-
     public void setNumeroCelular(String numeroCelular) {
         this.numeroCelular = numeroCelular;
     }
