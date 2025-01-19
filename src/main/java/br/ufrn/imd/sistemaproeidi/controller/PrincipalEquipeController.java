@@ -454,6 +454,7 @@ public class PrincipalEquipeController {
 
         // Ação do botão de excluir
         btn_apagar.setOnAction(event -> {
+            System.out.println("botão apagar pressionado para " + pessoa.getNome());
             if (exibirAlertaConfirmarApagar(pessoa.getNome())){
                 // Remover do VBox
                 VBoxListaDePessoas.getChildren().remove(blocoPessoa);
