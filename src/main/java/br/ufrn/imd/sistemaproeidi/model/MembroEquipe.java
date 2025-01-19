@@ -238,28 +238,28 @@ public class MembroEquipe extends Pessoa implements Serializable {
     }
 
     public void removerPessoaDasTurmas(Pessoa pessoa){
-            if(pessoa instanceof Aluno){
-                Aluno aluno = (Aluno) pessoa;
-                String codigoTurma = aluno.getCodigoTurma();
-                for(Turma turma : banco.getArrayTurmas()){
-                    if(Objects.equals(codigoTurma, turma.getCodigo())){
-                        turma.getAlunos().remove(aluno);
-                    }
+        if(pessoa instanceof Aluno){
+            Aluno aluno = (Aluno) pessoa;
+            String codigoTurma = aluno.getCodigoTurma();
+            for(Turma turma : banco.getArrayTurmas()){
+                if(Objects.equals(codigoTurma, turma.getCodigo())){
+                    turma.getAlunos().remove(aluno);
                 }
-                System.out.println("Aluno removido com sucesso");
-            } else if(pessoa instanceof MembroEquipe){
-                MembroEquipe membroEquipe = (MembroEquipe) pessoa;
-
-                for(Turma turma : banco.getArrayTurmas()){
-                    for(String codigo : membroEquipe.getCodigosTurmas()){
-                        if(Objects.equals(codigo, turma.getCodigo())){
-                            turma.getEquipe().remove(membroEquipe);
-                        }
-                    }
-                }
-
-                System.out.println("Membro da equipe removido com sucesso");
             }
+            System.out.println("Aluno removido com sucesso");
+        } else if(pessoa instanceof MembroEquipe){
+            MembroEquipe membroEquipe = (MembroEquipe) pessoa;
+
+            for(Turma turma : banco.getArrayTurmas()){
+                for(String codigo : membroEquipe.getCodigosTurmas()){
+                    if(Objects.equals(codigo, turma.getCodigo())){
+                        turma.getEquipe().remove(membroEquipe);
+                    }
+                }
+            }
+
+            System.out.println("Membro da equipe removido com sucesso");
+        }
 
     }
 
@@ -268,6 +268,19 @@ public class MembroEquipe extends Pessoa implements Serializable {
         for(Aluno aluno : turma.getAlunos()){
             aluno.getFaltas().clear();
             aluno.getCursosFeitos().add(turma.getCurso());
+            aluno.setCursoAtual(Curso.NENHUM);
+        }
+    }
+
+    public void removerTurma(Turma turma){
+        banco.getArrayTurmas().remove(turma);
+        for(Aluno aluno : turma.getAlunos()){
+            Vector<Curso> cursosAluno = aluno.getCursosFeitos();
+            cursosAluno.remove(turma.getCurso());
+            aluno.setCursosFeitos(cursosAluno);
+            if(aluno.getCursoAtual() == turma.getCurso()){
+                aluno.setCursoAtual(Curso.NENHUM);
+            }
         }
     }
 }

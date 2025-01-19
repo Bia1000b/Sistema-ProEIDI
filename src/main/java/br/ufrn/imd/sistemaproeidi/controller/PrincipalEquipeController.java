@@ -297,12 +297,12 @@ public class PrincipalEquipeController {
     void adicionarBlocoTurma(Turma turma) {
         // Criação do HBox
         HBox blocoTurma = new HBox();
-        blocoTurma.setPrefSize(637, 129); // Dimensão fixa
+        blocoTurma.setPrefSize(500, 129); // Dimensão fixa
         blocoTurma.setStyle("-fx-background-color: #2F4A5F; -fx-border-radius: 10; -fx-padding: 10;");
 
         // Criação do Pane dentro do HBox para layout manual
         Pane paneTurma = new Pane();
-        paneTurma.setPrefSize(630, 130); // Mesma altura que o HBox
+        paneTurma.setPrefSize(500, 130); // Mesma altura que o HBox
 
         // Criação das Labels
         Label labelNome = new Label("NOME: " + turma.getNome());
@@ -352,7 +352,7 @@ public class PrincipalEquipeController {
             if (exibirAlertaConfirmarApagar(turma.getNome())){
                 // Remover do VBox
                 VBoxListaDeTurmas.getChildren().remove(blocoTurma);
-                turmas.remove(turma);
+                membroEquipe.removerTurma(turma);
             }
         });
 
@@ -408,12 +408,12 @@ public class PrincipalEquipeController {
     void adicionarBlocoPessoa(Pessoa pessoa) {
         // Criação do HBox
         HBox blocoPessoa = new HBox();
-        blocoPessoa.setPrefSize(637, 129); // Dimensão fixa
+        blocoPessoa.setPrefSize(500, 129); // Dimensão fixa
         blocoPessoa.setStyle("-fx-background-color: #2F4A5F; -fx-border-radius: 10; -fx-padding: 10;");
 
         // Criação do Pane dentro do HBox para layout manual
         Pane panePessoa = new Pane();
-        panePessoa.setPrefSize(630, 130); // Mesma altura que o HBox
+        panePessoa.setPrefSize(500, 130); // Mesma altura que o HBox
 
         // Criação das Labels
         Label labelNome = new Label("NOME: " + pessoa.getNome());
@@ -454,7 +454,7 @@ public class PrincipalEquipeController {
 
         // Ação do botão de excluir
         btn_apagar.setOnAction(event -> {
-            System.out.println("botão apagar pressionado para " + pessoa.getNome());
+            System.out.println("Apagar " + pessoa.getNome());
             if (exibirAlertaConfirmarApagar(pessoa.getNome())){
                 // Remover do VBox
                 VBoxListaDePessoas.getChildren().remove(blocoPessoa);
