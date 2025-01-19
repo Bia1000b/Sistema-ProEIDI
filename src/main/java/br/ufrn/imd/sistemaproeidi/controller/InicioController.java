@@ -23,12 +23,12 @@ public class InicioController {
 
     @FXML
     public void initialize() {
+        //Gerenciador.criarMembroPadrao();
         System.out.println("Tela inicial carregada!");
         CPFusuario.setText("");
     }
 
     public void processarCPF(){
-        Gerenciador.criarMembroPadrao();
         String cpf = InputUtils.validarCPF(CPFusuario.getText());
         System.out.println("CPF digitado: " + cpf);
 

@@ -49,13 +49,11 @@ public class MembroEquipe extends Pessoa implements Serializable {
     }
 
     public boolean matricularAluno(String nome, String cpf, Genero genero, LocalDate dataNascimento, String numeroCelular, Escolaridade escolaridade, String obsSaude, boolean temInternet, boolean temComputador, boolean temSmartphone, SistemaOperacional SO, Turma turma) {
-       
         if (Period.between(dataNascimento, LocalDate.now()).getYears() < 60) {
             System.out.println("É necessário ser idoso para participar do projeto.");
             return false;
         }
 
-        // Busca o aluno no sistema pelo CPF
         Aluno alunoExistente = null;
         for (Pessoa pessoa : banco.getArrayPessoas()) {
             if (pessoa instanceof Aluno && pessoa.getCPF().equals(cpf)) {
@@ -88,7 +86,6 @@ public class MembroEquipe extends Pessoa implements Serializable {
             System.out.println("Novo aluno matriculado com sucesso!");
         }
 
-        // Adiciona o aluno à turma
         if (Objects.equals(alunoExistente.getCodigoTurma(), turma.getCodigo())) {
             System.out.println("Esse aluno ja está nessa turma!");
 
