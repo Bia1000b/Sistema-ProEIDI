@@ -84,8 +84,10 @@ public class ChamadaController {
         checkBoxPresenca.setLayoutX(500);
         checkBoxPresenca.setLayoutY(15);
         checkBoxPresenca.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
+//        // Marcar o CheckBox por padrão
+//        checkBoxPresenca.setSelected(true);
 
-        presenca.put(pessoa, true);
+        presenca.put(pessoa, false);
 
         // Adicionar ação ao CheckBox
         checkBoxPresenca.setOnAction(event -> {

@@ -29,3 +29,20 @@ projeto decidimos resumir da seguinte maneira:
 - Model: Marina
 - Interfaces: Bianca
 - Controllers : Marina + Bianca
+
+
+
+fazer:
+
+- [ ] Chamada
+- [x] VerAluno
+- [ ] Apagar
+
+
+
+
+
+
+
+
+sdsadd
