@@ -178,15 +178,16 @@ public class MembroEquipe extends Pessoa implements Serializable {
         turma.setEquipe(membros);
     }
 
-    public void cadastrarTurma(String nome, Curso curso, Horario horario, Integer numeroVagas, LocalDate dataInicio, LocalDate dataTermino){
+    public boolean cadastrarTurma(String nome, Curso curso, Horario horario, Integer numeroVagas, LocalDate dataInicio, LocalDate dataTermino){
         Turma turma = new Turma(nome, curso, horario, numeroVagas, dataInicio, dataTermino);
 
         if(banco.getArrayTurmas().add(turma)){
             System.out.println("Turma cadastrada com sucesso!");
         }else{
             System.out.println("Erro ao cadastrar turma!");
+            return false;
         }
-
+        return true;
     }
 
     public void chamadaAlunos(Turma turma){

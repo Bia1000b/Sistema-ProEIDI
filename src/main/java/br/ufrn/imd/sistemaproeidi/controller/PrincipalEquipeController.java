@@ -183,23 +183,64 @@ public class PrincipalEquipeController {
     }
 
 
+//    @FXML
+//    public void clicarBtnCadastrarTurmaFinal(ActionEvent event) {
+//        System.out.println("Botão CADASTRAR TURMA clicado.");
+//        String nome = cadastroTurmaNome.getText();
+//        Horario horario = (Horario) cadastroTurmaHorario.getValue();
+//        Curso curso = (Curso) cadastroTurmaCurso.getValue();
+//        Integer vagas = Integer.parseInt(cadastroTurmaVagas.getText());
+//        LocalDate dataInicio = cadastroTurmaDataInicio.getValue();
+//        LocalDate dataTermino = cadastroTurmaDataTermino.getValue();
+//
+//
+//        membroEquipe.cadastrarTurma(nome, curso, horario, vagas, dataInicio, dataTermino);
+//        LimparCamposTurma();
+//        exibirAlertaCadastroConcluido();
+//        carregarTurmas();
+//        cadastroAlunoTurmaDisponiveis.setItems(FXCollections.observableArrayList(turmas));
+//    }
+
     @FXML
     public void clicarBtnCadastrarTurmaFinal(ActionEvent event) {
         System.out.println("Botão CADASTRAR TURMA clicado.");
-        String nome = cadastroTurmaNome.getText();
-        Horario horario = (Horario) cadastroTurmaHorario.getValue();
-        Curso curso = (Curso) cadastroTurmaCurso.getValue();
-        Integer vagas = Integer.parseInt(cadastroTurmaVagas.getText());
-        LocalDate dataInicio = cadastroTurmaDataInicio.getValue();
-        LocalDate dataTermino = cadastroTurmaDataTermino.getValue();
+        try{
+            String nome = cadastroTurmaNome.getText();
+            Horario horario = (Horario) cadastroTurmaHorario.getValue();
+            Curso curso = (Curso) cadastroTurmaCurso.getValue();
+            Integer vagas = Integer.parseInt(cadastroTurmaVagas.getText());
+            LocalDate dataInicio = cadastroTurmaDataInicio.getValue();
+            LocalDate dataTermino = cadastroTurmaDataTermino.getValue();
 
+            if (nome == null ||
+                horario == null ||
+                curso == null ||
+                vagas == null || vagas <= 0 ||
+                dataInicio == null ||
+                dataTermino == null
+            ) {
+                exibirAlerta("Cadastro impedido", "Por favor, preencha os campos corretamente.");
+                return;
+            }
 
-        membroEquipe.cadastrarTurma(nome, curso, horario, vagas, dataInicio, dataTermino);
-        LimparCamposTurma();
-        exibirAlertaCadastroConcluido();
-        carregarTurmas();
-        cadastroAlunoTurmaDisponiveis.setItems(FXCollections.observableArrayList(turmas));
+            if (dataInicio.isAfter(dataTermino)) {
+                exibirAlerta("Data inválida", "A data de início não pode ser posterior à data de término.");
+                return;
+            }
+
+            if(membroEquipe.cadastrarTurma(nome, curso, horario, vagas, dataInicio, dataTermino)){
+                LimparCamposTurma();
+                exibirAlertaCadastroConcluido();
+                carregarTurmas();
+                cadastroAlunoTurmaDisponiveis.setItems(FXCollections.observableArrayList(turmas));
+            }else {
+                exibirAlerta("Cadastro impedido", "Verifique os dados digitados.");
+            }
+        } catch (Exception e) {
+            exibirAlerta("Erro inesperado", "Ocorreu um erro ao tentar cadastrar a turma. Por favor, tente novamente.");
+        }
     }
+
     @FXML
     public void LimparCamposTurma() {
         cadastroTurmaNome.clear();
