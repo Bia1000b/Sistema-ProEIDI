@@ -5,21 +5,18 @@ Sistema para gestão do Projeto de Extensao de Inclusao Digital para pessoa Idos
 ## Índice
 
 - [Video](#Video)
-- [Diagrama de Classes](#Diagrama-de-classes)
-- [Diagrama de Casos De Uso](#Diagrama-de-casos-de-uso)
+- [Diagramas](#Diagrama de Classes)
 - [Contribuição](#contribuição)
 
 ## Video
 
-[Assista ao vídeo]() para entender o funcionamento do projeto.
+[Assista ao vídeo](https://drive.google.com/file/d/1rWMyWZpXEpQnKztuJPfZ3arI484ibX1i/view?usp=sharing) para entender o funcionamento do projeto.
 
 ## Diagrama de Classes
-
-[Diagrama de Classes]() do projeto, solicitado pelo professor.
+![Diagrama de Classes](diagrams/ClassesProedi.png)
 
 ## Diagrama de Casos De Uso
-
-[Diagrama de Casos De Uso]() do projeto, solicitado pelo professor.
+![Diagrama de Casos De Uso](diagrams/CasosDeUsoProeidi.png)
 
 ## Contribuição
 

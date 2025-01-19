@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 
 public class PrincipalAlunoController {
-    @FXML private Label CursoAtual, HorarioTurma, NomeProfessor1, NomeProfessor2, NumeroDeTelefone, SO, nomeTurma, nomeUsuario, totalFaltas;
+    @FXML private Label CursoAtual, HorarioTurma, NomeProfessor1, NomeProfessor2, NumeroDeTelefone, SO, nomeTurma, nomeUsuario, totalFaltas, DataTermino, DataInicio;
     @FXML private TabPane tabPane;
     @FXML private ListView<String> ListViewCursos, listViewFaltas, listViewAlunosTurma;
     @FXML private Tab perfilTab, turmaTab;
@@ -58,6 +58,8 @@ public class PrincipalAlunoController {
             NumeroDeTelefone.setText(aluno.getNumeroCelular());
             SO.setText(aluno.getSistemaOperacional().toString());
             nomeTurma.setText(turmaAluno.getNome());
+            DataTermino.setText(InputUtils.formatLocalDate(turmaAluno.getDataTermino()));
+            DataInicio.setText(InputUtils.formatLocalDate(turmaAluno.getDataInicio()));
 
             System.out.println("Dados do aluno carregados: " + aluno.getNome());
         }

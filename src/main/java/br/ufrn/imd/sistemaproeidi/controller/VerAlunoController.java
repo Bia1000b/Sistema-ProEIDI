@@ -50,8 +50,16 @@ public class VerAlunoController {
             Escolaridade.setText(aluno.getEscolaridade().toString());
             ObsSaude.setText(aluno.getObsSaude());
             SO.setText(aluno.getSistemaOperacional().toString());
-            TurmaAtual.setText(turmaAluno.getNome());
-            CursoAtual.setText(InputUtils.formatEnum(aluno.getCursoAtual().toString()));
+            if(turmaAluno != null){
+                TurmaAtual.setText(turmaAluno.getNome());
+            }else{
+                TurmaAtual.setText("--");
+            }
+            if(aluno.getCursoAtual() != null){
+                CursoAtual.setText(InputUtils.formatEnum(aluno.getCursoAtual().toString()));
+            }else{
+                CursoAtual.setText("--");
+            }
 
             Internet.setText(aluno.isTemInternet() ? "Sim" : "Não");
             Computador.setText(aluno.isTemComputador() ? "Sim" : "Não");

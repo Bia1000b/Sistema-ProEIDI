@@ -182,6 +182,9 @@ public class MembroEquipe extends Pessoa implements Serializable {
             for(Turma turma : banco.getArrayTurmas()){
                 if(Objects.equals(codigoTurma, turma.getCodigo())){
                     turma.getAlunos().remove(aluno);
+                    int vagas = turma.getNumeroVagas();
+                    vagas++;
+                    turma.setNumeroVagas(vagas);
                 }
             }
             System.out.println("Aluno removido com sucesso");
