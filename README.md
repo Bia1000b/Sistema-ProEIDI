@@ -10,7 +10,7 @@ Sistema para gestão do Projeto de Extensao de Inclusao Digital para pessoa Idos
 
 ## Video
 
-[Assista ao vídeo](https://drive.google.com/file/d/1rWMyWZpXEpQnKztuJPfZ3arI484ibX1i/view?usp=sharing) para entender o funcionamento do projeto.
+[Assista ao vídeo](https://drive.google.com/file/d/1x2mwhO2-hTOzwcdMPXVNWPEy5he2O8Yu/view?usp=sharing) para entender o funcionamento do projeto.
 
 ## Diagrama de Classes
 ![Diagrama de Classes](diagrams/ClassesProedi.png)
