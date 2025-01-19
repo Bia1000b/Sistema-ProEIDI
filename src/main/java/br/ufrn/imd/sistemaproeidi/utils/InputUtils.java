@@ -1,6 +1,7 @@
 package br.ufrn.imd.sistemaproeidi.utils;
 
 import br.ufrn.imd.sistemaproeidi.model.enums.Genero;
+import br.ufrn.imd.sistemaproeidi.model.enums.Horario;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -57,6 +58,14 @@ public class InputUtils {
         }
 
         return cpf;
+    }
+
+    public static String validarHorario(Horario horario){
+        if(horario == Horario.OITO_E_TRINTA){
+            return "8h30";
+        }else{
+            return "10h30";
+        }
     }
 
     public static String validarTelefone(String numero){

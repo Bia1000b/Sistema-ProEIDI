@@ -83,10 +83,6 @@ public class Turma implements Serializable {
         this.curso = curso;
     }
 
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-
     public Horario getHorario() {
         return horario;
     }
@@ -95,16 +91,8 @@ public class Turma implements Serializable {
         return DataInicio;
     }
 
-    public void setDataInicio(LocalDate dataInicio) {
-        DataInicio = dataInicio;
-    }
-
     public LocalDate getDataTermino() {
         return DataTermino;
-    }
-
-    public void setDataTermino(LocalDate dataTermino) {
-        DataTermino = dataTermino;
     }
 
     public Boolean getConcluido() {

@@ -183,24 +183,6 @@ public class PrincipalEquipeController {
     }
 
 
-//    @FXML
-//    public void clicarBtnCadastrarTurmaFinal(ActionEvent event) {
-//        System.out.println("Botão CADASTRAR TURMA clicado.");
-//        String nome = cadastroTurmaNome.getText();
-//        Horario horario = (Horario) cadastroTurmaHorario.getValue();
-//        Curso curso = (Curso) cadastroTurmaCurso.getValue();
-//        Integer vagas = Integer.parseInt(cadastroTurmaVagas.getText());
-//        LocalDate dataInicio = cadastroTurmaDataInicio.getValue();
-//        LocalDate dataTermino = cadastroTurmaDataTermino.getValue();
-//
-//
-//        membroEquipe.cadastrarTurma(nome, curso, horario, vagas, dataInicio, dataTermino);
-//        LimparCamposTurma();
-//        exibirAlertaCadastroConcluido();
-//        carregarTurmas();
-//        cadastroAlunoTurmaDisponiveis.setItems(FXCollections.observableArrayList(turmas));
-//    }
-
     @FXML
     public void clicarBtnCadastrarTurmaFinal(ActionEvent event) {
         System.out.println("Botão CADASTRAR TURMA clicado.");
@@ -352,7 +334,7 @@ public class PrincipalEquipeController {
         labelNome.setPrefSize(500, 30);
         labelNome.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
 
-        Label horarioLabel = new Label("HORARIO: " + turma.getHorario());
+        Label horarioLabel = new Label("HORARIO: " + InputUtils.validarHorario(turma.getHorario()));
         horarioLabel.setLayoutX(14);
         horarioLabel.setLayoutY(44);
         horarioLabel.setPrefSize(500, 30);

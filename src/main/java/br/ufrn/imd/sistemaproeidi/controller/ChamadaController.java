@@ -128,11 +128,19 @@ public class ChamadaController {
     }
 
     private void registrarFaltas() {
+        LocalDate hoje = LocalDate.now();
+
         for (Map.Entry<Pessoa, Boolean> entry : presenca.entrySet()) {
             Pessoa pessoa = entry.getKey();
             Boolean estaPresente = entry.getValue();
+
             if (!estaPresente) {
-                pessoa.getFaltas().add(LocalDate.now());
+                if (!pessoa.getFaltas().contains(hoje)) {
+                    pessoa.getFaltas().add(hoje);
+                    System.out.println("Falta registrada para: " + pessoa.getNome());
+                } else {
+                    System.out.println("Falta já registrada para hoje: " + pessoa.getNome());
+                }
             }
 
             System.out.println("Pessoa: " + pessoa.getNome() + " - Presença: " + estaPresente);
