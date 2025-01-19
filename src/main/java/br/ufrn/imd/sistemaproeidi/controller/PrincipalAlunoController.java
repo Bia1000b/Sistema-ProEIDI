@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 
 public class PrincipalAlunoController {
-    @FXML private Label CursoAtual, Faltas, HorarioTurma, NomeProfessor1, NomeProfessor2, NumeroDeTelefone, SO, nomeTurma, nomeUsuario, totalFaltas;
+    @FXML private Label CursoAtual, HorarioTurma, NomeProfessor1, NomeProfessor2, NumeroDeTelefone, SO, nomeTurma, nomeUsuario, totalFaltas;
     @FXML private TabPane tabPane;
     @FXML private ListView<String> ListViewCursos, listViewFaltas, listViewAlunosTurma;
     @FXML private Tab perfilTab, turmaTab;
@@ -58,8 +58,6 @@ public class PrincipalAlunoController {
             NumeroDeTelefone.setText(aluno.getNumeroCelular());
             SO.setText(aluno.getSistemaOperacional().toString());
             nomeTurma.setText(turmaAluno.getNome());
-//            totalFaltas.setText(Integer.toString(aluno.getFaltas().size()));
-//            Faltas.setText(String.valueOf(aluno.getFaltas().size()));
 
             System.out.println("Dados do aluno carregados: " + aluno.getNome());
         }
@@ -77,15 +75,20 @@ public class PrincipalAlunoController {
         }
     }
 
-    private void carregarFaltas(){
+    private void carregarFaltas() {
         if (aluno.getFaltas() != null) {
             ObservableList<String> faltas = FXCollections.observableArrayList();
-
+            if (totalFaltas != null) {
+                totalFaltas.setText(Integer.toString(aluno.getFaltas().size()));
+            }
             for (LocalDate falta : aluno.getFaltas()) {
                 faltas.add(InputUtils.formatLocalDate(falta));
             }
-
             listViewFaltas.setItems(faltas);
+        } else {
+            if (totalFaltas != null) {
+                totalFaltas.setText("0");
+            }
         }
     }
 

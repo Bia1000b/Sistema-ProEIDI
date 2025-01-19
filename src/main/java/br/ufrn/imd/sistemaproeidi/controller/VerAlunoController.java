@@ -18,7 +18,7 @@ public class VerAlunoController {
     private Turma turmaAluno;
 
     @FXML
-    private Label CPF, Computador, Smartphone, DataDeNascimento, CursoAtual, Escolaridade, Faltas, Genero, Internet, NumeroDeTelefone, ObsSaude, SO, TurmaAtual, nomeUsuario, totalFaltas;
+    private Label CPF, Computador, Smartphone, DataDeNascimento, CursoAtual, Escolaridade, Genero, Internet, NumeroDeTelefone, ObsSaude, SO, TurmaAtual, nomeUsuario, totalFaltas;
 
     @FXML
     private ListView<String> ListViewCursos, listViewFaltas;
@@ -30,9 +30,9 @@ public class VerAlunoController {
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
         aluno.detalharAluno(); //OPCIONAL
-        carregarDadosAluno();
         carregarCursosFeitos();
         carregarFaltas();
+        carregarDadosAluno();
     }
 
     public void setTurmaAluno(){
@@ -52,13 +52,10 @@ public class VerAlunoController {
             SO.setText(aluno.getSistemaOperacional().toString());
             TurmaAtual.setText(turmaAluno.getNome());
             CursoAtual.setText(InputUtils.formatEnum(aluno.getCursoAtual().toString()));
-           // Faltas.setText(String.valueOf(aluno.getFaltas().size()));
 
             Internet.setText(aluno.isTemInternet() ? "Sim" : "Não");
             Computador.setText(aluno.isTemComputador() ? "Sim" : "Não");
             Smartphone.setText(aluno.isTemSmartphone() ? "Sim" : "Não");
-
-            //totalFaltas.setText(Integer.toString(aluno.getFaltas().size()));
 
             System.out.println("Dados do aluno carregados: " + aluno.getNome());
         } else {
@@ -79,15 +76,20 @@ public class VerAlunoController {
         }
     }
 
-    private void carregarFaltas(){
+    private void carregarFaltas() {
         if (aluno.getFaltas() != null) {
             ObservableList<String> faltas = FXCollections.observableArrayList();
-
+            if (totalFaltas != null) {
+                totalFaltas.setText(Integer.toString(aluno.getFaltas().size()));
+            }
             for (LocalDate falta : aluno.getFaltas()) {
                 faltas.add(InputUtils.formatLocalDate(falta));
             }
-
             listViewFaltas.setItems(faltas);
+        } else {
+            if (totalFaltas != null) {
+                totalFaltas.setText("0");
+            }
         }
     }
 }
