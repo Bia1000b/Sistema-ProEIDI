@@ -151,8 +151,4 @@ public class Turma implements Serializable {
         return nome;
     }
 
-    private void concluir(){
-        //se hoje == dataTermino
-        // this.concluido = true;
-    }
 }

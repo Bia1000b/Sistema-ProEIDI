@@ -17,10 +17,6 @@ public class MembroEquipe extends Pessoa implements Serializable {
     private Vector<String> codigosTurmas;
     private static BancoDAO banco = BancoDAO.getInstance();
 
-    public BancoDAO getBanco() {
-        return banco;
-    }
-
     public MembroEquipe(String nome, String CPF, Genero genero, String numeroCelular, String matricula, String cursoUFRN, String email, Cargo cargo) {
         super(nome, CPF, genero, numeroCelular);
         this.matricula = matricula;
@@ -187,42 +183,6 @@ public class MembroEquipe extends Pessoa implements Serializable {
             System.out.println("Erro ao cadastrar turma!");
         }
 
-    }
-
-    public void chamadaAlunos(Turma turma){
-        Boolean presente = true;
-        for(Aluno aluno : turma.getAlunos()){
-            presente = InputUtils.lerBool("Presente? ");
-            if(!presente){
-                adicionarFalta(aluno);
-            }
-        }
-    }
-
-    public void adicionarFalta(Aluno aluno){
-        LocalDate dataAtual = LocalDate.now();
-        Vector<LocalDate> faltas = aluno.getFaltas();
-        faltas.add(dataAtual);
-        aluno.setFaltas(faltas);
-    }
-
-    private void chamadaMembrosEquipe(Turma turma){
-        boolean presente = true;
-        LocalDate dataAtual = LocalDate.now();
-        for (MembroEquipe membroEquipe : turma.getEquipe()) {
-            presente = InputUtils.lerBool("Presente? ");
-            if (!presente) {
-                Vector<LocalDate> faltas = membroEquipe.getFaltas();
-                faltas.add(dataAtual);
-                membroEquipe.setFaltas(faltas);
-            }
-        }
-    }
-
-    public void listarTurmas(){
-        for (Turma turma : banco.getArrayTurmas()) {
-            turma.detalharTurma();
-        }
     }
 
     public void detalharMembroEquipe() {

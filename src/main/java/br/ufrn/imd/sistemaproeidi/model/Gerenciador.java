@@ -3,10 +3,8 @@ package br.ufrn.imd.sistemaproeidi.model;
 import br.ufrn.imd.sistemaproeidi.model.enums.*;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Vector;
 
 public class Gerenciador {
 
