@@ -52,13 +52,13 @@ public class VerAlunoController {
             SO.setText(aluno.getSistemaOperacional().toString());
             TurmaAtual.setText(turmaAluno.getNome());
             CursoAtual.setText(InputUtils.formatEnum(aluno.getCursoAtual().toString()));
-            Faltas.setText(String.valueOf(aluno.getFaltas().size()));
+           // Faltas.setText(String.valueOf(aluno.getFaltas().size()));
 
             Internet.setText(aluno.isTemInternet() ? "Sim" : "Não");
             Computador.setText(aluno.isTemComputador() ? "Sim" : "Não");
             Smartphone.setText(aluno.isTemSmartphone() ? "Sim" : "Não");
 
-            totalFaltas.setText(Integer.toString(aluno.getFaltas().size()));
+            //totalFaltas.setText(Integer.toString(aluno.getFaltas().size()));
 
             System.out.println("Dados do aluno carregados: " + aluno.getNome());
         } else {

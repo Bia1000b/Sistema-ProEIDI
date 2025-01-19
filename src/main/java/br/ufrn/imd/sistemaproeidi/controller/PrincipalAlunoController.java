@@ -58,7 +58,8 @@ public class PrincipalAlunoController {
             NumeroDeTelefone.setText(aluno.getNumeroCelular());
             SO.setText(aluno.getSistemaOperacional().toString());
             nomeTurma.setText(turmaAluno.getNome());
-            totalFaltas.setText(Integer.toString(aluno.getFaltas().size()));
+//            totalFaltas.setText(Integer.toString(aluno.getFaltas().size()));
+//            Faltas.setText(String.valueOf(aluno.getFaltas().size()));
 
             System.out.println("Dados do aluno carregados: " + aluno.getNome());
         }
