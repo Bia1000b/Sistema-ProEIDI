@@ -39,7 +39,6 @@ public class Aluno extends Pessoa {
         this.codigoTurma = codigoTurma;
     }
 
-
     public Vector<Curso> getCursosFeitos() {
         if (CursosFeitos == null) {
             CursosFeitos = new Vector<>(); // Inicializa o vetor caso seja null

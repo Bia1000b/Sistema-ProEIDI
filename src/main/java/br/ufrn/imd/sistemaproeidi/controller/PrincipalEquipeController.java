@@ -132,7 +132,7 @@ public class PrincipalEquipeController {
                 exibirAlertaCadastroConcluido();
                 carregarPessoas();
             } else {
-                exibirAlerta("Cadastro impedido", "Verifique a idade do aluno.");
+                exibirAlerta("Cadastro impedido", "Verifique a idade do aluno e o número de vagas da turma.");
             }
 
         } catch (Exception e) {

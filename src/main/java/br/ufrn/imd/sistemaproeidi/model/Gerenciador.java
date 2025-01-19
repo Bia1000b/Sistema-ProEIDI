@@ -27,7 +27,6 @@ public class Gerenciador {
             System.out.println("Erro ao salvar os dados: " + e.getMessage());
         }
     }
-
     @SuppressWarnings("unchecked")
     public static void carregarBinario() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARQUIVO_BINARIO))) {

@@ -121,6 +121,7 @@ public class MembroEquipe extends Pessoa implements Serializable {
                 System.out.println("Aluno " + alunoExistente.getNome() + " adicionado à turma " + turma.getNome() + " com sucesso!");
             }else{
                 System.out.println("Erro ao adicionar aluno!");
+                return false;
             }
 
         }
