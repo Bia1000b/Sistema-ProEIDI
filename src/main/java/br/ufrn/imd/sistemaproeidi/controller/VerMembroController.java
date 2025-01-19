@@ -18,7 +18,7 @@ public class VerMembroController {
 
     @FXML private ListView<String> listViewFaltas, listViewTurmas;
     @FXML private ChoiceBox<Turma> opcoesTurmas;
-    @FXML private Label cursoUFRN, email, faltas, matricula, nomeUsuario, numeroDeTelefone, CPF, Genero;
+    @FXML private Label cursoUFRN, email, totalFaltas, matricula, nomeUsuario, numeroDeTelefone, CPF, Genero;
 
     private ArrayList<Turma> turmas = BancoDAO.getInstance().getArrayTurmas();
 
@@ -41,7 +41,6 @@ public class VerMembroController {
             Genero.setText(membroEquipe.getGenero().toString());
             cursoUFRN.setText(membroEquipe.getCursoUFRN());
             email.setText(membroEquipe.getEmail());
-            faltas.setText(Integer.toString(membroEquipe.getFaltas().size()));
             matricula.setText(membroEquipe.getMatricula());
             numeroDeTelefone.setText(membroEquipe.getNumeroCelular());
 
@@ -53,13 +52,20 @@ public class VerMembroController {
 
     private void carregarFaltas(){
         if (membroEquipe.getFaltas() != null) {
-            ObservableList<String> faltas = FXCollections.observableArrayList();
-
-            for (LocalDate falta : membroEquipe.getFaltas()) {
-                faltas.add(InputUtils.formatLocalDate(falta));
+            ObservableList<String> listaFaltas = FXCollections.observableArrayList();
+            if (totalFaltas != null) {
+                totalFaltas.setText(Integer.toString(membroEquipe.getFaltas().size()));
             }
 
-            listViewFaltas.setItems(faltas);
+            for (LocalDate falta : membroEquipe.getFaltas()) {
+                listaFaltas.add(InputUtils.formatLocalDate(falta));
+            }
+
+            listViewFaltas.setItems(listaFaltas);
+        } else {
+            if (totalFaltas != null) {
+                totalFaltas.setText("0");
+            }
         }
     }
 
