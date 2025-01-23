@@ -25,7 +25,6 @@ public class InicioController {
 
     public void processarCPF(){
         String cpf = InputUtils.validarCPF(CPFusuario.getText());
-        System.out.println("CPF digitado: " + cpf);
 
         if(Gerenciador.buscarPessoa(cpf) == null){
             exibirAlerta();

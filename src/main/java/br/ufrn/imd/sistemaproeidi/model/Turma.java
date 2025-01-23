@@ -103,37 +103,6 @@ public class Turma implements Serializable {
         this.concluido = concluido;
     }
 
-    public void detalharTurma() {
-        System.out.println("========================= Detalhes da Turma ========================= ");
-        System.out.println("Nome: " + nome);
-        System.out.println("Curso: " + curso);
-        System.out.println("Horário: " + horario);
-        System.out.println("Número de Vagas: " + numeroVagas);
-        System.out.println("Concluído: " + (concluido ? "Sim" : "Não"));
-        System.out.println("Data de Início: " + (DataInicio != null ? DataInicio.toString() : "Não definida"));
-        System.out.println("Data de Término: " + (DataTermino != null ? DataTermino.toString() : "Não definida"));
-
-        System.out.println("\n--------- Alunos Matriculados ---------");
-        if (alunos.isEmpty()) {
-            System.out.println("Nenhum aluno matriculado.");
-        } else {
-            for (Aluno aluno : alunos) {
-                System.out.println("- " + aluno.getNome() + " (" + aluno.getCPF() + ")");
-            }
-        }
-
-        System.out.println("\n--------- Membros da Equipe ---------");
-        if (equipe.isEmpty()) {
-            System.out.println("Nenhum membro da equipe associado.");
-        } else {
-            for (MembroEquipe membro : equipe) {
-                System.out.println("- " + membro.getNome() + " (" + membro.getCargo() + ")");
-            }
-        }
-
-        System.out.println("==================================================================== ");
-    }
-
     @Override
     public String toString() {
         return nome;

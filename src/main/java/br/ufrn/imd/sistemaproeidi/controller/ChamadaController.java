@@ -127,13 +127,8 @@ public class ChamadaController {
             if (!estaPresente) {
                 if (!pessoa.getFaltas().contains(hoje)) {
                     pessoa.getFaltas().add(hoje);
-                    System.out.println("Falta registrada para: " + pessoa.getNome());
-                } else {
-                    System.out.println("Falta já registrada para hoje: " + pessoa.getNome());
                 }
             }
-
-            System.out.println("Pessoa: " + pessoa.getNome() + " - Presença: " + estaPresente);
         }
     }
 }

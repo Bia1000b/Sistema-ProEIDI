@@ -29,7 +29,6 @@ public class VerAlunoController {
 
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
-        aluno.detalharAluno();
         carregarCursosFeitos();
         carregarFaltas();
         carregarDadosAluno();

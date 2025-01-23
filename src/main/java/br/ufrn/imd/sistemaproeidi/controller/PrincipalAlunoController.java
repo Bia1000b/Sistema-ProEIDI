@@ -31,7 +31,6 @@ public class PrincipalAlunoController {
 
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
-        aluno.detalharAluno(); //OPCIONAL
         carregarDadosAluno();
         carregarCursosFeitos();
         carregarFaltas();

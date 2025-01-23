@@ -115,42 +115,35 @@ public class PrincipalEquipeController {
     @FXML
     void clicarBtnPerfil(ActionEvent event) {
         tabPane.getSelectionModel().select(perfilTab);
-        System.out.println("Botão PERFIL clicado.");
     }
 
     @FXML
     void clicarBtnTurmas(ActionEvent event) {
         tabPane.getSelectionModel().select(turmasTab);
-        System.out.println("Botão TURMAS clicado.");
     }
 
     @FXML
     void clicarBtnCadastrarAluno(ActionEvent event) {
         tabPane.getSelectionModel().select(cadastrarAlunoTab);
-        System.out.println("Botão CADASTRAR ALUNO clicado.");
     }
 
     @FXML
     void clicarBtnCadastrarEquipe(ActionEvent event) {
         tabPane.getSelectionModel().select(cadastrarEquipeTab);
-        System.out.println("Botão CADASTRAR EQUIPE clicado.");
     }
 
     @FXML
     void clicarBtnPessoas(ActionEvent event) {
         tabPane.getSelectionModel().select(pessoasTab);
-        System.out.println("Botão PESSOAS clicado.");
     }
 
     @FXML
     void clicarBtnTabCadastrarTurma(ActionEvent event) {
         tabPane.getSelectionModel().select(cadastrarTurmaTab);
-        System.out.println("Botão CADASTRAR TURMA TAB clicado.");
     }
 
     @FXML
     public void clicarBtnCadastrarAlunoFinal(ActionEvent event) {
-        System.out.println("Botão CADASTRAR ALUNO clicado.");
 
         try {
             String nome = InputUtils.validarNome(cadastroAlunoNome.getText());
@@ -199,7 +192,6 @@ public class PrincipalEquipeController {
 
     @FXML
     public void clicarBtnCadastrarEquipeFinal(ActionEvent event) {
-        System.out.println("Botão CADASTRAR EQUIPE clicado.");
 
         try {
             String nome = InputUtils.validarNome(cadastroEquipeNome.getText());
@@ -237,7 +229,6 @@ public class PrincipalEquipeController {
 
     @FXML
     public void clicarBtnCadastrarTurmaFinal(ActionEvent event) {
-        System.out.println("Botão CADASTRAR TURMA clicado.");
         try{
             String nome = cadastroTurmaNome.getText();
             Horario horario = (Horario) cadastroTurmaHorario.getValue();

@@ -2,6 +2,7 @@ module org.example.sistemaproeidi {
     requires javafx.controls;
     requires javafx.fxml;
     requires jdk.incubator.vector;
+    requires java.logging;
 
 
     opens br.ufrn.imd.sistemaproeidi to javafx.fxml;
