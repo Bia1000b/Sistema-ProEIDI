@@ -6,6 +6,7 @@ import br.ufrn.imd.sistemaproeidi.model.enums.*;
 import br.ufrn.imd.sistemaproeidi.utils.InputUtils;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,7 +26,9 @@ public class PrincipalEquipeController {
 
     @FXML private Tab perfilTab, turmasTab,cadastrarAlunoTab,cadastrarEquipeTab,cadastrarTurmaTab, pessoasTab;
     @FXML private TabPane tabPane;
+
     @FXML private VBox VBoxListaDeTurmas, VBoxListaDePessoas;
+
     @FXML private TextField cadastroAlunoCPF, cadastroAlunoNome, cadastroAlunoObsSaude, cadastroAlunoTelefone, cadastroEquipeCPF, cadastroEquipeCursoUFRN, cadastroEquipeEmail, cadastroEquipeMatricula, cadastroEquipeNome, cadastroEquipeTelefone;
     @FXML private TextField cadastroTurmaNome, cadastroTurmaVagas;
     @FXML private DatePicker cadastroAlunoDataNascimento, cadastroTurmaDataInicio, cadastroTurmaDataTermino;
@@ -53,25 +56,11 @@ public class PrincipalEquipeController {
     @FXML
     public void initialize() {
         System.out.println("Tela Principal Equipe carregada!");
-        cadastroAlunoGenero.setItems(FXCollections.observableArrayList(Genero.values()));
-        cadastroEquipeGenero.setItems(FXCollections.observableArrayList(Genero.values()));
-        cadastroAlunoSO.setItems(FXCollections.observableArrayList(SistemaOperacional.values()));
-        cadastroAlunoEscolaridade.setItems(FXCollections.observableArrayList(Escolaridade.values()));
-        cadastroAlunoTurmaDisponiveis.setItems(FXCollections.observableArrayList(turmas));
-        cadastroEquipeCargo.setItems(FXCollections.observableArrayList(Cargo.values()));
-        cadastroTurmaCurso.setItems(FXCollections.observableArrayList(Curso.values()));
-        cadastroTurmaHorario.setItems(FXCollections.observableArrayList(Horario.values()));
-        cadastroAlunoDataNascimento.setValue(LocalDate.of(1964,06,20));
+
+        carregarChoiceBoxes();
         carregarTurmas();
         carregarPessoas();
 
-    }
-
-    private void exibirAlerta(String titulo, String mensagem) {
-        Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle(titulo);
-        alerta.setContentText(mensagem);
-        alerta.showAndWait();
     }
 
     public void setMembroEquipe(MembroEquipe membroEquipe) {
@@ -89,6 +78,81 @@ public class PrincipalEquipeController {
             matricula.setText(membroEquipe.getMatricula());
             numeroDeTelefone.setText(membroEquipe.getNumeroCelular());
         }
+    }
+
+    public void carregarChoiceBoxes(){
+        cadastroAlunoGenero.setItems(FXCollections.observableArrayList(Genero.values()));
+        cadastroEquipeGenero.setItems(FXCollections.observableArrayList(Genero.values()));
+        cadastroAlunoSO.setItems(FXCollections.observableArrayList(SistemaOperacional.values()));
+        cadastroAlunoEscolaridade.setItems(FXCollections.observableArrayList(Escolaridade.values()));
+        cadastroAlunoTurmaDisponiveis.setItems(FXCollections.observableArrayList(turmas));
+        cadastroEquipeCargo.setItems(FXCollections.observableArrayList(Cargo.values()));
+        cadastroTurmaCurso.setItems(FXCollections.observableArrayList(Curso.values()));
+        cadastroTurmaHorario.setItems(FXCollections.observableArrayList(Horario.values()));
+        cadastroAlunoDataNascimento.setValue(LocalDate.of(1964,06,20));
+    }
+
+    @FXML
+    private void carregarTurmas() {
+        VBoxListaDeTurmas.getChildren().clear();
+        try {
+            for (Turma turma : turmas) {
+
+                adicionarBlocoTurma(turma);
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao carregar turmas " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void carregarPessoas() {
+        VBoxListaDePessoas.getChildren().clear();
+        try {
+            for (Pessoa pessoa : pessoas) {
+                String nome = pessoa.getNome();
+
+                adicionarBlocoPessoa(pessoa);
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao carregar pessoas " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void clicarBtnPerfil(ActionEvent event) {
+        tabPane.getSelectionModel().select(perfilTab);
+        System.out.println("Botão PERFIL clicado.");
+    }
+
+    @FXML
+    void clicarBtnTurmas(ActionEvent event) {
+        tabPane.getSelectionModel().select(turmasTab);
+        System.out.println("Botão TURMAS clicado.");
+    }
+
+    @FXML
+    void clicarBtnCadastrarAluno(ActionEvent event) {
+        tabPane.getSelectionModel().select(cadastrarAlunoTab);
+        System.out.println("Botão CADASTRAR ALUNO clicado.");
+    }
+
+    @FXML
+    void clicarBtnCadastrarEquipe(ActionEvent event) {
+        tabPane.getSelectionModel().select(cadastrarEquipeTab);
+        System.out.println("Botão CADASTRAR EQUIPE clicado.");
+    }
+
+    @FXML
+    void clicarBtnPessoas(ActionEvent event) {
+        tabPane.getSelectionModel().select(pessoasTab);
+        System.out.println("Botão PESSOAS clicado.");
+    }
+
+    @FXML
+    void clicarBtnTabCadastrarTurma(ActionEvent event) {
+        tabPane.getSelectionModel().select(cadastrarTurmaTab);
+        System.out.println("Botão CADASTRAR TURMA TAB clicado.");
     }
 
     @FXML
@@ -138,8 +202,6 @@ public class PrincipalEquipeController {
             exibirAlerta("Erro inesperado", "Ocorreu um erro ao tentar cadastrar o aluno. Por favor, tente novamente.");
         }
     }
-
-
 
 
     @FXML
