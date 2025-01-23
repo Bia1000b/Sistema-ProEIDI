@@ -36,8 +36,8 @@ public class PrincipalEquipeController {
     @FXML private ChoiceBox<Genero> cadastroAlunoGenero, cadastroEquipeGenero;
     @FXML private ChoiceBox<SistemaOperacional> cadastroAlunoSO;
     @FXML private ChoiceBox<Escolaridade> cadastroAlunoEscolaridade;
-    @FXML private ChoiceBox<Cargo>  cadastroEquipeCargo;
-    @FXML private ChoiceBox<Turma>  cadastroAlunoTurmaDisponiveis;
+    @FXML private ChoiceBox<Cargo> cadastroEquipeCargo;
+    @FXML private ChoiceBox<Turma> cadastroAlunoTurmaDisponiveis;
     @FXML private ChoiceBox<Horario> cadastroTurmaHorario;
     @FXML private CheckBox checkAlunoComputador, checkAlunoInternet, checkAlunoSmartphone;
     @FXML private Label nomeUsuario, cursoUFRN, email, faltas, matricula, numeroDeTelefone;
@@ -47,12 +47,6 @@ public class PrincipalEquipeController {
     private ArrayList<Pessoa> pessoas = BancoDAO.getInstance().getArrayPessoas();
     private ArrayList<Turma> turmas = BancoDAO.getInstance().getArrayTurmas();
 
-    private Stage principalSceneEquipe;
-
-    public void setPrincipalSceneEquipe(Stage stage) {
-        this.principalSceneEquipe = stage;
-    }
-
     @FXML
     public void initialize() {
         System.out.println("Tela Principal Equipe carregada!");
@@ -60,7 +54,6 @@ public class PrincipalEquipeController {
         carregarChoiceBoxes();
         carregarTurmas();
         carregarPessoas();
-
     }
 
     public void setMembroEquipe(MembroEquipe membroEquipe) {
@@ -395,21 +388,21 @@ public class PrincipalEquipeController {
     }
 
     private void apagarTurma(Turma turma, HBox blocoTurma) {
-        if (exibirAlertaConfirmarApagar(turma.getNome())) {
+        if (exibirAlertaConfirmar(turma.getNome(), " será apagada(o)", " será apagada(o). Deseja continuar?")) {
             VBoxListaDeTurmas.getChildren().remove(blocoTurma);
             membroEquipe.removerTurma(turma);
         }
     }
 
     private void concluirTurma(Turma turma, Pane paneTurma) {
-        if (exibirAlertaConfirmarConcluir(turma.getNome())) {
+        if (exibirAlertaConfirmar(turma.getNome(), " será concluido(a)", " será concluido(a). Deseja continuar?")) {
             membroEquipe.concluirTurma(turma);
             paneTurma.getChildren().removeIf(node -> node instanceof Button && ((Button) node).getText().equals("Concluir"));
         }
     }
 
     private void apagarPessoa(Pessoa pessoa, HBox blocoPessoa) {
-        if (exibirAlertaConfirmarApagar(pessoa.getNome())) {
+        if (exibirAlertaConfirmar(pessoa.getNome(), " será apagada(o)", " será apagada(o). Deseja continuar?")) {
             VBoxListaDePessoas.getChildren().remove(blocoPessoa);
             pessoas.remove(pessoa);
             membroEquipe.removerPessoaDasTurmas(pessoa);
@@ -423,21 +416,11 @@ public class PrincipalEquipeController {
         alerta.showAndWait();
     }
 
-    private boolean exibirAlertaConfirmarApagar(String objeto) {
+    private boolean exibirAlertaConfirmar(String objeto, String mensagem01, String mensagem02) {
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-        alerta.setTitle(objeto + " será apagada(o)");
+        alerta.setTitle(objeto + mensagem01);
         alerta.setHeaderText(null);
-        alerta.setContentText(objeto + " será apagada(o). Deseja continuar?");
-
-        Optional<ButtonType> resultado = alerta.showAndWait();
-        return resultado.isPresent() && resultado.get() == ButtonType.OK;
-    }
-
-    private boolean exibirAlertaConfirmarConcluir(String objeto) {
-        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-        alerta.setTitle(objeto + " será concluido(a)");
-        alerta.setHeaderText(null);
-        alerta.setContentText(objeto + " será concluido(a). Deseja continuar?");
+        alerta.setContentText(objeto + mensagem02);
 
         Optional<ButtonType> resultado = alerta.showAndWait();
         return resultado.isPresent() && resultado.get() == ButtonType.OK;

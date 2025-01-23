@@ -5,7 +5,6 @@ import br.ufrn.imd.sistemaproeidi.model.Pessoa;
 import br.ufrn.imd.sistemaproeidi.model.Turma;
 import br.ufrn.imd.sistemaproeidi.utils.InputUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -70,7 +69,6 @@ public class ChamadaController {
         VBoxListaDePessoas.getChildren().add(blocoPessoa);
     }
 
-    // Método auxiliar para criar CheckBox
     private CheckBox criarCheckBox(String text, double x, double y, String style) {
         CheckBox checkBox = new CheckBox(text);
         checkBox.setLayoutX(x);

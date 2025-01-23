@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Vector;
 
-
 public class Aluno extends Pessoa {
     private LocalDate dataNascimento;
     private Escolaridade escolaridade;

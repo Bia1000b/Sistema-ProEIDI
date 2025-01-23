@@ -24,12 +24,6 @@ public class PrincipalAlunoController {
     private Aluno aluno;
     private Turma turmaAluno;
 
-    private Stage principalSceneAluno;
-
-    public void setPrincipalSceneAluno(Stage stage) {
-        this.principalSceneAluno = stage;
-    }
-
     @FXML
     public void initialize() {
         System.out.println("Tela Principal Aluno carregada!");
