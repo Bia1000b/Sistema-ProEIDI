@@ -1,7 +1,6 @@
 package br.ufrn.imd.sistemaproeidi.model;
 
 import br.ufrn.imd.sistemaproeidi.model.enums.*;
-import br.ufrn.imd.sistemaproeidi.utils.InputUtils;
 
 import java.io.Serializable;
 import java.time.LocalDate;

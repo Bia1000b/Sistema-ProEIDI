@@ -79,7 +79,7 @@ public class Gerenciador {
     public static void criarMembroPadrao() {
         String nomePadrao = "João Silva";
         String cpfPadrao = "12345678910";
-        Genero generoPadrao = Genero.MASC;
+        Genero generoPadrao = Genero.MASCULINO;
         String numeroCelularPadrao = "(84) 99982-1212";
         String matriculaPadrao = "20230001";
         String cursoPadrao = "Engenharia de Computação";

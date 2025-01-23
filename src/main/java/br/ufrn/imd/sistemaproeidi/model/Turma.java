@@ -33,54 +33,12 @@ public class Turma implements Serializable {
 
     public Turma(){}
 
-    public String getCodigo() {
-        return codigo;
-    }
-
     public String getNome() {
         return nome;
     }
 
     public Curso getCurso() {
         return curso;
-    }
-
-    public Vector<Aluno> getAlunos() {
-        if (alunos == null) {
-            alunos = new Vector<>();
-        }
-        return alunos;
-    }
-
-    public void setAlunos(Vector<Aluno> alunos) {
-        this.alunos = alunos;
-    }
-
-    public Vector<MembroEquipe> getEquipe() {
-        if (equipe == null) {
-            equipe = new Vector<>();
-        }
-        return equipe;
-    }
-
-    public void setEquipe(Vector<MembroEquipe> equipe) {
-        this.equipe = equipe;
-    }
-
-    public Integer getNumeroVagas() {
-        return numeroVagas;
-    }
-
-    public void setNumeroVagas(Integer numeroVagas) {
-        this.numeroVagas = numeroVagas;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
     }
 
     public Horario getHorario() {
@@ -97,6 +55,48 @@ public class Turma implements Serializable {
 
     public Boolean getConcluido() {
         return concluido;
+    }
+
+    public Integer getNumeroVagas() {
+        return numeroVagas;
+    }
+
+    public Vector<Aluno> getAlunos() {
+        if (alunos == null) {
+            alunos = new Vector<>();
+        }
+        return alunos;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public Vector<MembroEquipe> getEquipe() {
+        if (equipe == null) {
+            equipe = new Vector<>();
+        }
+        return equipe;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public void setAlunos(Vector<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    public void setEquipe(Vector<MembroEquipe> equipe) {
+        this.equipe = equipe;
+    }
+
+    public void setNumeroVagas(Integer numeroVagas) {
+        this.numeroVagas = numeroVagas;
     }
 
     public void setConcluido(Boolean concluido) {
