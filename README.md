@@ -13,7 +13,7 @@ O **Sistema ProEIDI** é um aplicativo desktop que permite gerenciar alunos, mem
 
 ## VideoBPP
 
-[Assista ao vídeo](https://drive.google.com/file/d/1x2mwhO2-hTOzwcdMPXVNWPEy5he2O8Yu/view?usp=sharing) para entender como as Boas Práticas de Programação foram utilizadas nesse projeto.
+[Assista ao vídeo](https://www.loom.com/share/0a6ec9da705041929104b572ec424945?sid=95542ecf-dccb-46d7-b31a-03d1fd7c458b) para entender como as Boas Práticas de Programação foram utilizadas nesse projeto.
 
 ## VideoLP2
 
